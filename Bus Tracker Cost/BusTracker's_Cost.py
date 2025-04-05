@@ -23,7 +23,6 @@ def print_bus_locations(bus_locations):
         print('Failed to retrieve bus locations.')
 
 if __name__ == "__main__":
-    # Ganti dengan kunci API dan ID rute yang sesuai dengan BusTracker Taiwan
     api_key = 'your_api_key'
     route_id = 'your_route_id'
     
