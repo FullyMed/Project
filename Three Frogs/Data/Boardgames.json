@@ -2,15 +2,15 @@
     {
       "name": "Catan",
       "category": "Strategy",
-      "players": "3–4",
-      "duration": "60–90 mins",
-      "image": "Assets/Images/catan.jpg"
+      "players": "3-4",
+      "duration": "60-90 mins",
+      "image": "Assets/Images/Catan.webp"
     },
     {
       "name": "Uno",
       "category": "Party",
-      "players": "2–10",
-      "duration": "15–30 mins",
-      "image": "Assets/Images/uno.jpg"
+      "players": "2-10",
+      "duration": "15-30 mins",
+      "image": "Assets/Images/UNO.png"
     }
   ]  
