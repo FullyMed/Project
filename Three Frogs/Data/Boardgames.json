@@ -1,0 +1,16 @@
+[
+    {
+      "name": "Catan",
+      "category": "Strategy",
+      "players": "3–4",
+      "duration": "60–90 mins",
+      "image": "Assets/Images/catan.jpg"
+    },
+    {
+      "name": "Uno",
+      "category": "Party",
+      "players": "2–10",
+      "duration": "15–30 mins",
+      "image": "Assets/Images/uno.jpg"
+    }
+  ]  
