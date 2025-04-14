@@ -63,13 +63,20 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = document.getElementById("loginEmail").value;
       const password = document.getElementById("loginPassword").value;
 
-      // Placeholder logic
-      const message = `
-        <h3>Login Successful!</h3>
-        <p>Welcome back, <strong>${email}</strong>.</p>
-      `;
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const matchedUser = users.find(user => user.email === email && user.password === password);
 
-      document.getElementById("loginResult").innerHTML = message;
+      if (matchedUser) {
+        const message = `
+          <h3>Login Successful!</h3>
+          <p>Welcome back, <strong>${matchedUser.name}</strong>.</p>
+        `;
+        document.getElementById("loginResult").innerHTML = message;
+      } else {
+        document.getElementById("loginResult").innerHTML = `
+          <p style="color:red;"><strong>Invalid email or password.</strong></p>
+        `;
+      }
       loginForm.reset();
     });
   }
@@ -87,14 +94,25 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = document.getElementById("signupEmail").value;
       const password = document.getElementById("signupPassword").value;
 
-      // Placeholder logic
-      const message = `
-        <h3>Sign Up Successful!</h3>
-        <p>Welcome, <strong>${name}</strong>. Your account with email <strong>${email}</strong> has been created.</p>
-      `;
+      // Cek apakah email sudah terdaftar
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const isEmailUsed = users.some(user => user.email === email);
 
-      document.getElementById("signupResult").innerHTML = message;
-      signupForm.reset();
+      if (isEmailUsed) {
+        document.getElementById("signupResult").innerHTML = `
+          <p style="color:red;"><strong>Email already registered.</strong></p>
+        `;
+      } else {
+        users.push({ name, email, password });
+        localStorage.setItem("users", JSON.stringify(users));
+
+        const message = `
+          <h3>Sign Up Successful!</h3>
+          <p>Welcome, <strong>${name}</strong>. Your account has been created.</p>
+        `;
+        document.getElementById("signupResult").innerHTML = message;
+        signupForm.reset();
+      }
     });
   }
 });
@@ -111,13 +129,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = document.getElementById("forgotEmail").value;
       const newPassword = document.getElementById("newPassword").value;
 
-      // Placeholder logic
-      const message = `
-        <h3>Password Reset Successful!</h3>
-        <p>Your password for <strong>${email}</strong> has been updated.</p>
-      `;
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const index = users.findIndex(user => user.email === email);
 
-      document.getElementById("forgotResult").innerHTML = message;
+      if (index !== -1) {
+        users[index].password = newPassword;
+        localStorage.setItem("users", JSON.stringify(users));
+        document.getElementById("forgotResult").innerHTML = `
+          <h3>Password Reset Successful!</h3>
+          <p>Password for <strong>${email}</strong> has been updated.</p>
+        `;
+      } else {
+        document.getElementById("forgotResult").innerHTML = `
+          <p style="color:red;"><strong>Email not found.</strong></p>
+        `;
+      }
       forgotForm.reset();
     });
   }
