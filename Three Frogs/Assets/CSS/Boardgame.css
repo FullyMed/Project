@@ -173,3 +173,11 @@ footer {
   text-align: center;
   margin-top: 15px;
 }
+
+#signupResult, #loginResult, #forgotResult {
+  margin-top: 30px;
+  background: #e0f7ff;
+  padding: 20px;
+  border-radius: 10px;
+  color: #333;
+}

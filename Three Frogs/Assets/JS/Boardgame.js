@@ -1,31 +1,37 @@
+// ===============================
+// JS untuk Halaman Boardgame.html
+// ===============================
 fetch("Data/Boardgames.json")
   .then((response) => response.json())
   .then((data) => {
     const container = document.getElementById("boardgame-list");
-    data.forEach((game) => {
-      const card = document.createElement("div");
-      card.className = "boardgame-card";
-      card.innerHTML = `
-        <img src="${game.image}" alt="${game.name}" />
-        <div class="info">
-          <h3>${game.name}</h3>
-          <p>Category: ${game.category}</p>
-          <p>Players: ${game.players}</p>
-          <p>Duration: ${game.duration}</p>
-        </div>
-      `;
-      container.appendChild(card);
-    });
+    if (container) {
+      data.forEach((game) => {
+        const card = document.createElement("div");
+        card.className = "boardgame-card";
+        card.innerHTML = `
+          <img src="${game.image}" alt="${game.name}" />
+          <div class="info">
+            <h3>${game.name}</h3>
+            <p>Category: ${game.category}</p>
+            <p>Players: ${game.players}</p>
+            <p>Duration: ${game.duration}</p>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
   })
   .catch((error) => console.error("Gagal memuat data:", error));
 
-// Booking form handler
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("bookingForm");
-  if (form) {
-    form.addEventListener("submit", function (e) {
+// ===============================
+// JS untuk Halaman Booking.html
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
+  const bookingForm = document.getElementById("bookingForm");
+  if (bookingForm) {
+    bookingForm.addEventListener("submit", function (e) {
       e.preventDefault();
-
       const name = document.getElementById("name").value;
       const email = document.getElementById("email").value;
       const date = document.getElementById("date").value;
@@ -41,89 +47,78 @@ document.addEventListener("DOMContentLoaded", function () {
       `;
 
       document.getElementById("bookingResult").innerHTML = result;
-      form.reset();
+      bookingForm.reset();
     });
   }
 });
 
-// Login form handler
-document.addEventListener("DOMContentLoaded", function () {
+// ===============================
+// JS untuk Halaman Login.html
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
   if (loginForm) {
     loginForm.addEventListener("submit", function (e) {
       e.preventDefault();
-
       const email = document.getElementById("loginEmail").value;
       const password = document.getElementById("loginPassword").value;
 
-      const users = JSON.parse(localStorage.getItem("users") || "[]");
-      const user = users.find((u) => u.email === email && u.password === password);
+      // Placeholder logic
+      const message = `
+        <h3>Login Successful!</h3>
+        <p>Welcome back, <strong>${email}</strong>.</p>
+      `;
 
-      if (user) {
-        document.getElementById("loginResult").innerHTML =
-          `<p style="color: green;"><strong>Login berhasil!</strong> Selamat datang, ${user.name} 🐸</p>`;
-        loginForm.reset();
-      } else {
-        document.getElementById("loginResult").innerHTML =
-          `<p style="color: red;"><strong>Email atau password salah.</strong></p>`;
-      }
+      document.getElementById("loginResult").innerHTML = message;
+      loginForm.reset();
     });
   }
 });
 
-// Sign Up form handler
-document.addEventListener("DOMContentLoaded", function () {
+// ===============================
+// JS untuk Halaman Signup.html
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("signupForm");
   if (signupForm) {
     signupForm.addEventListener("submit", function (e) {
       e.preventDefault();
-
       const name = document.getElementById("signupName").value;
       const email = document.getElementById("signupEmail").value;
       const password = document.getElementById("signupPassword").value;
 
-      // Simpan data ke localStorage
-      const users = JSON.parse(localStorage.getItem("users") || "[]");
-      const existingUser = users.find((user) => user.email === email);
+      // Placeholder logic
+      const message = `
+        <h3>Sign Up Successful!</h3>
+        <p>Welcome, <strong>${name}</strong>. Your account with email <strong>${email}</strong> has been created.</p>
+      `;
 
-      if (existingUser) {
-        document.getElementById("signupResult").innerHTML =
-          `<p style="color: red;"><strong>Email sudah terdaftar.</strong></p>`;
-      } else {
-        users.push({ name, email, password });
-        localStorage.setItem("users", JSON.stringify(users));
-
-        document.getElementById("signupResult").innerHTML =
-          `<p style="color: green;"><strong>Registrasi berhasil!</strong> Silakan login.</p>`;
-        signupForm.reset();
-      }
+      document.getElementById("signupResult").innerHTML = message;
+      signupForm.reset();
     });
   }
 });
 
-// Forgot Password handler
-document.addEventListener("DOMContentLoaded", function () {
+
+// ===============================
+// JS untuk Halaman Forgot-password.html
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
   const forgotForm = document.getElementById("forgotForm");
   if (forgotForm) {
     forgotForm.addEventListener("submit", function (e) {
       e.preventDefault();
-
       const email = document.getElementById("forgotEmail").value;
       const newPassword = document.getElementById("newPassword").value;
 
-      const users = JSON.parse(localStorage.getItem("users") || "[]");
-      const userIndex = users.findIndex((user) => user.email === email);
+      // Placeholder logic
+      const message = `
+        <h3>Password Reset Successful!</h3>
+        <p>Your password for <strong>${email}</strong> has been updated.</p>
+      `;
 
-      if (userIndex !== -1) {
-        users[userIndex].password = newPassword;
-        localStorage.setItem("users", JSON.stringify(users));
-        document.getElementById("forgotResult").innerHTML =
-          `<p style="color: green;"><strong>Password berhasil di-reset!</strong></p>`;
-        forgotForm.reset();
-      } else {
-        document.getElementById("forgotResult").innerHTML =
-          `<p style="color: red;"><strong>Email tidak ditemukan!</strong></p>`;
-      }
+      document.getElementById("forgotResult").innerHTML = message;
+      forgotForm.reset();
     });
   }
 });
