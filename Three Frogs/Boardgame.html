@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-  
+
   <head>
-    
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Three Frogs Boardgame</title>
     <link rel="stylesheet" href="Assets/CSS/Boardgame.css" />
-
+    
   </head>
 
   <body>
@@ -31,8 +31,18 @@
 
     <main>
       <h2 class="section-title">Our Boardgame Collection</h2>
+
       <div class="boardgame-container" id="boardgame-list">
-        <!-- Card boardgame akan dimuat dari JSON -->
+        <!-- Card boardgame akan dimuat dari JSON oleh JS -->
+      </div>
+
+      <!-- Prompt Login untuk lihat semua boardgame -->
+      <div id="viewMorePrompt" class="view-more-box" style="display: none;">
+        <p><strong>Want to see all boardgames?</strong> Please log in or sign up to access the full list.</p>
+        <div>
+          <a href="Login.html" class="view-more-button">Login</a>
+          <a href="Signup.html" class="view-more-button">Sign Up</a>
+        </div>
       </div>
     </main>
 
@@ -41,7 +51,7 @@
     </footer>
 
     <script src="Assets/JS/Boardgame.js"></script>
-    
+
   </body>
 
 </html>
