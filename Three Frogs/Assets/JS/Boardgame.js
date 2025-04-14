@@ -56,16 +56,17 @@ document.addEventListener("DOMContentLoaded", function () {
       const email = document.getElementById("loginEmail").value;
       const password = document.getElementById("loginPassword").value;
 
-      // Contoh validasi sederhana (harus diganti dengan database nantinya)
-      if (email === "admin@threefrogs.com" && password === "password123") {
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      const user = users.find((u) => u.email === email && u.password === password);
+
+      if (user) {
         document.getElementById("loginResult").innerHTML =
-          `<p style="color: green;"><strong>Login successful!</strong> Welcome back.</p>`;
+          `<p style="color: green;"><strong>Login berhasil!</strong> Selamat datang, ${user.name} 🐸</p>`;
+        loginForm.reset();
       } else {
         document.getElementById("loginResult").innerHTML =
-          `<p style="color: red;"><strong>Invalid email or password.</strong></p>`;
+          `<p style="color: red;"><strong>Email atau password salah.</strong></p>`;
       }
-
-      loginForm.reset();
     });
   }
 });
