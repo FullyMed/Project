@@ -24,6 +24,7 @@ fetch("Data/Boardgames.json")
   })
   .catch((error) => console.error("Gagal memuat data:", error));
 
+
 // ===============================
 // JS untuk Halaman Booking.html
 // ===============================
@@ -51,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
 
 // ===============================
 // JS untuk Halaman Login.html
@@ -81,6 +83,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// ===============================
+// Toggle Show/Hide Password - Login Form
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.getElementById("toggleLoginPassword");
+  const passwordInput = document.getElementById("loginPassword");
+
+  if (toggleBtn && passwordInput) {
+    toggleBtn.addEventListener("click", () => {
+      const isVisible = passwordInput.type === "text";
+      passwordInput.type = isVisible ? "password" : "text";
+      toggleBtn.textContent = isVisible ? "👁️" : "🙈";
+    });
+  }
+});
+
 
 // ===============================
 // JS untuk Halaman Signup.html
@@ -117,6 +136,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// ===============================
+// Toggle Show/Hide Password - Signup Form
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.getElementById("toggleSignupPassword");
+  const passwordInput = document.getElementById("signupPassword");
+
+  if (toggleBtn && passwordInput) {
+    toggleBtn.addEventListener("click", () => {
+      const isVisible = passwordInput.type === "text";
+      passwordInput.type = isVisible ? "password" : "text";
+      toggleBtn.textContent = isVisible ? "👁️" : "🙈";
+    });
+  }
+});
+
 
 // ===============================
 // JS untuk Halaman Forgot-password.html
@@ -145,6 +180,22 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
       }
       forgotForm.reset();
+    });
+  }
+});
+
+// ===============================
+// Toggle Show/Hide Password - Forgot Password
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleForgotPassword = document.getElementById("toggleForgotPassword");
+  const forgotPasswordInput = document.getElementById("newPassword");
+
+  if (toggleForgotPassword && forgotPasswordInput) {
+    toggleForgotPassword.addEventListener("click", () => {
+      const type = forgotPasswordInput.getAttribute("type") === "password" ? "text" : "password";
+      forgotPasswordInput.setAttribute("type", type);
+      toggleForgotPassword.textContent = type === "password" ? "👁️" : "🙈";
     });
   }
 });

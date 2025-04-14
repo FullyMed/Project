@@ -7,21 +7,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Sign Up | Three Frogs Boardgame</title>
         <link rel="stylesheet" href="Assets/CSS/Boardgame.css" />
-        
+
     </head>
 
     <body>
 
         <header>
             <nav class="navbar">
-            <div class="logo">🐸 Three Frogs</div>
-            <ul class="nav-links">
-                <li><a href="Boardgame.html">Home</a></li>
-                <li><a href="Booking.html">Booking</a></li>
-                <li><a href="Login.html">Login</a></li>
-                <li><a href="Signup.html" class="active">Sign Up</a></li>
-                <li><a href="About.html">About</a></li>
-            </ul>
+                <div class="logo">🐸 Three Frogs</div>
+                <ul class="nav-links">
+                    <li><a href="Boardgame.html">Home</a></li>
+                    <li><a href="Booking.html">Booking</a></li>
+                    <li><a href="Login.html">Login</a></li>
+                    <li><a href="Signup.html" class="active">Sign Up</a></li>
+                    <li><a href="About.html">About</a></li>
+                </ul>
             </nav>
         </header>
 
@@ -35,7 +35,10 @@
             <input type="email" id="signupEmail" required />
 
             <label for="signupPassword">Password</label>
-            <input type="password" id="signupPassword" required />
+            <div class="password-wrapper">
+                <input type="password" id="signupPassword" placeholder="Enter password" required />
+                <span id="toggleSignupPassword" class="toggle-password">👁️</span>
+            </div>              
 
             <button type="submit">Sign Up</button>
             </form>
