@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up | Three Frogs Boardgame</title>
+  <link rel="stylesheet" href="Assets/CSS/Boardgame.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">🐸 Three Frogs</div>
+      <ul class="nav-links">
+        <li><a href="Boardgame.html">Home</a></li>
+        <li><a href="Booking.html">Booking</a></li>
+        <li><a href="Login.html">Login</a></li>
+        <li><a href="Signup.html" class="active">Sign Up</a></li>
+        <li><a href="About.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="booking-form">
+    <h2>Create an Account</h2>
+    <form id="signupForm">
+      <label for="signupName">Full Name</label>
+      <input type="text" id="signupName" required />
+
+      <label for="signupEmail">Email</label>
+      <input type="email" id="signupEmail" required />
+
+      <label for="signupPassword">Password</label>
+      <input type="password" id="signupPassword" required />
+
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <div id="signupResult"></div>
+  </section>
+
+  <footer>
+    <p>© 2025 Three Frogs Boardgame Surabaya</p>
+  </footer>
+
+  <script src="Assets/JS/Boardgame.js"></script>
+</body>
+</html>
