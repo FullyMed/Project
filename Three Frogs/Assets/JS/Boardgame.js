@@ -1,12 +1,18 @@
 // ===============================
 // JS untuk Halaman Boardgame.html
 // ===============================
-fetch("Data/Boardgames.json")
+fetch("Three Frogs/Data/Boardgames.json")
   .then((response) => response.json())
   .then((data) => {
     const container = document.getElementById("boardgame-list");
+    const isLoggedIn = localStorage.getItem("loggedInUser") !== null;
+
+    // Jumlah maksimum boardgame jika belum login
+    const limit = isLoggedIn ? data.length : 6;
+    const boardgamesToShow = data.slice(0, limit);
+
     if (container) {
-      data.forEach((game) => {
+      boardgamesToShow.forEach((game) => {
         const card = document.createElement("div");
         card.className = "boardgame-card";
         card.innerHTML = `
@@ -20,6 +26,12 @@ fetch("Data/Boardgames.json")
         `;
         container.appendChild(card);
       });
+    }
+
+    // Tampilkan prompt 'Lihat Boardgame Lainnya' jika belum login
+    const promptBox = document.getElementById("viewMorePrompt");
+    if (!isLoggedIn && promptBox) {
+      promptBox.style.display = "block";
     }
   })
   .catch((error) => console.error("Gagal memuat data:", error));
