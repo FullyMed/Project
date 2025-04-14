@@ -30,7 +30,17 @@ fetch("Data/Boardgames.json")
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
   const bookingForm = document.getElementById("bookingForm");
-  if (bookingForm) {
+  const popup = document.getElementById("authPopup");
+
+  // Cek apakah user sudah login
+  const currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  if (!currentUser && bookingForm) {
+    bookingForm.style.display = "none";
+    popup.classList.remove("hidden");
+  }
+
+  if (bookingForm && currentUser) {
     bookingForm.addEventListener("submit", function (e) {
       e.preventDefault();
       const name = document.getElementById("name").value;
@@ -59,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
+
   if (loginForm) {
     loginForm.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -69,6 +80,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const matchedUser = users.find(user => user.email === email && user.password === password);
 
       if (matchedUser) {
+        // Simpan user yang sedang login ke localStorage
+        localStorage.setItem("loggedInUser", JSON.stringify(matchedUser));
+
         const message = `
           <h3>Login Successful!</h3>
           <p>Welcome back, <strong>${matchedUser.name}</strong>.</p>
@@ -79,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <p style="color:red;"><strong>Invalid email or password.</strong></p>
         `;
       }
+
       loginForm.reset();
     });
   }
@@ -106,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("signupForm");
+
   if (signupForm) {
     signupForm.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -122,8 +138,12 @@ document.addEventListener("DOMContentLoaded", () => {
           <p style="color:red;"><strong>Email already registered.</strong></p>
         `;
       } else {
-        users.push({ name, email, password });
+        const newUser = { name, email, password };
+        users.push(newUser);
         localStorage.setItem("users", JSON.stringify(users));
+
+        // Simpan user yang baru signup ke localStorage
+        localStorage.setItem("loggedInUser", JSON.stringify(newUser));
 
         const message = `
           <h3>Sign Up Successful!</h3>
