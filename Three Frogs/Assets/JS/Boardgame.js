@@ -17,9 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       name:"UNO",
-      category: "Fun",
-      players: "4-12",
-      duration: "60 min",
+      category: "",
+      players: "",
+      duration: "",
       image: "Assets/Images/UNO.png"
     },
     {
@@ -106,8 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const bookingForm = document.getElementById("bookingForm");
   const popup = document.getElementById("authPopup");
+  const bookingResult = document.getElementById("bookingResult");
 
-  // Cek apakah user sudah login
   const currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
   if (!currentUser && bookingForm) {
@@ -116,23 +116,43 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (bookingForm && currentUser) {
+    // Auto-fill email dan buat readonly
+    const emailField = document.getElementById("email");
+    if (emailField) {
+      emailField.value = currentUser.email;
+      emailField.readOnly = true;
+    }
+
     bookingForm.addEventListener("submit", function (e) {
       e.preventDefault();
+
       const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
       const date = document.getElementById("date").value;
       const start = document.getElementById("start-time").value;
       const end = document.getElementById("end-time").value;
       const people = document.getElementById("people").value;
 
+      const bookingData = {
+        name,
+        email: currentUser.email, // Gunakan email dari user yang login
+        date,
+        start,
+        end,
+        people
+      };
+
+      const allBookings = JSON.parse(localStorage.getItem("bookings")) || [];
+      allBookings.push(bookingData);
+      localStorage.setItem("bookings", JSON.stringify(allBookings));
+
       const result = `
         <h3>Booking Confirmed!</h3>
         <p>Thank you, <strong>${name}</strong>.</p>
         <p>Your booking on <strong>${date}</strong> from <strong>${start}</strong> to <strong>${end}</strong> for <strong>${people} people</strong> is received.</p>
-        <p>We've sent a confirmation to <strong>${email}</strong>.</p>
+        <p>We've sent a confirmation to <strong>${currentUser.email}</strong>.</p>
       `;
 
-      document.getElementById("bookingResult").innerHTML = result;
+      bookingResult.innerHTML = result;
       bookingForm.reset();
     });
   }
@@ -339,6 +359,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (userInfo && loggedInUser) {
     userInfo.innerHTML = `
+      <img src="${loggedInUser.avatar}" alt="User Avatar" style="width:100px;height:100px;border-radius:50%;margin-bottom:10px;">
       <p><strong>Name:</strong> ${loggedInUser.name}</p>
       <p><strong>Email:</strong> ${loggedInUser.email}</p>
     `;

@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Dashboard | Three Frogs</title>
-  <link rel="stylesheet" href="Assets/CSS/Boardgame.css" />
-</head>
+    <head>
 
-<body>
-  <header>
-    <nav class="navbar">
-      <div class="logo">🐸 Three Frogs</div>
-      <ul class="nav-links">
-        <li><a href="Boardgame.html">Home</a></li>
-        <li><a href="Booking.html">Booking</a></li>
-        <li><a href="About.html">About</a></li>
-        <li><a href="Dashboard.html" class="active">👤 ${user.name}</a></li>
-      </ul>
-    </nav>
-  </header>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>User Dashboard | Three Frogs</title>
+        <link rel="stylesheet" href="Assets/CSS/Boardgame.css" />
 
-  <section class="dashboard-container">
-    <h2>Your Profile</h2>
-    <div id="userInfo"></div>
-    <button id="logoutBtn">Logout</button>
-  </section>
+    </head>
 
-  <footer>
-    <p>&copy; 2025 Three Frogs Boardgame Surabaya</p>
-  </footer>
+    <body>
 
-  <script src="Assets/JS/Boardgame.js"></script>
-</body>
+        <header>
+            <nav class="navbar">
+                <div class="logo">🐸 Three Frogs</div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="Boardgame.html">Home</a></li>
+                    <li><a href="Booking.html">Booking</a></li>
+                    <li><a href="About.html">About</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="dashboard-container">
+            <h2>Your Profile</h2>
+            <div id="userInfo"></div>
+            <h3>Your Booking History</h3>
+            <div id="bookingHistory"></div>
+            <button id="logoutBtn">Logout</button>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Three Frogs Boardgame Surabaya</p>
+        </footer>
+
+        <script src="Assets/JS/Boardgame.js"></script>
+
+    </body>
 
 </html>

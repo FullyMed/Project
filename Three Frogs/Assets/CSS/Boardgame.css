@@ -330,3 +330,16 @@ footer {
 input[type="radio"]:checked + .avatar-option {
   border-color: #4CAF50;
 }
+
+.booking-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 10px;
+}
+
+.booking-list li {
+  background-color: #f4f4f4;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
