@@ -17,9 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       name:"UNO",
-      category: "",
-      players: "",
-      duration: "",
+      category: "Card Game",
+      players: "2-10",
+      duration: "15-30 min",
       image: "Assets/Images/UNO.png"
     },
     {
@@ -255,7 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const password = document.getElementById("signupPassword").value;
 
       // Ambil avatar yang dipilih
-      const avatar = document.querySelector('input[name="avatar"]:checked')?.value || "default.png";
+      const avatar = document.querySelector('input[name="avatar"]:checked')?.value || "default.jpg";
 
       // Cek apakah email sudah terdaftar
       const users = JSON.parse(localStorage.getItem("users")) || [];
