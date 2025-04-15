@@ -1,40 +1,103 @@
 // ===============================
 // JS untuk Halaman Boardgame.html
 // ===============================
-fetch("Three Frogs/Data/Boardgames.json")
-  .then((response) => response.json())
-  .then((data) => {
-    const container = document.getElementById("boardgame-list");
-    const isLoggedIn = localStorage.getItem("loggedInUser") !== null;
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("boardgame-list");
+  const viewMorePrompt = document.getElementById("viewMorePrompt");
+  const isLoggedIn = localStorage.getItem("loggedInUser") !== null;
 
-    // Jumlah maksimum boardgame jika belum login
-    const limit = isLoggedIn ? data.length : 6;
-    const boardgamesToShow = data.slice(0, limit);
-
-    if (container) {
-      boardgamesToShow.forEach((game) => {
-        const card = document.createElement("div");
-        card.className = "boardgame-card";
-        card.innerHTML = `
-          <img src="${game.image}" alt="${game.name}" />
-          <div class="info">
-            <h3>${game.name}</h3>
-            <p>Category: ${game.category}</p>
-            <p>Players: ${game.players}</p>
-            <p>Duration: ${game.duration}</p>
-          </div>
-        `;
-        container.appendChild(card);
-      });
+  // Data boardgame langsung dalam array JS
+  const boardgames = [
+    {
+      name: "Catan",
+      category: "Strategy",
+      players: "3-4",
+      duration: "60 min",
+      image: "Assets/Images/Catan.webp"
+    },
+    {
+      name:"UNO",
+      category: "Fun",
+      players: "4-12",
+      duration: "60 min",
+      image: "Assets/Images/UNO.png"
+    },
+    {
+      name: "Monopoly",
+      category: "Economy",
+      players: "2-6",
+      duration: "120 min",
+      image: "Assets/Images/Monopoly.jpg"
+    },
+    {
+      name: "Carcassonne",
+      category: "Tile Placement",
+      players: "2-5",
+      duration: "45 min",
+      image: "Assets/Images/Carcassonne.jpg"
+    },
+    {
+      name: "Codenames",
+      category: "Word",
+      players: "4-8",
+      duration: "15 min",
+      image: "Assets/Images/Codenames.jpg"
+    },
+    {
+      name: "Ticket to Ride",
+      category: "Adventure",
+      players: "2-5",
+      duration: "60 min",
+      image: "Assets/Images/TicketToRide.jpg"
+    },
+    {
+      name: "Pandemic",
+      category: "Co-op",
+      players: "2-4",
+      duration: "45 min",
+      image: "Assets/Images/Pandemic.jpg"
+    },
+    {
+      name: "Azul",
+      category: "Abstract",
+      players: "2-4",
+      duration: "30-45 min",
+      image: "Assets/Images/Azul.jpg"
+    },
+    {
+      name: "7 Wonders",
+      category: "Card Drafting",
+      players: "3-7",
+      duration: "30 min",
+      image: "Assets/Images/7Wonders.jpg"
     }
+    // Tambah boardgame lain di sini kalau mau
+  ];
 
-    // Tampilkan prompt 'Lihat Boardgame Lainnya' jika belum login
-    const promptBox = document.getElementById("viewMorePrompt");
-    if (!isLoggedIn && promptBox) {
-      promptBox.style.display = "block";
-    }
-  })
-  .catch((error) => console.error("Gagal memuat data:", error));
+  const maxToShow = isLoggedIn ? boardgames.length : 10;
+  const toDisplay = boardgames.slice(0, maxToShow);
+
+  if (container) {
+    toDisplay.forEach((game) => {
+      const card = document.createElement("div");
+      card.className = "boardgame-card";
+      card.innerHTML = `
+        <img src="${game.image}" alt="${game.name}" />
+        <div class="info">
+          <h3>${game.name}</h3>
+          <p>Category: ${game.category}</p>
+          <p>Players: ${game.players}</p>
+          <p>Duration: ${game.duration}</p>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  if (!isLoggedIn && viewMorePrompt) {
+    viewMorePrompt.style.display = "block";
+  }
+});
 
 
 // ===============================
@@ -66,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <h3>Booking Confirmed!</h3>
         <p>Thank you, <strong>${name}</strong>.</p>
         <p>Your booking on <strong>${date}</strong> from <strong>${start}</strong> to <strong>${end}</strong> for <strong>${people} people</strong> is received.</p>
-        <p>We’ve sent a confirmation to <strong>${email}</strong>.</p>
+        <p>We've sent a confirmation to <strong>${email}</strong>.</p>
       `;
 
       document.getElementById("bookingResult").innerHTML = result;
@@ -128,6 +191,35 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// ================================
+// Navbar Dinamis Berdasarkan Login
+// ================================
+document.addEventListener("DOMContentLoaded", () => {
+  const navLinks = document.getElementById("navLinks");
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  if (navLinks) {
+    if (user) {
+      navLinks.innerHTML += `
+        <li><a href="Dashboard.html">👤 ${user.name}</a></li>
+        <li><a href="#" id="logoutLink">Logout</a></li>
+      `;
+    } else {
+      navLinks.innerHTML += `<li><a href="Login.html">Login</a></li>`;
+    }
+
+    const logoutLink = document.getElementById("logoutLink");
+    if (logoutLink) {
+      logoutLink.addEventListener("click", () => {
+        localStorage.removeItem("loggedInUser");
+        alert("You have been logged out.");
+        window.location.href = "Boardgame.html";
+      });
+    }
+  }
+});
+
+
 // ===============================
 // JS untuk Halaman Signup.html
 // ===============================
@@ -137,9 +229,13 @@ document.addEventListener("DOMContentLoaded", () => {
   if (signupForm) {
     signupForm.addEventListener("submit", function (e) {
       e.preventDefault();
+
       const name = document.getElementById("signupName").value;
       const email = document.getElementById("signupEmail").value;
       const password = document.getElementById("signupPassword").value;
+
+      // Ambil avatar yang dipilih
+      const avatar = document.querySelector('input[name="avatar"]:checked')?.value || "default.png";
 
       // Cek apakah email sudah terdaftar
       const users = JSON.parse(localStorage.getItem("users")) || [];
@@ -150,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <p style="color:red;"><strong>Email already registered.</strong></p>
         `;
       } else {
-        const newUser = { name, email, password };
+        const newUser = { name, email, password, avatar };
         users.push(newUser);
         localStorage.setItem("users", JSON.stringify(users));
 
@@ -228,6 +324,36 @@ document.addEventListener("DOMContentLoaded", () => {
       const type = forgotPasswordInput.getAttribute("type") === "password" ? "text" : "password";
       forgotPasswordInput.setAttribute("type", type);
       toggleForgotPassword.textContent = type === "password" ? "👁️" : "🙈";
+    });
+  }
+});
+
+
+// ===============================
+// JS untuk Halaman Dashboard.html
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
+  const userInfo = document.getElementById("userInfo");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  if (userInfo && loggedInUser) {
+    userInfo.innerHTML = `
+      <p><strong>Name:</strong> ${loggedInUser.name}</p>
+      <p><strong>Email:</strong> ${loggedInUser.email}</p>
+    `;
+  } else if (userInfo && !loggedInUser) {
+    userInfo.innerHTML = `
+      <p style="color:red;">You are not logged in. Please <a href="Login.html">login</a>.</p>
+    `;
+    logoutBtn.style.display = "none";
+  }
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("loggedInUser");
+      alert("You have been logged out.");
+      window.location.href = "Login.html";
     });
   }
 });
