@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Boardgame Collection | Three Frogs</title>
+        <link rel="stylesheet" href="Assets/CSS/Boardgame.css" />
+
+    </head>
+
+    <body>
+
+        <header>
+            <nav class="navbar">
+            <div class="logo">🐸 Three Frogs</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="Boardgame.html">Home</a></li>
+                <li><a href="Booking.html">Booking</a></li>
+                <li><a href="About.html">About</a></li>
+            </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="search-filter-bar">
+                <input type="text" id="searchInput" placeholder="Search boardgames..." />
+
+                <select id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="Strategy">Strategy</option>
+                    <option value="Card Game">Card Game</option>
+                    <option value="Economy">Economy</option>
+                    <option value="Tile Placement">Tile Placement</option>
+                    <option value="Word">Word</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Co-op">Co-op</option>
+                    <option value="Abstract">Abstract</option>
+                    <option value="Card Drafting">Card Drafting</option>
+                    <option value="Party">Party</option>
+                    <option value="Storytelling">Storytelling</option>
+                </select>
+            </div>
+            
+            <h2 class="section-title">All Boardgames</h2>
+            <div class="boardgame-container" id="boardgame-list">
+            <!-- Semua boardgame akan dimuat oleh JS -->
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Three Frogs Boardgame Surabaya</p>
+        </footer>
+
+        <script src="Assets/JS/Boardgame.js"></script>
+
+    </body>
+
+</html>

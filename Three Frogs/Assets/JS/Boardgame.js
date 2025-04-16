@@ -3,7 +3,7 @@
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("boardgame-list");
-  const viewMorePrompt = document.getElementById("viewMorePrompt");
+  const seeMoreBox = document.getElementById("seeMoreBox");
   const isLoggedIn = localStorage.getItem("loggedInUser") !== null;
 
   // Data boardgame langsung dalam array JS
@@ -70,8 +70,21 @@ document.addEventListener("DOMContentLoaded", () => {
       players: "3-7",
       duration: "30 min",
       image: "Assets/Images/7Wonders.jpg"
+    },
+    {
+      name: "Exploding Kittens",
+      category: "Party",
+      players: "2-5",
+      duration: "15 min",
+      image: "Assets/Images/ExplodingKittens.jpg"
+    },
+    {
+      name: "Dixit",
+      category: "Storytelling",
+      players: "3-6",
+      duration: "30 min",
+      image: "Assets/Images/Dixit.jpg"
     }
-    // Tambah boardgame lain di sini kalau mau
   ];
 
   const maxToShow = isLoggedIn ? boardgames.length : 10;
@@ -94,8 +107,68 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (!isLoggedIn && viewMorePrompt) {
-    viewMorePrompt.style.display = "block";
+  if (seeMoreBox) {
+    seeMoreBox.classList.remove("hidden");
+    if (isLoggedIn) {
+      seeMoreBox.innerHTML = `
+        <a href="Collection.html" class="see-more-button">See Other Boardgames</a>
+      `;
+    } else {
+      seeMoreBox.innerHTML = `
+        <p style="margin-top: 20px;">Please <a href="Login.html" style="color: #2563eb; font-weight: bold;">Login</a> or <a href="Signup.html" style="color: #2563eb; font-weight: bold;">Sign Up</a> to see the full collection.</p>
+      `;
+    }
+  }
+
+  const searchInput = document.getElementById("searchInput");
+  const categoryFilter = document.getElementById("categoryFilter");
+
+  function renderBoardgames(data) {
+    container.innerHTML = ""; // Clear sebelum render
+
+    if (data.length === 0) {
+      container.innerHTML = `<p style="text-align:center;">No boardgames found.</p>`;
+      return;
+    }
+
+    data.forEach((game) => {
+      const card = document.createElement("div");
+      card.className = "boardgame-card";
+      card.innerHTML = `
+        <img src="${game.image}" alt="${game.name}" />
+        <div class="info">
+          <h3>${game.name}</h3>
+          <p>Category: ${game.category}</p>
+          <p>Players: ${game.players}</p>
+          <p>Duration: ${game.duration}</p>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  // First render
+  if (window.location.pathname.includes("Collection.html")) {
+    renderBoardgames(boardgames);
+  }
+
+  // Event listeners
+  if (searchInput && categoryFilter) {
+    searchInput.addEventListener("input", filterBoardgames);
+    categoryFilter.addEventListener("change", filterBoardgames);
+  }
+
+  function filterBoardgames() {
+    const keyword = searchInput.value.toLowerCase();
+    const category = categoryFilter.value;
+
+    const filtered = boardgames.filter(game => {
+      const matchName = game.name.toLowerCase().includes(keyword);
+      const matchCategory = category === "" || game.category === category;
+      return matchName && matchCategory;
+    });
+
+    renderBoardgames(filtered);
   }
 });
 
@@ -131,6 +204,33 @@ document.addEventListener("DOMContentLoaded", () => {
       const start = document.getElementById("start-time").value;
       const end = document.getElementById("end-time").value;
       const people = document.getElementById("people").value;
+      const openTime = "12:00";
+      const closeTime = "22:00";
+
+      // Validasi: hanya izinkan tanggal booking hari ini ke depan
+      const today = new Date().toISOString().split("T")[0];
+      if (date < today) {
+        bookingResult.innerHTML = `
+          <p style="color:red;"><strong>Booking date cannot be in the past.</strong></p>
+        `;
+        return;
+      }
+
+      // ✅ Validasi waktu
+      if (end <= start) {
+        bookingResult.innerHTML = `
+          <p style="color:red;"><strong>End time must be later than start time.</strong></p>
+        `;
+        return;
+      }
+
+      // Validasi jam buka: hanya boleh antara 12:00 - 22:00
+      if (start < openTime || end > closeTime) {
+        bookingResult.innerHTML = `
+          <p style="color:red;"><strong>Booking must be between 12:00 and 22:00.</strong></p>
+        `;
+        return;
+      }
 
       const bookingData = {
         name,
@@ -378,3 +478,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+
+// ===============================
+// Proteksi Collection.html
+// ===============================
+if (window.location.pathname.includes("Collection.html")) {
+  const isLoggedIn = localStorage.getItem("loggedInUser");
+  if (!isLoggedIn) {
+    alert("You must be logged in to view the full boardgame collection.");
+    window.location.href = "Login.html";
+  }
+}
