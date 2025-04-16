@@ -14,21 +14,21 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Strategy",
       players: "3-4",
       duration: "60 min",
-      image: "Assets/Images/Catan.webp"
+      image: "Assets/Images/Catan.avif"
     },
     {
       name: "UNO",
       category: "Card Game",
       players: "2-10",
       duration: "15-30 min",
-      image: "Assets/Images/UNO.png"
+      image: "Assets/Images/UNO.jpg"
     },
     {
       name: "Monopoly",
       category: "Economy",
       players: "2-6",
       duration: "120 min",
-      image: "Assets/Images/Monopoly.jpg"
+      image: "Assets/Images/Monopoly.avif"
     },
     {
       name: "Carcassonne",
@@ -49,35 +49,35 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Adventure",
       players: "2-5",
       duration: "60 min",
-      image: "Assets/Images/TicketToRide.jpg"
+      image: "Assets/Images/Ticket To Ride.jpg"
     },
     {
       name: "Pandemic",
       category: "Co-op",
       players: "2-4",
       duration: "45 min",
-      image: "Assets/Images/Pandemic.jpg"
+      image: "Assets/Images/Pandemic.webp"
     },
     {
       name: "Azul",
       category: "Abstract",
       players: "2-4",
       duration: "30-45 min",
-      image: "Assets/Images/Azul.jpg"
+      image: "Assets/Images/Azul.webp"
     },
     {
       name: "7 Wonders",
       category: "Card Drafting",
       players: "3-7",
       duration: "30 min",
-      image: "Assets/Images/7Wonders.jpg"
+      image: "Assets/Images/7 Wonders.avif"
     },
     {
       name: "Exploding Kittens",
       category: "Party",
       players: "2-5",
       duration: "15 min",
-      image: "Assets/Images/ExplodingKittens.jpg"
+      image: "Assets/Images/Exploding Kittens.webp"
     },
     {
       name: "Dixit",
