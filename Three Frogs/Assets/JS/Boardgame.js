@@ -5,8 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("boardgame-list");
   const seeMoreBox = document.getElementById("seeMoreBox");
   const isLoggedIn = localStorage.getItem("loggedInUser") !== null;
+  const searchInput = document.getElementById("searchInput");
+  const categoryFilter = document.getElementById("categoryFilter");
 
-  // Data boardgame langsung dalam array JS
   const boardgames = [
     {
       name: "Catan",
@@ -16,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
       image: "Assets/Images/Catan.webp"
     },
     {
-      name:"UNO",
+      name: "UNO",
       category: "Card Game",
       players: "2-10",
       duration: "15-30 min",
@@ -87,44 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   ];
 
-  const maxToShow = isLoggedIn ? boardgames.length : 10;
-  const toDisplay = boardgames.slice(0, maxToShow);
-
-  if (container) {
-    toDisplay.forEach((game) => {
-      const card = document.createElement("div");
-      card.className = "boardgame-card";
-      card.innerHTML = `
-        <img src="${game.image}" alt="${game.name}" />
-        <div class="info">
-          <h3>${game.name}</h3>
-          <p>Category: ${game.category}</p>
-          <p>Players: ${game.players}</p>
-          <p>Duration: ${game.duration}</p>
-        </div>
-      `;
-      container.appendChild(card);
-    });
-  }
-
-  if (seeMoreBox) {
-    seeMoreBox.classList.remove("hidden");
-    if (isLoggedIn) {
-      seeMoreBox.innerHTML = `
-        <a href="Collection.html" class="see-more-button">See Other Boardgames</a>
-      `;
-    } else {
-      seeMoreBox.innerHTML = `
-        <p style="margin-top: 20px;">Please <a href="Login.html" style="color: #2563eb; font-weight: bold;">Login</a> or <a href="Signup.html" style="color: #2563eb; font-weight: bold;">Sign Up</a> to see the full collection.</p>
-      `;
-    }
-  }
-
-  const searchInput = document.getElementById("searchInput");
-  const categoryFilter = document.getElementById("categoryFilter");
-
+  // RENDER FUNCTION
   function renderBoardgames(data) {
-    container.innerHTML = ""; // Clear sebelum render
+    container.innerHTML = "";
 
     if (data.length === 0) {
       container.innerHTML = `<p style="text-align:center;">No boardgames found.</p>`;
@@ -147,28 +113,46 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // First render
+  if (window.location.pathname.includes("Boardgame.html")) {
+    const maxToShow = 10;
+    const toDisplay = boardgames.slice(0, maxToShow);
+    renderBoardgames(toDisplay);
+
+    if (seeMoreBox) {
+      seeMoreBox.classList.remove("hidden");
+      if (isLoggedIn) {
+        seeMoreBox.innerHTML = `
+          <a href="Collection.html" class="see-more-button">See Other Boardgames</a>
+        `;
+      } else {
+        seeMoreBox.innerHTML = `
+          <p style="margin-top: 20px;">Please <a href="Login.html" style="color: #2563eb; font-weight: bold;">Login</a> or <a href="Signup.html" style="color: #2563eb; font-weight: bold;">Sign Up</a> to see the full collection.</p>
+        `;
+      }
+    }
+  }
+
+  // COLLECTION PAGE: Show all + filter + search
   if (window.location.pathname.includes("Collection.html")) {
     renderBoardgames(boardgames);
-  }
 
-  // Event listeners
-  if (searchInput && categoryFilter) {
-    searchInput.addEventListener("input", filterBoardgames);
-    categoryFilter.addEventListener("change", filterBoardgames);
-  }
+    function filterBoardgames() {
+      const keyword = searchInput.value.toLowerCase();
+      const category = categoryFilter.value;
 
-  function filterBoardgames() {
-    const keyword = searchInput.value.toLowerCase();
-    const category = categoryFilter.value;
+      const filtered = boardgames.filter(game => {
+        const matchName = game.name.toLowerCase().includes(keyword);
+        const matchCategory = category === "" || game.category === category;
+        return matchName && matchCategory;
+      });
 
-    const filtered = boardgames.filter(game => {
-      const matchName = game.name.toLowerCase().includes(keyword);
-      const matchCategory = category === "" || game.category === category;
-      return matchName && matchCategory;
-    });
+      renderBoardgames(filtered);
+    }
 
-    renderBoardgames(filtered);
+    if (searchInput && categoryFilter) {
+      searchInput.addEventListener("input", filterBoardgames);
+      categoryFilter.addEventListener("change", filterBoardgames);
+    }
   }
 });
 
@@ -268,6 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (loginForm) {
     loginForm.addEventListener("submit", function (e) {
       e.preventDefault();
+
       const email = document.getElementById("loginEmail").value;
       const password = document.getElementById("loginPassword").value;
 
@@ -275,14 +260,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const matchedUser = users.find(user => user.email === email && user.password === password);
 
       if (matchedUser) {
-        // Simpan user yang sedang login ke localStorage
+        // Simpan user ke localStorage
         localStorage.setItem("loggedInUser", JSON.stringify(matchedUser));
 
-        const message = `
+        // Tampilkan pesan sukses
+        document.getElementById("loginResult").innerHTML = `
           <h3>Login Successful!</h3>
-          <p>Welcome back, <strong>${matchedUser.name}</strong>.</p>
+          <p>Welcome back, <strong>${matchedUser.name}</strong>. Redirecting to homepage...</p>
         `;
-        document.getElementById("loginResult").innerHTML = message;
+
+        // Delay 1.5 detik lalu redirect
+        setTimeout(() => {
+          window.location.href = "Boardgame.html";
+        }, 1500);
       } else {
         document.getElementById("loginResult").innerHTML = `
           <p style="color:red;"><strong>Invalid email or password.</strong></p>
@@ -318,24 +308,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.getElementById("navLinks");
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
 
-  if (navLinks) {
-    if (user) {
-      navLinks.innerHTML += `
-        <li><a href="Dashboard.html">👤 ${user.name}</a></li>
-        <li><a href="#" id="logoutLink">Logout</a></li>
-      `;
-    } else {
-      navLinks.innerHTML += `<li><a href="Login.html">Login</a></li>`;
-    }
+  if (!navLinks) return; // Pastikan elemen ada sebelum lanjut
 
-    const logoutLink = document.getElementById("logoutLink");
-    if (logoutLink) {
-      logoutLink.addEventListener("click", () => {
-        localStorage.removeItem("loggedInUser");
-        alert("You have been logged out.");
-        window.location.href = "Boardgame.html";
-      });
+  navLinks.innerHTML = `
+    <li><a href="Boardgame.html">Home</a></li>
+    <li><a href="Booking.html">Booking</a></li>
+    <li><a href="About.html">About</a></li>
+    ${
+      user
+        ? `
+      <li><a href="Dashboard.html">👤 ${user.name}</a></li>
+      <li><a href="#" id="logoutLink">Logout</a></li>
+    `
+        : `
+      <li><a href="Login.html">Login</a></li>
+      <li><a href="Signup.html">Sign Up</a></li>
+    `
     }
+  `;
+
+  // Logout handler
+  const logoutLink = document.getElementById("logoutLink");
+  if (logoutLink) {
+    logoutLink.addEventListener("click", () => {
+      localStorage.removeItem("loggedInUser");
+      alert("You have been logged out.");
+      window.location.href = "Boardgame.html";
+    });
   }
 });
 
@@ -373,11 +372,17 @@ document.addEventListener("DOMContentLoaded", () => {
         // Simpan user yang baru signup ke localStorage
         localStorage.setItem("loggedInUser", JSON.stringify(newUser));
 
-        const message = `
+        // Tampilkan pesan sukses
+        document.getElementById("signupResult").innerHTML = `
           <h3>Sign Up Successful!</h3>
-          <p>Welcome, <strong>${name}</strong>. Your account has been created.</p>
+          <p>Welcome, <strong>${name}</strong>. Redirecting to homepage...</p>
         `;
-        document.getElementById("signupResult").innerHTML = message;
+
+        // Delay 1.5 detik, lalu redirect
+        setTimeout(() => {
+          window.location.href = "Boardgame.html";
+        }, 1500);
+
         signupForm.reset();
       }
     });
@@ -406,9 +411,11 @@ document.addEventListener("DOMContentLoaded", () => {
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
   const forgotForm = document.getElementById("forgotForm");
+
   if (forgotForm) {
     forgotForm.addEventListener("submit", function (e) {
       e.preventDefault();
+
       const email = document.getElementById("forgotEmail").value;
       const newPassword = document.getElementById("newPassword").value;
 
@@ -418,15 +425,22 @@ document.addEventListener("DOMContentLoaded", () => {
       if (index !== -1) {
         users[index].password = newPassword;
         localStorage.setItem("users", JSON.stringify(users));
+
         document.getElementById("forgotResult").innerHTML = `
           <h3>Password Reset Successful!</h3>
           <p>Password for <strong>${email}</strong> has been updated.</p>
+          <p>Redirecting to login page...</p>
         `;
+
+        setTimeout(() => {
+          window.location.href = "Login.html";
+        }, 1500);
       } else {
         document.getElementById("forgotResult").innerHTML = `
           <p style="color:red;"><strong>Email not found.</strong></p>
         `;
       }
+
       forgotForm.reset();
     });
   }
