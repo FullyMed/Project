@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ================================
-// Navbar Dinamis Berdasarkan Login
+// Dynamic Navbar Based on Login
 // ================================
 document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.getElementById("navLinks");
