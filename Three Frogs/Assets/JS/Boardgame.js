@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Strategy",
       players: "3-4",
       duration: "60 min",
-      image: "Assets/Images/Catan.avif",
+      image: "Assets/Images/Catan.jpg",
       description: "Trade, build, and settle your way to victory!"
     },
     {
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Card Game",
       players: "2-10",
       duration: "15-30 min",
-      image: "Assets/Images/UNO.jpg",
+      image: "Assets/Images/UNO.webp",
       description: "Fast-paced game where matching colors and numbers rules."
     },
     {
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Abstract",
       players: "2-4",
       duration: "30-45 min",
-      image: "Assets/Images/Azul.webp",
+      image: "Assets/Images/Azul.jpg",
       description: "Draft tiles to create stunning mosaic patterns."
     },
     {
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Card Drafting",
       players: "3-7",
       duration: "30 min",
-      image: "Assets/Images/7 Wonders.avif",
+      image: "Assets/Images/7 Wonders.jpg",
       description: "Build an ancient city through science, war, and trade."
     },
     {
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Party",
       players: "2-5",
       duration: "15 min",
-      image: "Assets/Images/Exploding Kittens.webp",
+      image: "Assets/Images/Exploding Kittens.jpg",
       description: "A fast and hilarious game of feline destruction."
     },
     {

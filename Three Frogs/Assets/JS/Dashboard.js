@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
     logoutBtn.style.display = "none";
   }
 
-  // ========== Cancel Logic ==========
+  // Cancel Logic
   if (confirmCancel) {
     confirmCancel.addEventListener("click", () => {
       allBookings = allBookings.filter(b => {
