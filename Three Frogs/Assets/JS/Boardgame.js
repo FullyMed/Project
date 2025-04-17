@@ -14,77 +14,88 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Strategy",
       players: "3-4",
       duration: "60 min",
-      image: "Assets/Images/Catan.avif"
+      image: "Assets/Images/Catan.avif",
+      description: "Trade, build, and settle your way to victory!"
     },
     {
       name: "UNO",
       category: "Card Game",
       players: "2-10",
       duration: "15-30 min",
-      image: "Assets/Images/UNO.jpg"
+      image: "Assets/Images/UNO.jpg",
+      description: "Fast-paced game where matching colors and numbers rules."
     },
     {
       name: "Monopoly",
       category: "Economy",
       players: "2-6",
       duration: "120 min",
-      image: "Assets/Images/Monopoly.avif"
+      image: "Assets/Images/Monopoly.avif",
+      description: "Buy, trade, and bankrupt your opponents!"
     },
     {
       name: "Carcassonne",
       category: "Tile Placement",
       players: "2-5",
       duration: "45 min",
-      image: "Assets/Images/Carcassonne.jpg"
+      image: "Assets/Images/Carcassonne.jpg",
+      description: "Build cities and claim roads with strategic tiles."
     },
     {
       name: "Codenames",
       category: "Word",
       players: "4-8",
       duration: "15 min",
-      image: "Assets/Images/Codenames.jpg"
+      image: "Assets/Images/Codenames.jpg",
+      description: "Guess the secret words using clever clues."
     },
     {
       name: "Ticket to Ride",
       category: "Adventure",
       players: "2-5",
       duration: "60 min",
-      image: "Assets/Images/Ticket To Ride.jpg"
+      image: "Assets/Images/Ticket To Ride.jpg",
+      description: "Collect train cards to claim routes across the map."
     },
     {
       name: "Pandemic",
       category: "Co-op",
       players: "2-4",
       duration: "45 min",
-      image: "Assets/Images/Pandemic.webp"
+      image: "Assets/Images/Pandemic.webp",
+      description: "Work together to stop global outbreaks!"
     },
     {
       name: "Azul",
       category: "Abstract",
       players: "2-4",
       duration: "30-45 min",
-      image: "Assets/Images/Azul.webp"
+      image: "Assets/Images/Azul.webp",
+      description: "Draft tiles to create stunning mosaic patterns."
     },
     {
       name: "7 Wonders",
       category: "Card Drafting",
       players: "3-7",
       duration: "30 min",
-      image: "Assets/Images/7 Wonders.avif"
+      image: "Assets/Images/7 Wonders.avif",
+      description: "Build an ancient city through science, war, and trade."
     },
     {
       name: "Exploding Kittens",
       category: "Party",
       players: "2-5",
       duration: "15 min",
-      image: "Assets/Images/Exploding Kittens.webp"
+      image: "Assets/Images/Exploding Kittens.webp",
+      description: "A fast and hilarious game of feline destruction."
     },
     {
       name: "Dixit",
       category: "Storytelling",
       players: "3-6",
       duration: "30 min",
-      image: "Assets/Images/Dixit.jpg"
+      image: "Assets/Images/Dixit.jpg",
+      description: "Use imagination to match beautiful surreal cards."
     }
   ];
 
@@ -104,14 +115,18 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="info">
           <h3>${game.name}</h3>
           <p>Category: ${game.category}</p>
-          <p>Players: ${game.players}</p>
-          <p>Duration: ${game.duration}</p>
+        </div>
+        <div class="details">
+          <p><strong>Players:</strong> ${game.players}</p>
+          <p><strong>Duration:</strong> ${game.duration}</p>
+          <p>${game.description}</p>
         </div>
       `;
       container.appendChild(card);
     });
   }
 
+  // ================= Boardgame Page =================
   if (window.location.pathname.includes("Boardgame.html")) {
     const maxToShow = 10;
     const toDisplay = boardgames.slice(0, maxToShow);
@@ -119,18 +134,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (seeMoreBox) {
       seeMoreBox.classList.remove("hidden");
-      if (isLoggedIn) {
-        seeMoreBox.innerHTML = `
-          <a href="Collection.html" class="see-more-button">See Other Boardgames</a>
-        `;
-      } else {
-        seeMoreBox.innerHTML = `
-          <p style="margin-top: 20px;">Please <a href="Login.html" style="color: #2563eb; font-weight: bold;">Login</a> or <a href="Signup.html" style="color: #2563eb; font-weight: bold;">Sign Up</a> to see the full collection.</p>
-        `;
-      }
+      seeMoreBox.innerHTML = isLoggedIn
+        ? `<a href="Collection.html" class="see-more-button">See Other Boardgames</a>`
+        : `<p style="margin-top: 20px;">Please <a href="Login.html" style="color: #2563eb; font-weight: bold;">Login</a> or <a href="Signup.html" style="color: #2563eb; font-weight: bold;">Sign Up</a> to see the full collection.</p>`;
     }
   }
 
+  // ================= Collection Page =================
   if (window.location.pathname.includes("Collection.html")) {
     renderBoardgames(boardgames);
 
