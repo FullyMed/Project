@@ -28,6 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           document.getElementById("loginResult").innerHTML = `
             <p style="color:red;"><strong>Invalid email or password.</strong></p>
+            <p style="margin-top: 8px;">
+              <a href="Forgot-password.html" style="color: #2563eb; font-weight: bold;">Forgot your password?</a>
+            </p>
           `;
         }
   

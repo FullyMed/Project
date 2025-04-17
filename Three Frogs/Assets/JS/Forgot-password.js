@@ -30,6 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           document.getElementById("forgotResult").innerHTML = `
             <p style="color:red;"><strong>Email not found.</strong></p>
+            <p style="margin-top: 8px;">
+              <a href="Signup.html" style="color: #2563eb; font-weight: bold;">Signup if you don't have an account.</a>
+            </p>
           `;
         }
   
