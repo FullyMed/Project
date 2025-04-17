@@ -22,8 +22,21 @@
         <section class="dashboard-container">
             <h2>Your Profile</h2>
             <div id="userInfo"></div>
-            <h3>Your Booking History</h3>
+
+            <h2>Upcoming Bookings</h2>
+            <div id="upcomingBookings"></div>
+
+            <h2 style="margin-top: 30px;">Booking History</h2>
             <div id="bookingHistory"></div>
+
+            <div id="cancelPopup" class="cancel-popup hidden">
+                <div class="popup-content">
+                    <p id="cancelText"></p>
+                    <button id="confirmCancel" class="popup-btn">Yes, Cancel</button>
+                    <button id="closePopup" class="popup-btn cancel">No</button>
+                </div>
+            </div>
+
             <button id="logoutBtn">Logout</button>
         </section>
 

@@ -76,4 +76,4 @@ document.addEventListener("DOMContentLoaded", () => {
         bookingForm.reset();
       });
     }
-  });
+  });  
