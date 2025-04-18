@@ -14,8 +14,8 @@
 
         <header>
             <nav class="navbar">
-                <div class="logo">🐸 Three Frogs</div>
-                <ul class="nav-links" id="navLinks"></ul>
+            <div class="logo">🐸 Three Frogs</div>
+            <ul class="nav-links" id="navLinks"></ul>
             </nav>
         </header>
 
@@ -23,18 +23,67 @@
             <h2>Your Profile</h2>
             <div id="userInfo"></div>
 
-            <h2>Upcoming Bookings</h2>
+            <div class="avatar-profile">
+                <img id="currentAvatar" src="Assets/Images/Avatars/Clam.jpg" alt="Avatar" class="user-avatar" />
+                <span class="edit-avatar" id="editAvatarBtn" title="Change Avatar">🖉</span>
+            </div>
+
+            <!-- Avatar Change Form (Hidden by Default) -->
+            <div id="avatarChangeContainer" class="hidden">
+                <h3>Change Avatar</h3>
+                <form id="changeAvatarForm">
+                    <div class="avatar-scroll-wrapper">
+                        <div class="avatar-selection">
+                            <label>
+                                <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Clam.jpg" checked />
+                                <img src="Assets/Images/Avatars/Clam.jpg" class="avatar-option" />
+                            </label>
+
+                            <label>
+                                <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Cow.jpg" />
+                                <img src="Assets/Images/Avatars/Cow.jpg" class="avatar-option" />
+                            </label>
+                            
+                            <label>
+                                <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Crab.jpg" />
+                                <img src="Assets/Images/Avatars/Crab.jpg" class="avatar-option" />
+                            </label>
+                            
+                            <label>
+                                <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Dolphin.jpg" />
+                                <img src="Assets/Images/Avatars/Dolphin.jpg" class="avatar-option" />
+                            </label>
+
+                            <label>
+                                <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Nemo.jpg" />
+                                <img src="Assets/Images/Avatars/Nemo.jpg" class="avatar-option" />
+                            </label>
+
+                            <label>
+                                <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Puffer.jpg" />
+                                <img src="Assets/Images/Avatars/Puffer.jpg" class="avatar-option" />
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" style="margin-top: 10px;">Update Avatar</button>
+                </form>
+                <div id="avatarUpdateMessage" style="margin-top: 10px;"></div>
+            </div>
+
+            <!-- Booking Section -->
+            <h2 style="margin-top: 40px;">Upcoming Bookings</h2>
             <div id="upcomingBookings"></div>
 
             <h2 style="margin-top: 30px;">Booking History</h2>
             <div id="bookingHistory"></div>
 
+            <!-- Cancel Booking Popup -->
             <div id="cancelPopup" class="cancel-popup hidden">
-                <div class="popup-content">
-                    <p id="cancelText"></p>
-                    <button id="confirmCancel" class="popup-btn">Yes, Cancel</button>
-                    <button id="closePopup" class="popup-btn cancel">No</button>
-                </div>
+            <div class="popup-content">
+                <p id="cancelText"></p>
+                <button id="confirmCancel" class="popup-btn">Yes, Cancel</button>
+                <button id="closePopup" class="popup-btn cancel">No</button>
+            </div>
             </div>
 
             <button id="logoutBtn">Logout</button>
@@ -44,8 +93,10 @@
             <p>&copy; 2025 Three Frogs Boardgame Surabaya</p>
         </footer>
 
+        <!-- Scroll to Top Button -->
         <button id="scrollTopBtn" title="Back to Top">⬆️</button>
 
+        <!-- JavaScript Files -->
         <script src="Assets/JS/Dashboard.js"></script>
         <script src="Assets/JS/Navbar.js"></script>
 

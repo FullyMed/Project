@@ -352,12 +352,19 @@ footer {
 .avatar-selection {
   display: flex;
   gap: 20px;
-  margin-top: 10px;
-  justify-content: center;
+  padding: 10px 0;
+  flex-wrap: nowrap;
+  width: max-content;
 }
 
 .avatar-selection label {
   cursor: pointer;
+}
+
+.avatar-scroll-wrapper {
+  overflow-x: auto;
+  padding: 10px;
+  margin-top: 10px;
 }
 
 .avatar-option {
@@ -365,11 +372,35 @@ footer {
   height: 80px;
   border-radius: 50%;
   border: 3px solid transparent;
+  cursor: pointer;
   transition: 0.2s ease;
 }
 
 input[type="radio"]:checked + .avatar-option {
   border-color: #4CAF50;
+}
+
+.avatar-profile {
+  position: relative;
+  display: inline-block;
+}
+
+.user-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.edit-avatar {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background: white;
+  border-radius: 50%;
+  padding: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
 }
 
 .booking-list {
