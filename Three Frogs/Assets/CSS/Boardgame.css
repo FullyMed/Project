@@ -542,3 +542,13 @@ input[type="radio"]:checked + .avatar-option {
 .contact-link span {
   display: inline-block;
 }
+
+.tag {
+  background-color: #e0e0e0;
+  color: #333;
+  border-radius: 12px;
+  padding: 4px 10px;
+  font-size: 12px;
+  margin: 2px;
+  display: inline-block;
+}

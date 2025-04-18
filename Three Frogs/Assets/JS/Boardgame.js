@@ -15,7 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
       players: "3-4",
       duration: "60 min",
       image: "Assets/Images/Catan.jpg",
-      description: "Trade, build, and settle your way to victory!"
+      description: "Trade, build, and settle your way to victory!",
+      tags: ["Resource Management", "Trading", "Dice Rolling"]
     },
     {
       name: "UNO",
@@ -23,47 +24,53 @@ document.addEventListener("DOMContentLoaded", () => {
       players: "2-10",
       duration: "15-30 min",
       image: "Assets/Images/UNO.webp",
-      description: "Fast-paced game where matching colors and numbers rules."
+      description: "Fast-paced game where matching colors and numbers rules.",
+      tags: ["Hand Management", "Color Matching", "Shedding"]
     },
     {
       name: "Monopoly",
-      category: "Economy",
+      category: "Family",
       players: "2-6",
       duration: "120 min",
       image: "Assets/Images/Monopoly.avif",
-      description: "Buy, trade, and bankrupt your opponents!"
+      description: "Buy, trade, and bankrupt your opponents!",
+      tags: ["Roll and Move", "Economic", "Player Elimination"]
     },
     {
       name: "Carcassonne",
-      category: "Tile Placement",
+      category: "Family",
       players: "2-5",
       duration: "45 min",
       image: "Assets/Images/Carcassonne.jpg",
-      description: "Build cities and claim roads with strategic tiles."
+      description: "Build cities and claim roads with strategic tiles.",
+      tags: ["Tile Placement", "Area Control"]
     },
     {
       name: "Codenames",
-      category: "Word",
+      category: "Word Game",
       players: "4-8",
       duration: "15 min",
       image: "Assets/Images/Codenames.jpg",
-      description: "Guess the secret words using clever clues."
+      description: "Guess the secret words using clever clues.",
+      tags: ["Team-Based", "Communication", "Deduction"]
     },
     {
       name: "Ticket to Ride",
-      category: "Adventure",
+      category: "Family",
       players: "2-5",
       duration: "60 min",
       image: "Assets/Images/Ticket To Ride.jpg",
-      description: "Collect train cards to claim routes across the map."
+      description: "Collect train cards to claim routes across the map.",
+      tags: ["Route Building", "Set Collection"]
     },
     {
       name: "Pandemic",
-      category: "Co-op",
+      category: "Cooperative",
       players: "2-4",
       duration: "45 min",
       image: "Assets/Images/Pandemic.webp",
-      description: "Work together to stop global outbreaks!"
+      description: "Work together to stop global outbreaks!",
+      tags: ["Action Point Allowance", "Hand Management", "Variable Player Powers"]
     },
     {
       name: "Azul",
@@ -71,15 +78,17 @@ document.addEventListener("DOMContentLoaded", () => {
       players: "2-4",
       duration: "30-45 min",
       image: "Assets/Images/Azul.jpg",
-      description: "Draft tiles to create stunning mosaic patterns."
+      description: "Draft tiles to create stunning mosaic patterns.",
+      tags: ["Pattern Building", "Drafting"]
     },
     {
       name: "7 Wonders",
-      category: "Card Drafting",
+      category: "Strategy",
       players: "3-7",
       duration: "30 min",
       image: "Assets/Images/7 Wonders.jpg",
-      description: "Build an ancient city through science, war, and trade."
+      description: "Build an ancient city through science, war, and trade.",
+      tags: ["Card Drafting", "Set Collection", "Engine Building"]
     },
     {
       name: "Exploding Kittens",
@@ -87,15 +96,17 @@ document.addEventListener("DOMContentLoaded", () => {
       players: "2-5",
       duration: "15 min",
       image: "Assets/Images/Exploding Kittens.jpg",
-      description: "A fast and hilarious game of feline destruction."
+      description: "A fast and hilarious game of feline destruction.",
+      tags: ["Player Elimination", "Push Your Luck"]
     },
     {
       name: "Dixit",
-      category: "Storytelling",
+      category: "Party",
       players: "3-6",
       duration: "30 min",
       image: "Assets/Images/Dixit.jpg",
-      description: "Use imagination to match beautiful surreal cards."
+      description: "Use imagination to match beautiful surreal cards.",
+      tags: ["Storytelling", "Voting", "Creativity"]
     },
     {
       name: "Jenga",
@@ -103,47 +114,53 @@ document.addEventListener("DOMContentLoaded", () => {
       players: "1-8",
       duration: "15-20 min",
       image: "Assets/Images/Jenga.jpg",
-      description: "Pull and stack wooden blocks without toppling the tower!"
+      description: "Pull and stack wooden blocks without toppling the tower!",
+      tags: ["Stacking", "Tension", "Hand-Eye Coordination"]
     },
     {
       name: "The Resistance",
-      category: "Bluffing / Social Deduction",
+      category: "Party",
       players: "5-10",
       duration: "30 min",
       image: "Assets/Images/The Resistance.jpg",
-      description: "Uncover the spies in your midst through lies and deduction."
+      description: "Uncover the spies in your midst through lies and deduction.",
+      tags: ["Bluffing", "Social Deduction", "Hidden Roles"]
     },
     {
       name: "Dominion",
-      category: "Deck-Building",
+      category: "Strategy",
       players: "2-4",
       duration: "30 min",
       image: "Assets/Images/Dominion.jpg",
-      description: "Build your deck and kingdom from a shared card pool."
+      description: "Build your deck and kingdom from a shared card pool.",
+      tags: ["Deck-Building", "Card Drafting", "Engine Building"]
     },
     {
       name: "Welcome To...",
-      category: "Roll and Write",
+      category: "Family",
       players: "1-100",
       duration: "25 min",
       image: "Assets/Images/Welcome To.jpg",
-      description: "Plan the perfect suburban neighborhood with clever number placement."
+      description: "Plan the perfect suburban neighborhood with clever number placement.",
+      tags: ["Flip and Write", "Number Placement"]
     },
     {
       name: "Wingspan",
-      category: "Engine Building",
+      category: "Strategy",
       players: "1-5",
       duration: "40-70 min",
       image: "Assets/Images/Wingspan.jpg",
-      description: "Attract birds and build powerful combos in a beautiful engine-building game."
+      description: "Attract birds and build powerful combos in a beautiful engine-building game.",
+      tags: ["Engine Building", "Card Drafting", "Set Collection"]
     },
     {
       name: "Risk",
-      category: "Area Control",
+      category: "Strategy",
       players: "2-6",
       duration: "60-120 min",
       image: "Assets/Images/Risk.jpg",
-      description: "Conquer the world one territory at a time through dice and strategy."
+      description: "Conquer the world one territory at a time through dice and strategy.",
+      tags: ["Area Control", "Dice Rolling", "Elimination"]
     },
     {
       name: "Patchwork",
@@ -151,33 +168,37 @@ document.addEventListener("DOMContentLoaded", () => {
       players: "2",
       duration: "30 min",
       image: "Assets/Images/Patchwork.jpg",
-      description: "Compete to build the most aesthetically pleasing quilt using Tetris-like pieces."
+      description: "Compete to build the most aesthetically pleasing quilt using Tetris-like pieces.",
+      tags: ["Tile Placement", "Tetris-Like", "Resource Management"]
     },
     {
       name: "Secret Hitler",
-      category: "Hidden Role",
+      category: "Party",
       players: "5-10",
       duration: "45 min",
       image: "Assets/Images/Secret Hitler.jpg",
-      description: "Deduce who is lying in this tense and strategic political thriller."
+      description: "Deduce who is lying in this tense and strategic political thriller.",
+      tags: ["Hidden Roles", "Bluffing", "Deduction"]
     },
     {
       name: "Camel Up",
-      category: "Racing / Betting",
+      category: "Party",
       players: "2-8",
       duration: "30 min",
       image: "Assets/Images/Camel Up.jpg",
-      description: "Bet on racing camels and manipulate their positions in wild ways!"
+      description: "Bet on racing camels and manipulate their positions in wild ways!",
+      tags: ["Betting", "Racing", "Dice Rolling"]
     },
     {
       name: "Splendor",
-      category: "Engine Building",
+      category: "Strategy",
       players: "2-4",
       duration: "30 min",
       image: "Assets/Images/Splendor.jpg",
-      description: "Collect gems and attract nobles in this elegant and strategic game."
-    }    
-  ];
+      description: "Collect gems and attract nobles in this elegant and strategic game.",
+      tags: ["Engine Building", "Set Collection", "Card Drafting"]
+    }
+  ];  
 
   function renderBoardgames(data) {
     container.innerHTML = "";
