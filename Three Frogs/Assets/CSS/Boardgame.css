@@ -492,3 +492,22 @@ input[type="radio"]:checked + .avatar-option {
 .hidden {
   display: none !important;
 }
+
+.contact-icon {
+  width: 50px;
+  vertical-align: middle;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.contact-link {
+  text-decoration: none;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-link span {
+  display: inline-block;
+}
