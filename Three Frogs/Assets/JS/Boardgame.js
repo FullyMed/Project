@@ -211,11 +211,13 @@ document.addEventListener("DOMContentLoaded", () => {
     data.forEach((game) => {
       const card = document.createElement("div");
       card.className = "boardgame-card";
+      const tagsHtml = game.tags ? game.tags.map(tag => `<span class='tag'>${tag}</span>`).join(" ") : "";
       card.innerHTML = `
         <img src="${game.image}" alt="${game.name}" />
         <div class="info">
           <h3>${game.name}</h3>
           <p>Category: ${game.category}</p>
+          <div class="tags">${tagsHtml}</div>
         </div>
         <div class="details">
           <p><strong>Players:</strong> ${game.players}</p>
