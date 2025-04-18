@@ -96,7 +96,87 @@ document.addEventListener("DOMContentLoaded", () => {
       duration: "30 min",
       image: "Assets/Images/Dixit.jpg",
       description: "Use imagination to match beautiful surreal cards."
-    }
+    },
+    {
+      name: "Jenga",
+      category: "Dexterity",
+      players: "1-8",
+      duration: "15-20 min",
+      image: "Assets/Images/Jenga.jpg",
+      description: "Pull and stack wooden blocks without toppling the tower!"
+    },
+    {
+      name: "The Resistance",
+      category: "Bluffing / Social Deduction",
+      players: "5-10",
+      duration: "30 min",
+      image: "Assets/Images/The Resistance.jpg",
+      description: "Uncover the spies in your midst through lies and deduction."
+    },
+    {
+      name: "Dominion",
+      category: "Deck-Building",
+      players: "2-4",
+      duration: "30 min",
+      image: "Assets/Images/Dominion.jpg",
+      description: "Build your deck and kingdom from a shared card pool."
+    },
+    {
+      name: "Welcome To...",
+      category: "Roll and Write",
+      players: "1-100",
+      duration: "25 min",
+      image: "Assets/Images/Welcome To.jpg",
+      description: "Plan the perfect suburban neighborhood with clever number placement."
+    },
+    {
+      name: "Wingspan",
+      category: "Engine Building",
+      players: "1-5",
+      duration: "40-70 min",
+      image: "Assets/Images/Wingspan.jpg",
+      description: "Attract birds and build powerful combos in a beautiful engine-building game."
+    },
+    {
+      name: "Risk",
+      category: "Area Control",
+      players: "2-6",
+      duration: "60-120 min",
+      image: "Assets/Images/Risk.jpg",
+      description: "Conquer the world one territory at a time through dice and strategy."
+    },
+    {
+      name: "Patchwork",
+      category: "Abstract",
+      players: "2",
+      duration: "30 min",
+      image: "Assets/Images/Patchwork.jpg",
+      description: "Compete to build the most aesthetically pleasing quilt using Tetris-like pieces."
+    },
+    {
+      name: "Secret Hitler",
+      category: "Hidden Role",
+      players: "5-10",
+      duration: "45 min",
+      image: "Assets/Images/Secret Hitler.jpg",
+      description: "Deduce who is lying in this tense and strategic political thriller."
+    },
+    {
+      name: "Camel Up",
+      category: "Racing / Betting",
+      players: "2-8",
+      duration: "30 min",
+      image: "Assets/Images/Camel Up.jpg",
+      description: "Bet on racing camels and manipulate their positions in wild ways!"
+    },
+    {
+      name: "Splendor",
+      category: "Engine Building",
+      players: "2-4",
+      duration: "30 min",
+      image: "Assets/Images/Splendor.jpg",
+      description: "Collect gems and attract nobles in this elegant and strategic game."
+    }    
   ];
 
   function renderBoardgames(data) {
