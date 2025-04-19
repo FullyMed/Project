@@ -198,6 +198,186 @@ document.addEventListener("DOMContentLoaded", () => {
       description: "Collect gems and attract nobles in this elegant and strategic game.",
       tags: ["Engine Building", "Set Collection", "Card Drafting"]
     },
+    {
+      name: "Love Letter",
+      category: "Card Game",
+      players: "2-4",
+      duration: "20 min",
+      image: "Assets/Images/Love Letter.jpg",
+      description: "Use deduction and luck to deliver your love letter to the princess.",
+      tags: ["Hand Management", "Deduction", "Player Elimination"]
+    },
+    {
+      name: "Isle of Skye",
+      category: "Strategy",
+      players: "2-5",
+      duration: "60 min",
+      image: "Assets/Images/Isle of Skye.jpg",
+      description: "Build your kingdom in the Scottish highlands through tile placement and clever pricing.",
+      tags: ["Tile Placement", "Auction", "Economic"]
+    },
+    {
+      name: "King of Tokyo",
+      category: "Party",
+      players: "2-6",
+      duration: "30 min",
+      image: "Assets/Images/King of Tokyo.jpg",
+      description: "Battle monsters and roll dice to become the one and only King of Tokyo!",
+      tags: ["Dice Rolling", "Player Elimination", "Push Your Luck"]
+    },
+    {
+      name: "Tokaido",
+      category: "Family",
+      players: "2-5",
+      duration: "45 min",
+      image: "Assets/Images/Tokaido.jpg",
+      description: "Take a peaceful journey through Japan, collecting souvenirs and experiences.",
+      tags: ["Point to Point Movement", "Set Collection", "Relaxing"]
+    },
+    {
+      name: "Cartographers",
+      category: "Abstract",
+      players: "1-100",
+      duration: "30-45 min",
+      image: "Assets/Images/Cartographers.jpg",
+      description: "Draw maps and plan your kingdom while adapting to changing objectives.",
+      tags: ["Flip and Write", "Map Drawing", "Pattern Building"]
+    },
+    {
+      name: "The Mind",
+      category: "Party",
+      players: "2-4",
+      duration: "15-20 min",
+      image: "Assets/Images/The Mind.jpg",
+      description: "Play cards in the right order—without talking. A game of timing and connection.",
+      tags: ["Cooperative", "Hand Management", "Timing"]
+    },
+    {
+      name: "Quacks of Quedlinburg",
+      category: "Strategy",
+      players: "2-4",
+      duration: "45 min",
+      image: "Assets/Images/Quacks of Quedlinburg.jpg",
+      description: "Brew potions by pushing your luck and drawing ingredients from your bag.",
+      tags: ["Bag Building", "Push Your Luck", "Engine Building"]
+    },
+    {
+      name: "Hive",
+      category: "Abstract",
+      players: "2",
+      duration: "20 min",
+      image: "Assets/Images/Hive.jpg",
+      description: "A bug-themed chess-like game where you surround the opponent’s queen bee.",
+      tags: ["Abstract Strategy", "No Board", "Tactical Movement"]
+    },
+    {
+      name: "MicroMacro: Crime City",
+      category: "Deduction",
+      players: "1-4",
+      duration: "15-45 min",
+      image: "Assets/Images/MicroMacro.jpg",
+      description: "Solve crimes by searching through a giant illustrated city map.",
+      tags: ["Observation", "Deduction", "Storytelling"]
+    },
+    {
+      name: "Betrayal at House on the Hill",
+      category: "Horror",
+      players: "3-6",
+      duration: "60 min",
+      image: "Assets/Images/Betrayal at House on the Hill.jpg",
+      description: "Explore a haunted house until one player turns traitor and the haunt begins.",
+      tags: ["Modular Board", "Hidden Traitor", "Scenario-Based"]
+    },
+    {
+      name: "Just One",
+      category: "Party",
+      players: "3-7",
+      duration: "20 min",
+      image: "Assets/Images/Just One.jpg",
+      description: "Cooperate to give one-word clues and guess the secret word. But duplicates are discarded!",
+      tags: ["Word Game", "Cooperative", "Party"]
+    },
+    {
+      name: "Clue (Cluedo)",
+      category: "Family",
+      players: "3-6",
+      duration: "45 min",
+      image: "Assets/Images/Clue.jpg",
+      description: "Solve the murder mystery by deducing who, where, and with what.",
+      tags: ["Deduction", "Roll and Move", "Mystery"]
+    },
+    {
+      name: "Onitama",
+      category: "Abstract",
+      players: "2",
+      duration: "15-20 min",
+      image: "Assets/Images/Onitama.jpg",
+      description: "A fast-paced strategy game with martial arts-inspired movement patterns.",
+      tags: ["Abstract Strategy", "Perfect Information", "Grid Movement"]
+    },
+    {
+      name: "Terraforming Mars",
+      category: "Strategy",
+      players: "1-5",
+      duration: "120 min",
+      image: "Assets/Images/Terraforming Mars.jpg",
+      description: "Lead a corporation to terraform the red planet through engine building and resource management.",
+      tags: ["Engine Building", "Card Drafting", "Resource Management"]
+    },
+    {
+      name: "Suspend",
+      category: "Dexterity",
+      players: "1-4",
+      duration: "15-20 min",
+      image: "Assets/Images/Suspend.jpg",
+      description: "Balance metal rods in a tension-filled test of nerves and precision.",
+      tags: ["Balancing", "Hand-Eye Coordination", "Tension"]
+    },
+    {
+      name: "Dead of Winter",
+      category: "Thematic",
+      players: "2-5",
+      duration: "90-120 min",
+      image: "Assets/Images/Dead of Winter.jpg",
+      description: "Survive a zombie apocalypse with your group, but beware: someone may have a secret agenda.",
+      tags: ["Hidden Traitor", "Cooperative", "Scenario-Based"]
+    },
+    {
+      name: "Paperback",
+      category: "Word Game",
+      players: "2-5",
+      duration: "45 min",
+      image: "Assets/Images/Paperback.jpg",
+      description: "Build words using letter cards in this blend of deck-building and wordplay.",
+      tags: ["Word Building", "Deck-Building", "Card Game"]
+    },
+    {
+      name: "Forbidden Island",
+      category: "Cooperative",
+      players: "2-4",
+      duration: "30 min",
+      image: "Assets/Images/Forbidden Island.jpg",
+      description: "Work together to retrieve treasures before the island sinks beneath the waves.",
+      tags: ["Cooperative", "Action Point Allowance", "Tile Removal"]
+    },
+    {
+      name: "Star Realms",
+      category: "Card Game",
+      players: "2",
+      duration: "20 min",
+      image: "Assets/Images/Star Realms.jpg",
+      description: "A fast-paced deck-building game of starship battles and combos.",
+      tags: ["Deck-Building", "Card Drafting", "Combat"]
+    },
+    {
+      name: "Coup",
+      category: "Bluffing",
+      players: "2-6",
+      duration: "15 min",
+      image: "Assets/Images/Coup.jpg",
+      description: "Use deception, deduction, and strategy to manipulate your way to power.",
+      tags: ["Bluffing", "Player Elimination", "Hidden Roles"]
+    },    
   ];
 
   function renderBoardgames(data) {
@@ -232,7 +412,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // ================= Boardgame Page =================
   if (window.location.pathname.includes("Boardgame.html")) {
     const maxToShow = 10;
-    const toDisplay = boardgames.slice(0, maxToShow);
+    const shuffled = boardgames.sort(() => 0.5 - Math.random());
+    const toDisplay = shuffled.slice(0, maxToShow);
     renderBoardgames(toDisplay);
 
     if (seeMoreBox) {
