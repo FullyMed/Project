@@ -102,7 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // === User Info & Avatar Display ===
   function updateUserInfo() {
     userInfo.innerHTML = `
-      <img src="${loggedInUser.avatar}" alt="User Avatar" style="width:100px;height:100px;border-radius:50%;margin-bottom:10px;">
       <p><strong>Name:</strong> ${loggedInUser.name}</p>
       <p><strong>Email:</strong> ${loggedInUser.email}</p>
     `;

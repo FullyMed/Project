@@ -197,8 +197,8 @@ document.addEventListener("DOMContentLoaded", () => {
       image: "Assets/Images/Splendor.jpg",
       description: "Collect gems and attract nobles in this elegant and strategic game.",
       tags: ["Engine Building", "Set Collection", "Card Drafting"]
-    }
-  ];  
+    },
+  ];
 
   function renderBoardgames(data) {
     container.innerHTML = "";
