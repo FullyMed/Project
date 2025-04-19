@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
       duration: "45 min",
       image: "Assets/Images/Pandemic.webp",
       description: "Work together to stop global outbreaks!",
-      tags: ["Action Point Allowance", "Hand Management", "Variable Player Powers"]
+      tags: ["Action Point Allowance", "Hand Management", "Player Powers"]
     },
     {
       name: "Azul",
@@ -136,11 +136,11 @@ document.addEventListener("DOMContentLoaded", () => {
       tags: ["Deck-Building", "Card Drafting", "Engine Building"]
     },
     {
-      name: "Welcome To...",
+      name: "Welcome to Your Perfect Home",
       category: "Family",
       players: "1-100",
       duration: "25 min",
-      image: "Assets/Images/Welcome To.jpg",
+      image: "Assets/Images/Welcome to Your Perfect Home.jpg",
       description: "Plan the perfect suburban neighborhood with clever number placement.",
       tags: ["Flip and Write", "Number Placement"]
     },
@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Party",
       players: "2-8",
       duration: "30 min",
-      image: "Assets/Images/Camel Up.jpg",
+      image: "Assets/Images/Camel Up.webp",
       description: "Bet on racing camels and manipulate their positions in wild ways!",
       tags: ["Betting", "Racing", "Dice Rolling"]
     },
