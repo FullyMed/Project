@@ -266,7 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Abstract",
       players: "2",
       duration: "20 min",
-      image: "Assets/Images/Hive.jpg",
+      image: "Assets/Images/Hive.png",
       description: "A bug-themed chess-like game where you surround the opponent’s queen bee.",
       tags: ["Abstract Strategy", "No Board", "Tactical Movement"]
     },
@@ -293,16 +293,16 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Party",
       players: "3-7",
       duration: "20 min",
-      image: "Assets/Images/Just One.jpg",
+      image: "Assets/Images/Just One.webp",
       description: "Cooperate to give one-word clues and guess the secret word. But duplicates are discarded!",
       tags: ["Word Game", "Cooperative", "Party"]
     },
     {
-      name: "Clue (Cluedo)",
+      name: "Cluedo",
       category: "Family",
       players: "3-6",
       duration: "45 min",
-      image: "Assets/Images/Clue.jpg",
+      image: "Assets/Images/Cluedo.jpg",
       description: "Solve the murder mystery by deducing who, where, and with what.",
       tags: ["Deduction", "Roll and Move", "Mystery"]
     },
@@ -329,7 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Dexterity",
       players: "1-4",
       duration: "15-20 min",
-      image: "Assets/Images/Suspend.jpg",
+      image: "Assets/Images/Suspend.webp",
       description: "Balance metal rods in a tension-filled test of nerves and precision.",
       tags: ["Balancing", "Hand-Eye Coordination", "Tension"]
     },
@@ -347,7 +347,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Word Game",
       players: "2-5",
       duration: "45 min",
-      image: "Assets/Images/Paperback.jpg",
+      image: "Assets/Images/Paperback.webp",
       description: "Build words using letter cards in this blend of deck-building and wordplay.",
       tags: ["Word Building", "Deck-Building", "Card Game"]
     },
@@ -361,15 +361,6 @@ document.addEventListener("DOMContentLoaded", () => {
       tags: ["Cooperative", "Action Point Allowance", "Tile Removal"]
     },
     {
-      name: "Star Realms",
-      category: "Card Game",
-      players: "2",
-      duration: "20 min",
-      image: "Assets/Images/Star Realms.jpg",
-      description: "A fast-paced deck-building game of starship battles and combos.",
-      tags: ["Deck-Building", "Card Drafting", "Combat"]
-    },
-    {
       name: "Coup",
       category: "Bluffing",
       players: "2-6",
@@ -377,6 +368,96 @@ document.addEventListener("DOMContentLoaded", () => {
       image: "Assets/Images/Coup.jpg",
       description: "Use deception, deduction, and strategy to manipulate your way to power.",
       tags: ["Bluffing", "Player Elimination", "Hidden Roles"]
+    },
+    {
+      name: "Wavelength",
+      category: "Party",
+      players: "2-12",
+      duration: "30-45 min",
+      image: "Assets/Images/Wavelength.jpg",
+      description: "Give and guess clues on a hidden spectrum in this hilarious team game.",
+      tags: ["Team-Based", "Communication", "Social"]
+    },
+    {
+      name: "Labyrinth",
+      category: "Family",
+      players: "2-4",
+      duration: "30 min",
+      image: "Assets/Images/Labyrinth.jpg",
+      description: "Shift the maze to find treasures and block opponents in this classic puzzle game.",
+      tags: ["Tile Movement", "Maze", "Tactical"]
+    },
+    {
+      name: "Santorini",
+      category: "Abstract",
+      players: "2-4",
+      duration: "20 min",
+      image: "Assets/Images/Santorini.jpg",
+      description: "Build and block in a stunning 3D race to reach the top floor.",
+      tags: ["Abstract Strategy", "Grid Movement", "God Powers"]
+    },
+    {
+      name: "Great Western Trail",
+      category: "Strategy",
+      players: "2-4",
+      duration: "75-150 min",
+      image: "Assets/Images/Great Western Trail.jpg",
+      description: "Herd cattle, upgrade your engine, and build your legacy in the Old West.",
+      tags: ["Deck-Building", "Route Building", "Economic"]
+    },
+    {
+      name: "Junk Art",
+      category: "Dexterity",
+      players: "2-6",
+      duration: "30 min",
+      image: "Assets/Images/Junk Art.jpg",
+      description: "Stack odd-shaped pieces to create artistic structures without toppling them.",
+      tags: ["Balancing", "Stacking", "Quick Reflex"]
+    },
+    {
+      name: "Arkham Horror: The Card Game",
+      category: "Thematic",
+      players: "1-2 (expandable)",
+      duration: "60-120 min",
+      image: "Assets/Images/Arkham Horror Card Game.jpg",
+      description: "Investigate dark mysteries and battle cosmic horrors in this narrative-driven LCG.",
+      tags: ["Deck Construction", "Campaign", "Horror"]
+    },
+    {
+      name: "Trapwords",
+      category: "Word Game",
+      players: "4-8",
+      duration: "30 min",
+      image: "Assets/Images/Trapwords.jpg",
+      description: "Guess the word without saying the trap words your opponents secretly chose!",
+      tags: ["Team-Based", "Word Guessing", "Trap Mechanic"]
+    },
+    {
+      name: "The Crew: The Quest for Planet Nine",
+      category: "Cooperative",
+      players: "2-5",
+      duration: "20 min",
+      image: "Assets/Images/The Crew.jpg",
+      description: "Complete tricky space missions with limited communication in this cooperative trick-taking game.",
+      tags: ["Trick-Taking", "Mission-Based", "Limited Communication"]
+    },
+    {
+      name: "Hanamikoji",
+      category: "Card Game",
+      players: "2",
+      duration: "15-20 min",
+      image: "Assets/Images/Hanamikoji.jpg",
+      description: "Gain the favor of geishas through tactical card play and clever offerings.",
+      tags: ["Hand Management", "Area Control", "Tug of War"]
+    },
+    {
+      name: "Spyfall",
+      category: "Bluffing",
+      players: "3-8",
+      duration: "15 min",
+      image: "Assets/Images/Spyfall.jpg",
+      description: "Find the spy among you—or if you're the spy, figure out where you are!",
+      tags: ["Social Deduction", "Bluffing", "Hidden Roles"]
     },    
   ];
 
