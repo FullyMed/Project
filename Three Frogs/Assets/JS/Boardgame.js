@@ -401,7 +401,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Strategy",
       players: "2-4",
       duration: "75-150 min",
-      image: "Assets/Images/Great Western Trail.jpg",
+      image: "Assets/Images/Great Western Trail.webp",
       description: "Herd cattle, upgrade your engine, and build your legacy in the Old West.",
       tags: ["Deck-Building", "Route Building", "Economic"]
     },
@@ -437,7 +437,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Cooperative",
       players: "2-5",
       duration: "20 min",
-      image: "Assets/Images/The Crew.jpg",
+      image: "Assets/Images/The Crew_Planet Nine.jpg",
       description: "Complete tricky space missions with limited communication in this cooperative trick-taking game.",
       tags: ["Trick-Taking", "Mission-Based", "Limited Communication"]
     },
@@ -455,7 +455,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Bluffing",
       players: "3-8",
       duration: "15 min",
-      image: "Assets/Images/Spyfall.jpg",
+      image: "Assets/Images/Spyfall.webp",
       description: "Find the spy among you—or if you're the spy, figure out where you are!",
       tags: ["Social Deduction", "Bluffing", "Hidden Roles"]
     },    
