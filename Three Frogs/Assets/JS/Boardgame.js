@@ -424,15 +424,6 @@ document.addEventListener("DOMContentLoaded", () => {
       tags: ["Abstract Strategy", "3D", "Tactical"]
     },
     {
-      name: "Game of Cat and Mouth",
-      category: "Dexterity",
-      players: "2",
-      duration: "10-15 min",
-      image: "Assets/Images/Game of Cat and Mouth.jpg",
-      description: "Use a magnetic cat paw to fling balls at your opponent's side in a fast-paced battle.",
-      tags: ["Flicking", "Dexterity", "Real-Time"]
-    },
-    {
       name: "Quoridor",
       category: "Abstract",
       players: "2-4",
@@ -442,11 +433,20 @@ document.addEventListener("DOMContentLoaded", () => {
       tags: ["Maze", "Blocking", "Abstract Strategy"]
     },
     {
+      name: "Game of Cat and Mouth",
+      category: "Dexterity",
+      players: "2",
+      duration: "10-15 min",
+      image: "Assets/Images/Game of Cat and Mouth.webp",
+      description: "Use a magnetic cat paw to fling balls at your opponent's side in a fast-paced battle.",
+      tags: ["Flicking", "Dexterity", "Real-Time"]
+    },
+    {
       name: "Blokus",
       category: "Abstract",
       players: "2-4",
       duration: "20-30 min",
-      image: "Assets/Images/Blokus.jpg",
+      image: "Assets/Images/Blokus.webp",
       description: "Place as many of your pieces as you can while blocking your opponents in this strategic spatial game.",
       tags: ["Tile Placement", "Spatial Reasoning", "Abstract Strategy"]
     },
@@ -464,7 +464,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Card Game",
       players: "2",
       duration: "20 min",
-      image: "Assets/Images/Schotten Totten.jpg",
+      image: "Assets/Images/Schotten Totten.jpeg",
       description: "Battle over stones using poker-style formations in this tactical 2-player duel.",
       tags: ["Hand Management", "Area Control", "Bluffing"]
     },
@@ -473,7 +473,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Party",
       players: "2",
       duration: "15-20 min",
-      image: "Assets/Images/Tacocat Spelled Backwards.jpg",
+      image: "Assets/Images/Tacocat Spelled Backwards.webp",
       description: "A palindrome-powered tug-of-war game of clever duels and bluffing.",
       tags: ["Bluffing", "Card Game", "Humor"]
     },
@@ -496,20 +496,11 @@ document.addEventListener("DOMContentLoaded", () => {
       tags: ["Tile Placement", "Drafting", "Spatial"]
     },
     {
-      name: "Kingdomino Origin",
-      category: "Family",
-      players: "2-4",
-      duration: "25-30 min",
-      image: "Assets/Images/Kingdomino Origin.jpg",
-      description: "A prehistoric twist on the original Kingdomino with new scoring systems and bonuses.",
-      tags: ["Tile Placement", "Set Collection", "Drafting"]
-    },
-    {
       name: "Cacao",
       category: "Strategy",
       players: "2-4",
       duration: "45 min",
-      image: "Assets/Images/Cacao.jpg",
+      image: "Assets/Images/Cacao.webp",
       description: "Grow and sell cacao in this tile-laying game of timing and resource management.",
       tags: ["Tile Placement", "Resource Management", "Economic"]
     },
@@ -518,7 +509,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Family",
       players: "2-6",
       duration: "60 min",
-      image: "Assets/Images/Game of Life.jpg",
+      image: "Assets/Images/Game of Life.jpeg",
       description: "Travel through life making choices about career, family, and fortune in this classic game.",
       tags: ["Roll and Move", "Life Simulation", "Classic"]
     },
@@ -527,7 +518,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Party",
       players: "2-8",
       duration: "20 min",
-      image: "Assets/Images/Dream On.jpg",
+      image: "Assets/Images/Dream On.jpeg",
       description: "Build a dream together, then try to recall it in the right order!",
       tags: ["Memory", "Storytelling", "Cooperative"]
     },
@@ -545,16 +536,16 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Party",
       players: "3-8",
       duration: "20-40 min",
-      image: "Assets/Images/Bang The Bullet.jpg",
+      image: "Assets/Images/Bang The Bullet.webp",
       description: "A deluxe edition of the wild west shootout game—hidden roles, bluffing, and bullets fly.",
       tags: ["Bluffing", "Hidden Roles", "Western"]
     },
     {
-      name: "Fun Fact",
+      name: "Fun Facts",
       category: "Party",
       players: "4-8",
       duration: "20-30 min",
-      image: "Assets/Images/Fun Fact.jpg",
+      image: "Assets/Images/Fun Facts.jpg",
       description: "Reveal hilarious and surprising facts about your friends in this light party game.",
       tags: ["Guessing", "Social", "Icebreaker"]
     },
@@ -563,7 +554,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Party",
       players: "4-12",
       duration: "40 min",
-      image: "Assets/Images/Concept.jpg",
+      image: "Assets/Images/Concept.webp",
       description: "Use icons to get your teammates to guess words or phrases in this abstract communication game.",
       tags: ["Word Game", "Abstract", "Team-Based"]
     },
