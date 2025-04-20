@@ -734,7 +734,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Bluffing",
       players: "3-13",
       duration: "30 min",
-      image: "Assets/Images/Trial by Trolley.jpg",
+      image: "Assets/Images/Trial by Trolley.webp",
       description: "A darkly humorous game of moral dilemmas and choosing who lives or dies.",
       tags: ["Debate", "Bluffing", "Dark Humor"]
     },
@@ -757,15 +757,6 @@ document.addEventListener("DOMContentLoaded", () => {
       tags: ["Dexterity", "Physical", "Silly Fun"]
     },
     {
-      name: "The Builders",
-      category: "Strategy",
-      players: "2-4",
-      duration: "30 min",
-      image: "Assets/Images/The Builders.jpg",
-      description: "Hire workers and manage resources to complete historic buildings.",
-      tags: ["Card Game", "Engine Building", "Resource Management"]
-    },
-    {
       name: "Mascarade",
       category: "Bluffing",
       players: "2-13",
@@ -779,7 +770,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Bluffing",
       players: "3-6",
       duration: "20-30 min",
-      image: "Assets/Images/Scape Goat.jpg",
+      image: "Assets/Images/Scape Goat.webp",
       description: "One player is the scapegoat—can they figure it out before they’re thrown under the bus?",
       tags: ["Deduction", "Hidden Identity", "Bluffing"]
     },
@@ -797,7 +788,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Party",
       players: "6-30",
       duration: "15-20 min",
-      image: "Assets/Images/Two Rooms and a Boom.jpg",
+      image: "Assets/Images/Two Rooms and a Boom.web",
       description: "Split into two rooms and use hidden roles to protect or assassinate the president.",
       tags: ["Hidden Roles", "Social Deduction", "Party"]
     },
