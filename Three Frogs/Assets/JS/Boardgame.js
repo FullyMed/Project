@@ -806,7 +806,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Party",
       players: "8-35",
       duration: "30-45 min",
-      image: "Assets/Images/Werewolf Deluxe.jpg",
+      image: "Assets/Images/Werewolf Deluxe.webp",
       description: "A social deduction classic where players must discover the werewolves hiding in the village.",
       tags: ["Social Deduction", "Hidden Roles", "Bluffing"]
     },
@@ -842,7 +842,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Family",
       players: "2-4",
       duration: "20-30 min",
-      image: "Assets/Images/Bendomino.jpg",
+      image: "Assets/Images/Bendomino.webp",
       description: "A curved twist on the classic domino game requiring smart placement and planning.",
       tags: ["Tile Placement", "Domino", "Abstract"]
     },
@@ -860,7 +860,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Party",
       players: "3-6",
       duration: "30 min",
-      image: "Assets/Images/Stella.jpg",
+      image: "Assets/Images/Stella.webp",
       description: "Connect images through associations in the Dixit universe.",
       tags: ["Word Association", "Creativity", "Deduction"]
     },
@@ -869,7 +869,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Dexterity",
       players: "2-6",
       duration: "20 min",
-      image: "Assets/Images/Catch the Moon.jpg",
+      image: "Assets/Images/Catch the Moon.png",
       description: "Climb to the moon by balancing ladders—don't let your dreams crash!",
       tags: ["Dexterity", "Balancing", "Tension"]
     },
@@ -878,7 +878,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Strategy",
       players: "1-5",
       duration: "30 min",
-      image: "Assets/Images/Canvas.jpg",
+      image: "Assets/Images/Canvas.webp",
       description: "Create beautiful paintings by layering transparent cards for points and aesthetics.",
       tags: ["Set Collection", "Art", "Drafting"]
     },
@@ -887,7 +887,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Word Game",
       players: "3-6",
       duration: "30 min",
-      image: "Assets/Images/So Clover.jpg",
+      image: "Assets/Images/So Clover.webp",
       description: "Write clues that connect word pairs and work as a team to solve the clover puzzle.",
       tags: ["Cooperative", "Word Game", "Clue Giving"]
     },
@@ -959,7 +959,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Party",
       players: "2-6",
       duration: "15 min",
-      image: "Assets/Images/Halli Galli.jpg",
+      image: "Assets/Images/Halli Galli.png",
       description: "A fast-reaction game where players race to ring the bell when fruit sets match!",
       tags: ["Reaction", "Speed", "Pattern Recognition"]
     },
@@ -986,7 +986,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Dexterity",
       players: "2-4",
       duration: "15 min",
-      image: "Assets/Images/Cookie Box.jpg",
+      image: "Assets/Images/Cookie Box.webp",
       description: "Stack, balance, and race to arrange cookies and boxes faster than your friends.",
       tags: ["Stacking", "Speed", "Kids"]
     },
@@ -998,15 +998,6 @@ document.addEventListener("DOMContentLoaded", () => {
       image: "Assets/Images/Bears in Barrels.jpg",
       description: "Wind up the bears and race them across the table in this silly action game.",
       tags: ["Dexterity", "Wind-Up Toys", "Racing"]
-    },
-    {
-      name: "Sheep N Sheep",
-      category: "Family",
-      players: "2-4",
-      duration: "20 min",
-      image: "Assets/Images/Sheep N Sheep.jpg",
-      description: "Collect adorable sheep cards and complete objectives while watching out for sneaky tricks.",
-      tags: ["Set Collection", "Card Game", "Kids"]
     },
     {
       name: "Felicity: The Cat in the Sack",
@@ -1022,7 +1013,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Dexterity",
       players: "2-4",
       duration: "10-15 min",
-      image: "Assets/Images/Bam Bam Race.jpg",
+      image: "Assets/Images/Bam Bam Race.webp",
       description: "Race your car across the floor in this slam-the-pawn action game!",
       tags: ["Dexterity", "Racing", "Kids"]
     },
