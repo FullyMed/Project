@@ -1731,8 +1731,69 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ================= Collection Page =================
   if (window.location.pathname.includes("Collection.html")) {
-    renderBoardgames(boardgames);
+    const isLoggedIn = localStorage.getItem("loggedInUser");
+    if (!isLoggedIn) {
+      alert("You must be logged in to view the full boardgame collection.");
+      window.location.href = "Login.html";
+      return;
+    }
 
+    const container = document.getElementById("boardgame-list");
+
+    // Sort A-Z
+    boardgames.sort((a, b) => a.name.localeCompare(b.name));
+
+    function groupBoardgamesByLetter(games) {
+      const grouped = {};
+      games.forEach(game => {
+        const letter = game.name[0].toUpperCase();
+        if (!grouped[letter]) grouped[letter] = [];
+        grouped[letter].push(game);
+      });
+      return grouped;
+    }
+
+    function renderGroupedBoardgames(games) {
+      container.innerHTML = "";
+      const grouped = groupBoardgamesByLetter(games);
+
+      Object.keys(grouped).sort().forEach(letter => {
+        const section = document.createElement("section");
+        section.id = `letter-${letter}`;
+        section.innerHTML = `<h3>${letter}</h3>`;
+
+        const groupContainer = document.createElement("div");
+        groupContainer.className = "boardgame-container";
+
+        grouped[letter].forEach(game => {
+          const card = document.createElement("div");
+          card.className = "boardgame-card";
+          const tagsHtml = game.tags.map(tag => `<span class='tag'>${tag}</span>`).join(" ");
+          card.innerHTML = `
+            <img src="${game.image}" alt="${game.name}" />
+            <div class="info">
+              <h3>${game.name}</h3>
+              <p>Category: ${game.category}</p>
+              <div class="tags">${tagsHtml}</div>
+            </div>
+            <div class="details">
+              <p><strong>Players:</strong> ${game.players}</p>
+              <p><strong>Duration:</strong> ${game.duration}</p>
+              <p>${game.description}</p>
+            </div>
+          `;
+          groupContainer.appendChild(card);
+        });
+
+        section.appendChild(groupContainer);
+        container.appendChild(section);
+      });
+    }
+
+    // Initial Render
+    renderGroupedBoardgames(boardgames);
+
+    // Filter Logic
     function filterBoardgames() {
       const keyword = searchInput.value.toLowerCase();
       const category = categoryFilter.value;
@@ -1743,9 +1804,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return matchName && matchCategory;
       });
 
-      renderBoardgames(filtered);
+      renderGroupedBoardgames(filtered);
     }
 
+    // Event Listeners
     if (searchInput && categoryFilter) {
       searchInput.addEventListener("input", filterBoardgames);
       categoryFilter.addEventListener("change", filterBoardgames);
