@@ -581,7 +581,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Abstract",
       players: "1-4",
       duration: "20-30 min",
-      image: "Assets/Images/Spirits of the Forest.jpg",
+      image: "Assets/Images/Spirits of the Forest.webp",
       description: "Collect sets of spirit tiles while managing resources and blocking opponents.",
       tags: ["Set Collection", "Abstract Strategy", "Tile Drafting"]
     },
@@ -599,7 +599,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Thematic",
       players: "1-6",
       duration: "30-60 min",
-      image: "Assets/Images/Room 25.jpg",
+      image: "Assets/Images/Room 25.webp",
       description: "Escape a deadly maze filled with traps, suspicion, and betrayal.",
       tags: ["Hidden Traitor", "Modular Board", "Action Programming"]
     },
@@ -608,7 +608,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Card Game",
       players: "2-5",
       duration: "15-20 min",
-      image: "Assets/Images/Ramen Fury.jpg",
+      image: "Assets/Images/Ramen Fury.webp",
       description: "Build the tastiest bowls of ramen by drafting ingredients and seasoning wisely.",
       tags: ["Drafting", "Set Collection", "Food Theme"]
     },
@@ -617,7 +617,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Party",
       players: "2-5",
       duration: "20 min",
-      image: "Assets/Images/Bag of Chips.jpg",
+      image: "Assets/Images/Bag of Chips.webp",
       description: "Bet on outcomes and crunch your way to victory in this push-your-luck snack game.",
       tags: ["Betting", "Push Your Luck", "Drafting"]
     },
@@ -626,7 +626,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Family",
       players: "2-5",
       duration: "30-45 min",
-      image: "Assets/Images/Waroong Wars.jpg",
+      image: "Assets/Images/Waroong Wars.png",
       description: "Build your food stall empire and serve customers in this flavorful Indonesian-themed game.",
       tags: ["Resource Management", "Set Collection", "Local Theme"]
     },
@@ -644,7 +644,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Strategy",
       players: "2-5",
       duration: "30-45 min",
-      image: "Assets/Images/Subastral.jpg",
+      image: "Assets/Images/Subastral.png",
       description: "Explore the biomes of Earth while drafting cards to complete your journal.",
       tags: ["Set Collection", "Drafting", "Nature Theme"]
     },
@@ -653,7 +653,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Bluffing",
       players: "3-5",
       duration: "20 min",
-      image: "Assets/Images/Inside Job.jpg",
+      image: "Assets/Images/Inside Job.webp",
       description: "A hidden role game where an agent blends in with coworkers while sabotaging missions.",
       tags: ["Hidden Roles", "Deduction", "Cooperative"]
     },
@@ -662,7 +662,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Party",
       players: "3-6",
       duration: "15-20 min",
-      image: "Assets/Images/Boy Who Cried Wolf.jpg",
+      image: "Assets/Images/Boy Who Cried Wolf.webp",
       description: "A storytelling and bluffing game based on the classic fable.",
       tags: ["Bluffing", "Storytelling", "Family"]
     },
@@ -685,22 +685,13 @@ document.addEventListener("DOMContentLoaded", () => {
       tags: ["Observation", "Speed", "Pattern Recognition"]
     },
     {
-      name: "Tacocat Goat Cheese Pizza",
+      name: "Taco Cat Goat Cheese Pizza",
       category: "Party",
       players: "3-8",
       duration: "10-15 min",
-      image: "Assets/Images/Tacocat Goat Cheese Pizza.jpg",
+      image: "Assets/Images/Taco Cat Goat Cheese Pizza.jpg",
       description: "Say words and slap cards fast—this chaotic game tests your reflexes and memory.",
       tags: ["Speed Game", "Party", "Reflex"]
-    },
-    {
-      name: "We Will Rock You",
-      category: "Party",
-      players: "3-6",
-      duration: "10-15 min",
-      image: "Assets/Images/We Will Rock You.jpg",
-      description: "A fast-paced rhythm and memory game based on iconic beats.",
-      tags: ["Rhythm", "Memory", "Party"]
     },
     {
       name: "Mimiq",
@@ -716,12 +707,12 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Word Game",
       players: "2-6",
       duration: "20-30 min",
-      image: "Assets/Images/Sekata.jpg",
+      image: "Assets/Images/Sekata.png",
       description: "Guess the same word as your teammate with only a single clue!",
       tags: ["Team-Based", "Word Guessing", "Communication"]
     },
     {
-      name: "Who Did It",
+      name: "Who Did It?",
       category: "Party",
       players: "3-6",
       duration: "15 min",
@@ -734,7 +725,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Deduction",
       players: "2-8",
       duration: "20 min",
-      image: "Assets/Images/Shadows Amsterdam.jpg",
+      image: "Assets/Images/Shadows Amsterdam.avif",
       description: "Give clues using pictures in this fast-paced real-time deduction game.",
       tags: ["Deduction", "Real-Time", "Wordless Clues"]
     },
@@ -1740,7 +1731,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const container = document.getElementById("boardgame-list");
 
-    // Sort A-Z
     boardgames.sort((a, b) => a.name.localeCompare(b.name));
 
     function groupBoardgamesByLetter(games) {
@@ -1790,10 +1780,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // Initial Render
     renderGroupedBoardgames(boardgames);
 
-    // Filter Logic
     function filterBoardgames() {
       const keyword = searchInput.value.toLowerCase();
       const category = categoryFilter.value;
@@ -1807,7 +1795,6 @@ document.addEventListener("DOMContentLoaded", () => {
       renderGroupedBoardgames(filtered);
     }
 
-    // Event Listeners
     if (searchInput && categoryFilter) {
       searchInput.addEventListener("input", filterBoardgames);
       categoryFilter.addEventListener("change", filterBoardgames);
