@@ -329,7 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Strategy",
       players: "1-4",
       duration: "40-80 min",
-      image: "Assets/Images/Everdell.jpg",
+      image: "Assets/Images/Everdell.png",
       description: "Build a vibrant woodland city with critters and constructions in this beautiful tableau game.",
       tags: ["Worker Placement", "Tableau Building", "Card Drafting"]
     },
@@ -356,7 +356,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Family",
       players: "2-4",
       duration: "30-45 min",
-      image: "Assets/Images/Barenpark.jpg",
+      image: "Assets/Images/Barenpark.jpeg",
       description: "Build your own bear park by placing polyomino tiles to maximize space.",
       tags: ["Tile Placement", "Tetris-Like", "Set Collection"]
     },
@@ -365,7 +365,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Family",
       players: "2-4",
       duration: "30-45 min",
-      image: "Assets/Images/Blue Lagoon.jpg",
+      image: "Assets/Images/Blue Lagoon.webp",
       description: "Explore islands and settle in this strategic area control game.",
       tags: ["Area Control", "Set Collection", "Abstract"]
     },
@@ -410,7 +410,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Abstract",
       players: "2 or 4",
       duration: "15-20 min",
-      image: "Assets/Images/Quixo.jpg",
+      image: "Assets/Images/Quixo.webp",
       description: "Align five of your symbols in a row by pushing and rotating blocks.",
       tags: ["Abstract Strategy", "Alignment", "Quick Play"]
     },
@@ -419,7 +419,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Abstract",
       players: "2",
       duration: "20 min",
-      image: "Assets/Images/Pylos.jpg",
+      image: "Assets/Images/Pylos.jpeg",
       description: "Stack your spheres to complete the pyramid while conserving your pieces.",
       tags: ["Abstract Strategy", "3D", "Tactical"]
     },
@@ -523,15 +523,6 @@ document.addEventListener("DOMContentLoaded", () => {
       tags: ["Roll and Move", "Life Simulation", "Classic"]
     },
     {
-      name: "Sherlock Holmes Detective",
-      category: "Deduction",
-      players: "1-8",
-      duration: "60-120 min",
-      image: "Assets/Images/Sherlock Holmes Detective.jpg",
-      description: "Solve intricate cases by reading clues and piecing together the mystery.",
-      tags: ["Storytelling", "Deduction", "Cooperative"]
-    },
-    {
       name: "Dream On",
       category: "Party",
       players: "2-8",
@@ -548,6 +539,15 @@ document.addEventListener("DOMContentLoaded", () => {
       image: "Assets/Images/Bang The Dice.jpg",
       description: "A faster version of Bang! with dice-rolling and hidden roles.",
       tags: ["Dice Rolling", "Hidden Roles", "Bluffing"]
+    },
+    {
+      name: "Bang! The Bullet",
+      category: "Party",
+      players: "3-8",
+      duration: "20-40 min",
+      image: "Assets/Images/Bang The Bullet.jpg",
+      description: "A deluxe edition of the wild west shootout game—hidden roles, bluffing, and bullets fly.",
+      tags: ["Bluffing", "Hidden Roles", "Western"]
     },
     {
       name: "Fun Fact",
@@ -1242,7 +1242,456 @@ document.addEventListener("DOMContentLoaded", () => {
       description: "Delve into mysteries and unravel complex scenarios with creative thinking.",
       tags: ["Puzzle", "Mystery", "Narrative"]
     },
-
+    {
+      name: "Ark Nova",
+      category: "Strategy",
+      players: "1-4",
+      duration: "90-150 min",
+      image: "Assets/Images/Ark Nova.jpg",
+      description: "Design a modern zoo and support conservation projects in this deep strategy game.",
+      tags: ["Engine Building", "Tile Placement", "Card Drafting"]
+    },
+    {
+      name: "Celestia",
+      category: "Family",
+      players: "2-6",
+      duration: "30 min",
+      image: "Assets/Images/Celestia.jpg",
+      description: "Push your luck as you explore floating cities in a flying ship—stay onboard or bail out early?",
+      tags: ["Push Your Luck", "Bluffing", "Adventure"]
+    },
+    {
+      name: "Cascadia",
+      category: "Abstract",
+      players: "1-4",
+      duration: "30-45 min",
+      image: "Assets/Images/Cascadia.jpg",
+      description: "Build beautiful natural habitats in the Pacific Northwest with clever tile and token placement.",
+      tags: ["Tile Placement", "Pattern Building", "Nature"]
+    },
+    {
+      name: "Point Salad",
+      category: "Card Game",
+      players: "2-6",
+      duration: "15-30 min",
+      image: "Assets/Images/Point Salad.jpg",
+      description: "Draft veggies and scoring conditions to make the tastiest (and most strategic) salad.",
+      tags: ["Card Drafting", "Set Collection", "Quick Play"]
+    },
+    {
+      name: "Bohnanza",
+      category: "Card Game",
+      players: "2-7",
+      duration: "45 min",
+      image: "Assets/Images/Bohnanza.jpg",
+      description: "Plant, trade, and harvest beans—but you can't rearrange your hand!",
+      tags: ["Trading", "Hand Management", "Set Collection"]
+    },
+    {
+      name: "Tokyo Highway",
+      category: "Dexterity",
+      players: "2-4",
+      duration: "30-50 min",
+      image: "Assets/Images/Tokyo Highway.jpg",
+      description: "Stack roads and pillars to build your highway in this delicate and artistic dexterity game.",
+      tags: ["Dexterity", "Construction", "Precision"]
+    },
+    {
+      name: "Awkward Guests",
+      category: "Deduction",
+      players: "1-8",
+      duration: "45-75 min",
+      image: "Assets/Images/Awkward Guests.jpg",
+      description: "Solve a mysterious murder using variable clues in this replayable deduction game.",
+      tags: ["Deduction", "Mystery", "Card Game"]
+    },
+    {
+      name: "Citadels",
+      category: "Strategy",
+      players: "2-8",
+      duration: "30-60 min",
+      image: "Assets/Images/Citadels.jpg",
+      description: "Use character roles to build a medieval city while bluffing and outwitting opponents.",
+      tags: ["Bluffing", "Role Selection", "City Building"]
+    },
+    {
+      name: "Cockroach Poker",
+      category: "Bluffing",
+      players: "2-6",
+      duration: "20 min",
+      image: "Assets/Images/Cockroach Poker.jpg",
+      description: "Lie about disgusting creatures and call your friends' bluffs in this cheeky bluffing game.",
+      tags: ["Bluffing", "Party", "Lying"]
+    },
+    {
+      name: "Decrypto",
+      category: "Word Game",
+      players: "3-8",
+      duration: "30 min",
+      image: "Assets/Images/Decrypto.jpg",
+      description: "Communicate secret codes to your team while intercepting your opponents’ clues.",
+      tags: ["Word Game", "Deduction", "Team-Based"]
+    },
+    {
+      name: "Cubitos",
+      category: "Strategy",
+      players: "2-4",
+      duration: "45 min",
+      image: "Assets/Images/Cubitos.jpg",
+      description: "Roll, push your luck, and race across a wild track in this cube-chucking race game.",
+      tags: ["Dice Rolling", "Racing", "Push Your Luck"]
+    },
+    {
+      name: "Saboteur",
+      category: "Bluffing",
+      players: "3-10",
+      duration: "30 min",
+      image: "Assets/Images/Saboteur.jpg",
+      description: "Work together to mine gold—or secretly sabotage your team in this hidden role game.",
+      tags: ["Hidden Roles", "Bluffing", "Team-Based"]
+    },
+    {
+      name: "Chinatown",
+      category: "Negotiation",
+      players: "3-5",
+      duration: "60 min",
+      image: "Assets/Images/Chinatown.jpg",
+      description: "Buy lots, trade deals, and build shops in this pure negotiation classic set in 1960s NYC.",
+      tags: ["Negotiation", "Economic", "Tile Placement"]
+    },
+    {
+      name: "Cubeez",
+      category: "Dexterity",
+      players: "2-4",
+      duration: "10-15 min",
+      image: "Assets/Images/Cubeez.jpg",
+      description: "Race to arrange cubes and match faces in this quick, silly puzzle game.",
+      tags: ["Pattern Recognition", "Speed", "Puzzle"]
+    },
+    {
+      name: "Earth",
+      category: "Strategy",
+      players: "1-5",
+      duration: "45-90 min",
+      image: "Assets/Images/Earth.jpg",
+      description: "Grow an ecosystem using cards and combos in this nature-themed tableau builder.",
+      tags: ["Engine Building", "Card Game", "Nature"]
+    },
+    {
+      name: "Dice Forge",
+      category: "Strategy",
+      players: "2-4",
+      duration: "45 min",
+      image: "Assets/Images/Dice Forge.jpg",
+      description: "Craft your own dice and compete in divine trials to gain glory!",
+      tags: ["Dice Crafting", "Resource Management", "Mythology"]
+    },
+    {
+      name: "Colt Express",
+      category: "Family",
+      players: "2-6",
+      duration: "40 min",
+      image: "Assets/Images/Colt Express.jpg",
+      description: "Program your bandit’s actions and loot a 3D train in this chaotic western adventure.",
+      tags: ["Action Programming", "Thematic", "Wild West"]
+    },
+    {
+      name: "God of War: The Card Game",
+      category: "Cooperative",
+      players: "1-4",
+      duration: "60-90 min",
+      image: "Assets/Images/God Of War.jpg",
+      description: "Team up to defeat monsters and change your fate in this Norse mythology card game.",
+      tags: ["Cooperative", "Card Drafting", "Scenario-Based"]
+    },
+    {
+      name: "Jamaica",
+      category: "Family",
+      players: "2-6",
+      duration: "30-60 min",
+      image: "Assets/Images/Jamaica.jpg",
+      description: "Race around the island, plunder treasures, and fight pirates in this colorful adventure game.",
+      tags: ["Racing", "Resource Management", "Pirates"]
+    },
+    {
+      name: "Memoir '44",
+      category: "Strategy",
+      players: "2",
+      duration: "30-60 min",
+      image: "Assets/Images/Memoir 44.jpg",
+      description: "Relive World War II battles in this historical scenario-based war game.",
+      tags: ["Wargame", "Scenario-Based", "Tactical"]
+    },
+    {
+      name: "Planet",
+      category: "Abstract",
+      players: "2-4",
+      duration: "30 min",
+      image: "Assets/Images/Planet.jpg",
+      description: "Build a 3D planet by placing magnetic terrain tiles to create habitats for animals.",
+      tags: ["Tile Placement", "3D", "Nature"]
+    },
+    {
+      name: "Insider",
+      category: "Party",
+      players: "4-8",
+      duration: "15-20 min",
+      image: "Assets/Images/Insider.jpg",
+      description: "One player knows the secret word… and must help others guess it without being caught.",
+      tags: ["Hidden Roles", "Deduction", "Word Game"]
+    },
+    {
+      name: "Letter from Whitechapel",
+      category: "Deduction",
+      players: "2-6",
+      duration: "90 min",
+      image: "Assets/Images/Letter To White Chapel.jpg",
+      description: "Track down Jack the Ripper—or play as Jack and try to escape detection.",
+      tags: ["Hidden Movement", "Deduction", "Historical"]
+    },
+    {
+      name: "Scout",
+      category: "Card Game",
+      players: "2-5",
+      duration: "20 min",
+      image: "Assets/Images/Scout.jpg",
+      description: "Climb the ladder with clever card combos in this fast-paced, award-winning card game.",
+      tags: ["Ladder Climbing", "Hand Management", "Tactical"]
+    },
+    {
+      name: "Speed Cups",
+      category: "Dexterity",
+      players: "2-6",
+      duration: "15 min",
+      image: "Assets/Images/Speed Cups.jpg",
+      description: "Stack and arrange colorful cups quickly to match patterns on challenge cards.",
+      tags: ["Speed", "Pattern Matching", "Reflex"]
+    },
+    {
+      name: "Sticky Chameleons",
+      category: "Party",
+      players: "2-6",
+      duration: "15 min",
+      image: "Assets/Images/Sticky Chameleons.jpg",
+      description: "Use sticky tongues to grab insects in this hilarious, fast-paced reaction game.",
+      tags: ["Dexterity", "Speed", "Kids"]
+    },
+    {
+      name: "Survive: Escape from Atlantis!",
+      category: "Strategy",
+      players: "2-4",
+      duration: "45 min",
+      image: "Assets/Images/Survive.jpg",
+      description: "Escape the sinking island while avoiding sea monsters and sabotaging your friends.",
+      tags: ["Survival", "Tile Removal", "Take That"]
+    },
+    {
+      name: "Sushi Go Party!",
+      category: "Card Game",
+      players: "2-8",
+      duration: "20 min",
+      image: "Assets/Images/Sushi Go Party.jpg",
+      description: "Draft your favorite sushi dishes and create point-winning combos in this delicious party edition.",
+      tags: ["Card Drafting", "Set Collection", "Family"]
+    },
+    {
+      name: "Tussie Mussie",
+      category: "Card Game",
+      players: "1-4",
+      duration: "20 min",
+      image: "Assets/Images/Tussie Mussie.jpg",
+      description: "Offer flowers with hidden meanings in this elegant game of bluffing and set collection.",
+      tags: ["Bluffing", "Set Collection", "Pocket Game"]
+    },
+    {
+      name: "Unstable Unicorns",
+      category: "Party",
+      players: "2-8",
+      duration: "30-45 min",
+      image: "Assets/Images/Unstable Unicorns.jpg",
+      description: "Build your unicorn army and betray your friends in this chaotic and adorable card game.",
+      tags: ["Take That", "Set Collection", "Humor"]
+    },
+    {
+      name: "Braintopia",
+      category: "Puzzle",
+      players: "2-6",
+      duration: "15 min",
+      image: "Assets/Images/Braintopia.jpg",
+      description: "Test your brain across 8 types of challenges—from memory to coordination.",
+      tags: ["Brain Teaser", "Speed", "Variety"]
+    },
+    {
+      name: "Deception: Murder in Hong Kong",
+      category: "Deduction",
+      players: "4-12",
+      duration: "20-30 min",
+      image: "Assets/Images/Deception.jpg",
+      description: "Solve a murder case—but the killer is among you in this hidden role deduction game.",
+      tags: ["Hidden Roles", "Deduction", "Social"]
+    },
+    {
+      name: "Fog of Love",
+      category: "Thematic",
+      players: "2",
+      duration: "60-120 min",
+      image: "Assets/Images/Fog Of Love.jpg",
+      description: "Roleplay a romantic comedy where each player’s choices shape a unique love story.",
+      tags: ["Storytelling", "Roleplaying", "Negotiation"]
+    },
+    {
+      name: "Dice Throne: Marvel",
+      category: "Strategy",
+      players: "2-6",
+      duration: "30-45 min",
+      image: "Assets/Images/Dice Throne Marvel.jpg",
+      description: "Battle using Marvel heroes in this Yahtzee-style combat game with asymmetric powers.",
+      tags: ["Dice Rolling", "Combat", "Marvel"]
+    },
+    {
+      name: "Sherlock Holmes: Consulting Detective",
+      category: "Deduction",
+      players: "1-8",
+      duration: "60-120 min",
+      image: "Assets/Images/Sherlock Holmes.jpg",
+      description: "Solve cases by interviewing suspects, finding clues, and reading through immersive mysteries.",
+      tags: ["Deduction", "Cooperative", "Story-Driven"]
+    },
+    {
+      name: "Mysterium",
+      category: "Cooperative",
+      players: "2-7",
+      duration: "45 min",
+      image: "Assets/Images/Mysterium.jpg",
+      description: "Communicate with a ghost using visions to solve a murder mystery in a haunted mansion.",
+      tags: ["Cooperative", "Deduction", "Visual Clues"]
+    },
+    {
+      name: "Rhino Hero Super Battle",
+      category: "Dexterity",
+      players: "2-4",
+      duration: "15-20 min",
+      image: "Assets/Images/Rhino Hero Super Battle.jpg",
+      description: "Build skyscrapers and battle with superheroes in this wobbly stacking challenge.",
+      tags: ["Dexterity", "Stacking", "Kids"]
+    },
+    {
+      name: "Chronicles of Crime",
+      category: "Deduction",
+      players: "1-4",
+      duration: "60-90 min",
+      image: "Assets/Images/Chronicles of Crime.jpg",
+      description: "Investigate crimes using a mix of physical components and mobile app with VR scenes.",
+      tags: ["Investigation", "Tech Integration", "Storytelling"]
+    },
+    {
+      name: "Blood Rage",
+      category: "Strategy",
+      players: "2-4",
+      duration: "60-90 min",
+      image: "Assets/Images/Blood Rage.jpg",
+      description: "Control Viking clans, gain glory through battle, and face Ragnarok in epic Norse warfare.",
+      tags: ["Area Control", "Card Drafting", "Mythology"]
+    },
+    {
+      name: "Mr. Jack",
+      category: "Deduction",
+      players: "2",
+      duration: "30 min",
+      image: "Assets/Images/Mr Jack.jpg",
+      description: "Play as Jack the Ripper or the detective trying to catch him in this tense two-player duel.",
+      tags: ["Hidden Movement", "Bluffing", "Asymmetric"]
+    },
+    {
+      name: "Bureau of Investigations",
+      category: "Deduction",
+      players: "1-5",
+      duration: "90-120 min",
+      image: "Assets/Images/Bureau Of Investigations.jpg",
+      description: "Solve Lovecraftian mysteries in the 1920s as investigators uncover strange happenings.",
+      tags: ["Deduction", "Storytelling", "Cthulhu Mythos"]
+    },
+    {
+      name: "Dead Last",
+      category: "Party",
+      players: "6-12",
+      duration: "30 min",
+      image: "Assets/Images/Dead Last.jpg",
+      description: "Conspire, betray, and outlast everyone else in this social collusion game.",
+      tags: ["Social Deduction", "Voting", "Bluffing"]
+    },
+    {
+      name: "Dude",
+      category: "Party",
+      players: "3-6",
+      duration: "15 min",
+      image: "Assets/Images/Dude.jpg",
+      description: "Say the word 'dude' in different ways to find your match. It’s ridiculous fun!",
+      tags: ["Word Game", "Party", "Silly"]
+    },
+    {
+      name: "Catch the Moon",
+      category: "Dexterity",
+      players: "2-6",
+      duration: "20 min",
+      image: "Assets/Images/Catch the Moon.jpg",
+      description: "Balance ladders in a dreamy sky tower without toppling them in this poetic dexterity game.",
+      tags: ["Stacking", "Balancing", "Dreamlike"]
+    },
+    {
+      name: "Cubitos",
+      category: "Strategy",
+      players: "2-4",
+      duration: "45 min",
+      image: "Assets/Images/Cubitos.jpg",
+      description: "Race and push your luck while building dice pools in this quirky competition.",
+      tags: ["Push Your Luck", "Dice Building", "Racing"]
+    },
+    {
+      name: "In Vino Morte",
+      category: "Bluffing",
+      players: "3-12",
+      duration: "10 min",
+      image: "Assets/Images/In Vino Morte.jpg",
+      description: "Choose wine or poison... and try not to die in this micro bluffing game.",
+      tags: ["Bluffing", "Microgame", "Social"]
+    },
+    {
+      name: "Exploding Kitten: Blue Expansion",
+      category: "Party",
+      players: "2-5",
+      duration: "15 min",
+      image: "Assets/Images/Exploding Kitten Blue Expansion.jpg",
+      description: "More chaos and card combos in this hilarious expansion to the feline-fueled base game.",
+      tags: ["Expansion", "Humor", "Push Your Luck"]
+    },
+    {
+      name: "Katamino Family",
+      category: "Puzzle",
+      players: "1-2",
+      duration: "10-20 min",
+      image: "Assets/Images/Katamino Family.jpg",
+      description: "A clever spatial challenge for all ages—fit the pieces perfectly in increasingly difficult puzzles.",
+      tags: ["Tetris-Like", "Spatial", "Kids Friendly"]
+    },
+    {
+      name: "Not Alone",
+      category: "Bluffing",
+      players: "2-7",
+      duration: "30-45 min",
+      image: "Assets/Images/Not Alone.jpg",
+      description: "One player hunts the others on an alien planet in this asymmetrical survival game.",
+      tags: ["Asymmetric", "Bluffing", "Sci-Fi"]
+    },
+    {
+      name: "Obrolan Hati Pacar",
+      category: "Party",
+      players: "2+",
+      duration: "30+ min",
+      image: "Assets/Images/Obrolan Hati Pacar.jpg",
+      description: "A local card game for deep, meaningful, or spicy relationship conversations.",
+      tags: ["Conversation", "Local", "Relationship"]
+    },
   ];
 
   function renderBoardgames(data) {
