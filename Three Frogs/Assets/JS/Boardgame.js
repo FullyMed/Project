@@ -19,15 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
       tags: ["Resource Management", "Trading", "Dice Rolling"]
     },
     {
-      name: "UNO",
-      category: "Card Game",
-      players: "2-10",
-      duration: "15-30 min",
-      image: "Assets/Images/UNO.webp",
-      description: "Fast-paced game where matching colors and numbers rules.",
-      tags: ["Hand Management", "Color Matching", "Shedding"]
-    },
-    {
       name: "Monopoly",
       category: "Family",
       players: "2-6",
@@ -280,15 +271,6 @@ document.addEventListener("DOMContentLoaded", () => {
       tags: ["Trick-Taking", "Mission-Based", "Limited Communication"]
     },
     {
-      name: "Hanamikoji",
-      category: "Card Game",
-      players: "2",
-      duration: "15-20 min",
-      image: "Assets/Images/Hanamikoji.jpg",
-      description: "Gain the favor of geishas through tactical card play and clever offerings.",
-      tags: ["Hand Management", "Area Control", "Tug of War"]
-    },
-    {
       name: "Spyfall",
       category: "Bluffing",
       players: "3-8",
@@ -323,15 +305,6 @@ document.addEventListener("DOMContentLoaded", () => {
       image: "Assets/Images/Dream Home.jpg",
       description: "Design your ideal house by choosing cards and furnishing each room with style.",
       tags: ["Set Collection", "Drafting", "Family Friendly"]
-    },
-    {
-      name: "Game of Cat and Mouth",
-      category: "Dexterity",
-      players: "2",
-      duration: "10-15 min",
-      image: "Assets/Images/Game of Cat and Mouth.jpg",
-      description: "A fast-paced flicking battle to knock out your opponent’s balls with magnetic paws.",
-      tags: ["Dexterity", "Flicking", "Fast-Paced"]
     },
     {
       name: "Baobab",
@@ -539,15 +512,6 @@ document.addEventListener("DOMContentLoaded", () => {
       image: "Assets/Images/Cacao.jpg",
       description: "Grow and sell cacao in this tile-laying game of timing and resource management.",
       tags: ["Tile Placement", "Resource Management", "Economic"]
-    },
-    {
-      name: "Exploding Kitten Blue Expansion",
-      category: "Party",
-      players: "2-5",
-      duration: "15 min",
-      image: "Assets/Images/Exploding Kitten Blue Expansion.jpg",
-      description: "An expansion to the hilarious Exploding Kittens game with new cards and chaos.",
-      tags: ["Expansion", "Humor", "Push Your Luck"]
     },
     {
       name: "Game of Life",
