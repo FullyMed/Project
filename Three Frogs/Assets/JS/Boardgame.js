@@ -797,7 +797,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Party",
       players: "6-30",
       duration: "15-20 min",
-      image: "Assets/Images/Two Rooms and a Boom.web",
+      image: "Assets/Images/Two Rooms and a Boom.webp",
       description: "Split into two rooms and use hidden roles to protect or assassinate the president.",
       tags: ["Hidden Roles", "Social Deduction", "Party"]
     },
@@ -1139,7 +1139,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Dexterity",
       players: "2-7",
       duration: "10-15 min",
-      image: "Assets/Images/Tock Tock Woodman.jpg",
+      image: "Assets/Images/Tock Tock Woodman.webp",
       description: "Chop the tree carefully without knocking it all down in this light-hearted game.",
       tags: ["Dexterity", "Stacking", "Tension"]
     },
@@ -1184,7 +1184,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Puzzle",
       players: "1-6",
       duration: "60 min",
-      image: "Assets/Images/Unlock Timeless Adventures.jpg",
+      image: "Assets/Images/Unlock Timeless Adventures.webp",
       description: "Solve new escape scenarios spanning past, present, and future.",
       tags: ["Escape Room", "Time Travel", "Puzzle"]
     },
@@ -1454,7 +1454,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Strategy",
       players: "2-4",
       duration: "45 min",
-      image: "Assets/Images/Survive.jpg",
+      image: "Assets/Images/Survive from Atlantis.jpg",
       description: "Escape the sinking island while avoiding sea monsters and sabotaging your friends.",
       tags: ["Survival", "Tile Removal", "Take That"]
     },
@@ -1472,7 +1472,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Card Game",
       players: "1-4",
       duration: "20 min",
-      image: "Assets/Images/Tussie Mussie.jpg",
+      image: "Assets/Images/Tussie Mussie.webp",
       description: "Offer flowers with hidden meanings in this elegant game of bluffing and set collection.",
       tags: ["Bluffing", "Set Collection", "Pocket Game"]
     },
@@ -1481,7 +1481,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Party",
       players: "2-8",
       duration: "30-45 min",
-      image: "Assets/Images/Unstable Unicorns.jpg",
+      image: "Assets/Images/Unstable Unicorns.webp",
       description: "Build your unicorn army and betray your friends in this chaotic and adorable card game.",
       tags: ["Take That", "Set Collection", "Humor"]
     },
@@ -1526,7 +1526,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Deduction",
       players: "1-8",
       duration: "60-120 min",
-      image: "Assets/Images/Sherlock Holmes.jpg",
+      image: "Assets/Images/Sherlock Holmes Consulting Detective.jpg",
       description: "Solve cases by interviewing suspects, finding clues, and reading through immersive mysteries.",
       tags: ["Deduction", "Cooperative", "Story-Driven"]
     },
