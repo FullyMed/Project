@@ -1040,7 +1040,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Card Game",
       players: "2-6",
       duration: "15 min",
-      image: "Assets/Images/Mantis.jpg",
+      image: "Assets/Images/Mantis.webp",
       description: "A fast, colorful card-stealing game from the makers of Exploding Kittens.",
       tags: ["Stealing", "Set Collection", "Color Matching"]
     },
@@ -1076,7 +1076,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Bluffing",
       players: "3-5",
       duration: "45 min",
-      image: "Assets/Images/Sheriff of Nottingham.jpg",
+      image: "Assets/Images/Sheriff of Nottingham 1st.webp",
       description: "Smuggle goods past the Sheriff or inspect players for contraband in this classic bluffing game.",
       tags: ["Bluffing", "Negotiation", "Bribery"]
     },
@@ -1130,7 +1130,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Kids",
       players: "2-6",
       duration: "15 min",
-      image: "Assets/Images/Peek A Mouse.jpg",
+      image: "Assets/Images/Peek a Mouse.jpg",
       description: "Spot the objects the mice borrowed while they’re still lit up!",
       tags: ["Memory", "Observation", "Flashlight"]
     },
@@ -1148,7 +1148,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Family",
       players: "2-5",
       duration: "15 min",
-      image: "Assets/Images/Rhino Hero.jpg",
+      image: "Assets/Images/Rhino Hero.webp",
       description: "Stack walls and roofs while helping Rhino Hero climb up the building.",
       tags: ["Stacking", "Dexterity", "Kids"]
     },
@@ -1247,7 +1247,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Card Game",
       players: "2-6",
       duration: "15-30 min",
-      image: "Assets/Images/Point Salad.jpg",
+      image: "Assets/Images/Point Salad.png",
       description: "Draft veggies and scoring conditions to make the tastiest (and most strategic) salad.",
       tags: ["Card Drafting", "Set Collection", "Quick Play"]
     },
@@ -1373,7 +1373,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Cooperative",
       players: "1-4",
       duration: "60-90 min",
-      image: "Assets/Images/God Of War.jpg",
+      image: "Assets/Images/God Of War.jpeg",
       description: "Team up to defeat monsters and change your fate in this Norse mythology card game.",
       tags: ["Cooperative", "Card Drafting", "Scenario-Based"]
     },
@@ -1382,7 +1382,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Family",
       players: "2-6",
       duration: "30-60 min",
-      image: "Assets/Images/Jamaica.jpg",
+      image: "Assets/Images/Jamaica.webp",
       description: "Race around the island, plunder treasures, and fight pirates in this colorful adventure game.",
       tags: ["Racing", "Resource Management", "Pirates"]
     },
@@ -1418,7 +1418,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Deduction",
       players: "2-6",
       duration: "90 min",
-      image: "Assets/Images/Letter To White Chapel.jpg",
+      image: "Assets/Images/Letter from Whitechapel.webp",
       description: "Track down Jack the Ripper—or play as Jack and try to escape detection.",
       tags: ["Hidden Movement", "Deduction", "Historical"]
     },
@@ -1562,7 +1562,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Deduction",
       players: "2",
       duration: "30 min",
-      image: "Assets/Images/Mr Jack.jpg",
+      image: "Assets/Images/Mr Jack.png",
       description: "Play as Jack the Ripper or the detective trying to catch him in this tense two-player duel.",
       tags: ["Hidden Movement", "Bluffing", "Asymmetric"]
     },
@@ -1589,7 +1589,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Bluffing",
       players: "3-12",
       duration: "10 min",
-      image: "Assets/Images/In Vino Morte.jpg",
+      image: "Assets/Images/In Vino Morte.png",
       description: "Choose wine or poison... and try not to die in this micro bluffing game.",
       tags: ["Bluffing", "Microgame", "Social"]
     },
@@ -1607,7 +1607,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Puzzle",
       players: "1-2",
       duration: "10-20 min",
-      image: "Assets/Images/Katamino Family.jpg",
+      image: "Assets/Images/Katamino Family.webp",
       description: "A clever spatial challenge for all ages—fit the pieces perfectly in increasingly difficult puzzles.",
       tags: ["Tetris-Like", "Spatial", "Kids Friendly"]
     },
@@ -1616,7 +1616,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Bluffing",
       players: "2-7",
       duration: "30-45 min",
-      image: "Assets/Images/Not Alone.jpg",
+      image: "Assets/Images/Not Alone.png",
       description: "One player hunts the others on an alien planet in this asymmetrical survival game.",
       tags: ["Asymmetric", "Bluffing", "Sci-Fi"]
     },
@@ -1625,7 +1625,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Party",
       players: "2+",
       duration: "30+ min",
-      image: "Assets/Images/Obrolan Hati Pacar.jpg",
+      image: "Assets/Images/Obrolan Hati.png",
       description: "A local card game for deep, meaningful, or spicy relationship conversations.",
       tags: ["Conversation", "Local", "Relationship"]
     },
