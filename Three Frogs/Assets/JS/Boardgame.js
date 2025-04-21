@@ -235,6 +235,15 @@ document.addEventListener("DOMContentLoaded", () => {
       tags: ["Engine Building", "Card Drafting", "Resource Management"]
     },
     {
+      name: "Terraforming Mars: Ares Expedition",
+      category: "Strategy",
+      players: "1-4",
+      duration: "45-75 min",
+      image: "Assets/Images/Terraforming Mars Ares.jpg",
+      description: "A faster, card-based take on Terraforming Mars with streamlined mechanics.",
+      tags: ["Engine Building", "Card Game", "Science Fiction"]
+    },
+    {
       name: "Coup",
       category: "Bluffing",
       players: "2-6",
@@ -1656,6 +1665,24 @@ document.addEventListener("DOMContentLoaded", () => {
       description: "A local card game for deep, meaningful, or spicy relationship conversations.",
       tags: ["Conversation", "Local", "Relationship"]
     },
+    {
+      name: "Memoarr!",
+      category: "Memory",
+      players: "2-4",
+      duration: "20 min",
+      image: "Assets/Images/Memoarr.jpg",
+      description: "Escape from a sinking island by remembering matching images and avoiding traps.",
+      tags: ["Memory", "Animal Theme", "Kids Friendly"]
+    },
+    {
+      name: "House of Danger",
+      category: "Adventure",
+      players: "1-8",
+      duration: "60-90 min",
+      image: "Assets/Images/House Of Danger.jpg",
+      description: "Explore a haunted mansion in this choose-your-own-adventure mystery game.",
+      tags: ["Storytelling", "Exploration", "Solo-Friendly"]
+    },
   ];
 
   function renderBoardgames(data) {
@@ -1712,8 +1739,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const container = document.getElementById("boardgame-list");
+    const searchInput = document.getElementById("searchInput");
+    const categoryFilter = document.getElementById("categoryFilter");
 
-    boardgames.sort((a, b) => a.name.localeCompare(b.name));
+    boardgames.sort((a, b) => a.name.localeCompare(b.name)); // Sort A-Z
 
     function groupBoardgamesByLetter(games) {
       const grouped = {};
@@ -1732,7 +1761,11 @@ document.addEventListener("DOMContentLoaded", () => {
       Object.keys(grouped).sort().forEach(letter => {
         const section = document.createElement("section");
         section.id = `letter-${letter}`;
-        section.innerHTML = `<h3>${letter}</h3>`;
+        
+        const heading = document.createElement("h2");
+        heading.className = "letter-heading";
+        heading.textContent = letter;
+        section.appendChild(heading);
 
         const groupContainer = document.createElement("div");
         groupContainer.className = "boardgame-container";
@@ -1741,6 +1774,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const card = document.createElement("div");
           card.className = "boardgame-card";
           const tagsHtml = game.tags.map(tag => `<span class='tag'>${tag}</span>`).join(" ");
+
           card.innerHTML = `
             <img src="${game.image}" alt="${game.name}" />
             <div class="info">
@@ -1762,6 +1796,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
+    // Initial render
     renderGroupedBoardgames(boardgames);
 
     function filterBoardgames() {
