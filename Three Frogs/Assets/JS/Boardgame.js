@@ -1549,15 +1549,6 @@ document.addEventListener("DOMContentLoaded", () => {
       tags: ["Dexterity", "Stacking", "Kids"]
     },
     {
-      name: "Chronicles of Crime",
-      category: "Deduction",
-      players: "1-4",
-      duration: "60-90 min",
-      image: "Assets/Images/Chronicles of Crime.jpg",
-      description: "Investigate crimes using a mix of physical components and mobile app with VR scenes.",
-      tags: ["Investigation", "Tech Integration", "Storytelling"]
-    },
-    {
       name: "Blood Rage",
       category: "Strategy",
       players: "2-4",
@@ -1601,24 +1592,6 @@ document.addEventListener("DOMContentLoaded", () => {
       image: "Assets/Images/Dude.jpg",
       description: "Say the word 'dude' in different ways to find your match. It’s ridiculous fun!",
       tags: ["Word Game", "Party", "Silly"]
-    },
-    {
-      name: "Catch the Moon",
-      category: "Dexterity",
-      players: "2-6",
-      duration: "20 min",
-      image: "Assets/Images/Catch the Moon.jpg",
-      description: "Balance ladders in a dreamy sky tower without toppling them in this poetic dexterity game.",
-      tags: ["Stacking", "Balancing", "Dreamlike"]
-    },
-    {
-      name: "Cubitos",
-      category: "Strategy",
-      players: "2-4",
-      duration: "45 min",
-      image: "Assets/Images/Cubitos.jpg",
-      description: "Race and push your luck while building dice pools in this quirky competition.",
-      tags: ["Push Your Luck", "Dice Building", "Racing"]
     },
     {
       name: "In Vino Morte",
@@ -1747,7 +1720,11 @@ document.addEventListener("DOMContentLoaded", () => {
     function groupBoardgamesByLetter(games) {
       const grouped = {};
       games.forEach(game => {
-        const letter = game.name[0].toUpperCase();
+        let letter = game.name && game.name[0] ? game.name[0].toUpperCase() : '#';
+        if (!isNaN(letter)) {
+          letter = '#';
+        }
+
         if (!grouped[letter]) grouped[letter] = [];
         grouped[letter].push(game);
       });
