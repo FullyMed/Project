@@ -743,7 +743,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Bluffing",
       players: "3-13",
       duration: "30 min",
-      image: "Assets/Images/Trial by Trolley.webp",
+      image: "Assets/Images/Trial by Trolley.jpg",
       description: "A darkly humorous game of moral dilemmas and choosing who lives or dies.",
       tags: ["Debate", "Bluffing", "Dark Humor"]
     },
@@ -1031,7 +1031,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Card Game",
       players: "2-4",
       duration: "20-30 min",
-      image: "Assets/Images/Cat Lady.jpg",
+      image: "Assets/Images/Cat Lady.png",
       description: "Collect cats, food, toys, and costumes to become the ultimate cat lover.",
       tags: ["Set Collection", "Drafting", "Cute Theme"]
     },
@@ -1229,7 +1229,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Family",
       players: "2-6",
       duration: "30 min",
-      image: "Assets/Images/Celestia.jpg",
+      image: "Assets/Images/Celestia.avif",
       description: "Push your luck as you explore floating cities in a flying ship—stay onboard or bail out early?",
       tags: ["Push Your Luck", "Bluffing", "Adventure"]
     },
@@ -1274,7 +1274,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Deduction",
       players: "1-8",
       duration: "45-75 min",
-      image: "Assets/Images/Awkward Guests.jpg",
+      image: "Assets/Images/Awkward Guests.webp",
       description: "Solve a mysterious murder using variable clues in this replayable deduction game.",
       tags: ["Deduction", "Mystery", "Card Game"]
     },
@@ -1292,7 +1292,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Bluffing",
       players: "2-6",
       duration: "20 min",
-      image: "Assets/Images/Cockroach Poker.jpg",
+      image: "Assets/Images/Cockroach Poker.png",
       description: "Lie about disgusting creatures and call your friends' bluffs in this cheeky bluffing game.",
       tags: ["Bluffing", "Party", "Lying"]
     },
@@ -1571,7 +1571,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Deduction",
       players: "1-5",
       duration: "90-120 min",
-      image: "Assets/Images/Bureau Of Investigations.jpg",
+      image: "Assets/Images/Bureau of Investigations.webp",
       description: "Solve Lovecraftian mysteries in the 1920s as investigators uncover strange happenings.",
       tags: ["Deduction", "Storytelling", "Cthulhu Mythos"]
     },
