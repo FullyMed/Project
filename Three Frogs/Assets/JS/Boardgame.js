@@ -1049,7 +1049,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Dexterity",
       players: "2-5",
       duration: "30 min",
-      image: "Assets/Images/Crash Octopus.jpg",
+      image: "Assets/Images/Crash Octopus.webp",
       description: "Flick and collect treasures while dodging the chaotic movements of a giant octopus!",
       tags: ["Flicking", "Dexterity", "Modular Board"]
     },
@@ -1310,7 +1310,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Strategy",
       players: "2-4",
       duration: "45 min",
-      image: "Assets/Images/Cubitos.jpg",
+      image: "Assets/Images/Cubitos.webp",
       description: "Roll, push your luck, and race across a wild track in this cube-chucking race game.",
       tags: ["Dice Rolling", "Racing", "Push Your Luck"]
     },
@@ -1364,7 +1364,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Family",
       players: "2-6",
       duration: "40 min",
-      image: "Assets/Images/Colt Express.jpg",
+      image: "Assets/Images/Colt Express.png",
       description: "Program your bandit’s actions and loot a 3D train in this chaotic western adventure.",
       tags: ["Action Programming", "Thematic", "Wild West"]
     },
@@ -1508,7 +1508,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Thematic",
       players: "2",
       duration: "60-120 min",
-      image: "Assets/Images/Fog Of Love.jpg",
+      image: "Assets/Images/Fog Of Love.webp",
       description: "Roleplay a romantic comedy where each player’s choices shape a unique love story.",
       tags: ["Storytelling", "Roleplaying", "Negotiation"]
     },
@@ -1517,7 +1517,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Strategy",
       players: "2-6",
       duration: "30-45 min",
-      image: "Assets/Images/Dice Throne Marvel.jpg",
+      image: "Assets/Images/Dice Throne Marvel.webp",
       description: "Battle using Marvel heroes in this Yahtzee-style combat game with asymmetric powers.",
       tags: ["Dice Rolling", "Combat", "Marvel"]
     },
@@ -1580,18 +1580,9 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Party",
       players: "6-12",
       duration: "30 min",
-      image: "Assets/Images/Dead Last.jpg",
+      image: "Assets/Images/Dead Last.jpeg",
       description: "Conspire, betray, and outlast everyone else in this social collusion game.",
       tags: ["Social Deduction", "Voting", "Bluffing"]
-    },
-    {
-      name: "Dude",
-      category: "Party",
-      players: "3-6",
-      duration: "15 min",
-      image: "Assets/Images/Dude.jpg",
-      description: "Say the word 'dude' in different ways to find your match. It’s ridiculous fun!",
-      tags: ["Word Game", "Party", "Silly"]
     },
     {
       name: "In Vino Morte",
@@ -1603,11 +1594,11 @@ document.addEventListener("DOMContentLoaded", () => {
       tags: ["Bluffing", "Microgame", "Social"]
     },
     {
-      name: "Exploding Kitten: Blue Expansion",
+      name: "Exploding Kittens Recipes For Disaster",
       category: "Party",
       players: "2-5",
       duration: "15 min",
-      image: "Assets/Images/Exploding Kitten Blue Expansion.jpg",
+      image: "Assets/Images/Exploding Kittens Blue.webp",
       description: "More chaos and card combos in this hilarious expansion to the feline-fueled base game.",
       tags: ["Expansion", "Humor", "Push Your Luck"]
     },
