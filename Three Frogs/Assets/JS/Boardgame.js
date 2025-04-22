@@ -64,6 +64,15 @@ document.addEventListener("DOMContentLoaded", () => {
       tags: ["Action Point Allowance", "Hand Management", "Player Powers"]
     },
     {
+      name: "Pandemic: Rapid Response",
+      category: "Cooperative",
+      players: "2-4",
+      duration: "20 min",
+      image: "Assets/Images/Pandemic Rapid Response.jpg",
+      description: "Deliver aid to cities in crisis in this real-time dice-rolling spinoff of Pandemic.",
+      tags: ["Real-Time", "Dice Rolling", "Crisis Management"]
+    },
+    {
       name: "Azul",
       category: "Abstract",
       players: "2-4",
@@ -80,6 +89,15 @@ document.addEventListener("DOMContentLoaded", () => {
       image: "Assets/Images/7 Wonders.jpg",
       description: "Build an ancient city through science, war, and trade.",
       tags: ["Card Drafting", "Set Collection", "Engine Building"]
+    },
+    {
+      name: "7 Wonders Duel",
+      category: "Card Game",
+      players: "2",
+      duration: "30 min",
+      image: "Assets/Images/7 Wonders Duel.webp",
+      description: "A strategic head-to-head version of 7 Wonders with new twists and mechanics.",
+      tags: ["Card Drafting", "Two Player", "Civ Building"]
     },
     {
       name: "Exploding Kittens",
@@ -134,6 +152,15 @@ document.addEventListener("DOMContentLoaded", () => {
       image: "Assets/Images/Risk.jpg",
       description: "Conquer the world one territory at a time through dice and strategy.",
       tags: ["Area Control", "Dice Rolling", "Elimination"]
+    },
+    {
+      name: "Risk Europe",
+      category: "Strategy",
+      players: "2-4",
+      duration: "120 min",
+      image: "Assets/Images/Risk  Europe.jpg",
+      description: "Command medieval armies and use tactics and economy to dominate Europe.",
+      tags: ["Area Control", "Dice Rolling", "War Game"]
     },
     {
       name: "Patchwork",
@@ -818,6 +845,15 @@ document.addEventListener("DOMContentLoaded", () => {
       image: "Assets/Images/Werewolf Deluxe.webp",
       description: "A social deduction classic where players must discover the werewolves hiding in the village.",
       tags: ["Social Deduction", "Hidden Roles", "Bluffing"]
+    },
+    {
+      name: "One Night Ultimate Werewolf",
+      category: "Social Deduction",
+      players: "3-10",
+      duration: "10 min",
+      image: "Assets/Images/One Night Ultimate Werewolf.jpg",
+      description: "Figure out who among you is the werewolf — in just one chaotic night!",
+      tags: ["Hidden Roles", "Bluffing", "Party Game"]
     },
     {
       name: "Hamster Clan",
@@ -1522,6 +1558,15 @@ document.addEventListener("DOMContentLoaded", () => {
       tags: ["Dice Rolling", "Combat", "Marvel"]
     },
     {
+      name: "Dice Throne: Santa vs Krampus",
+      category: "Duel",
+      players: "2",
+      duration: "20-40 min",
+      image: "Assets/Images/Dice Throne Santa vs Krampus.jpg",
+      description: "Battle it out with holiday flair in this stand-alone Dice Throne showdown.",
+      tags: ["Dice Rolling", "Combat", "Holiday-Themed"]
+    },
+    {
       name: "Sherlock Holmes: Consulting Detective",
       category: "Deduction",
       players: "1-8",
@@ -1647,6 +1692,231 @@ document.addEventListener("DOMContentLoaded", () => {
       description: "Explore a haunted mansion in this choose-your-own-adventure mystery game.",
       tags: ["Storytelling", "Exploration", "Solo-Friendly"]
     },
+    {
+      name: "Agricola",
+      category: "Strategy",
+      players: "1-5",
+      duration: "30-150 min",
+      image: "Assets/Images/Agricola.webp",
+      description: "Build and manage your farm through careful planning and resource allocation.",
+      tags: ["Worker Placement", "Resource Management", "Farming"]
+    },
+    {
+      name: "Stupefy",
+      category: "Party",
+      players: "3-8",
+      duration: "30 min",
+      image: "Assets/Images/Stupefy.webp",
+      description: "Cast spells and outwit your opponents in this fast-paced wizard duel.",
+      tags: ["Bluffing", "Party Game", "Magic-Themed"]
+    },
+    {
+      name: "Cupcake Academy",
+      category: "Family",
+      players: "2-4",
+      duration: "10-20 min",
+      image: "Assets/Images/Cupcake Academy.webp",
+      description: "Work together in real-time to organize colorful cupcake trays and complete challenges.",
+      tags: ["Real-Time", "Cooperative", "Pattern Recognition"]
+    },    
+    {
+      name: "Santai Aja Lagi",
+      category: "Casual",
+      players: "2-6",
+      duration: "30 min",
+      image: "Assets/Images/Santai Aja Lagi.jpeg",
+      description: "A chill game about taking it easy, making choices, and vibing with friends.",
+      tags: ["Relaxing", "Conversation", "Light Strategy"]
+    },
+    {
+      name: "Sequence",
+      category: "Family",
+      players: "2-12",
+      duration: "30 min",
+      image: "Assets/Images/Sequence.avif",
+      description: "Play cards and place chips to get five in a row before your opponents do.",
+      tags: ["Card Game", "Pattern Building", "Strategy"]
+    },
+    {
+      name: "Go Go Gelato!",
+      category: "Kids",
+      players: "2-4",
+      duration: "15 min",
+      image: "Assets/Images/Go Go Gelato.png",
+      description: "Race to match ice cream cone challenges using coordination and speed.",
+      tags: ["Dexterity", "Pattern Matching", "Real-Time"]
+    },
+    {
+      name: "Duck Duck Go",
+      category: "Family",
+      players: "2-4",
+      duration: "30 min",
+      image: "Assets/Images/Duck Duck Go.png",
+      description: "Race rubber duckies through a bathtub obstacle course with strategic moves.",
+      tags: ["Programming", "Racing", "Family Friendly"]
+    },
+    {
+      name: "Herd Mentality",
+      category: "Party",
+      players: "4-20",
+      duration: "20 min",
+      image: "Assets/Images/Herd Mentality.jpg",
+      description: "Write the same answer as the herd to win — but avoid being the odd one out!",
+      tags: ["Party Game", "Social", "Humor"]
+    },
+    {
+      name: "Battle Sheep",
+      category: "Abstract",
+      players: "2-4",
+      duration: "15-20 min",
+      image: "Assets/Images/Battle Sheep.jpg",
+      description: "Spread your sheep across the pasture while blocking your opponents.",
+      tags: ["Area Control", "Tile Placement", "Abstract"]
+    },
+    {
+      name: "Little Red Riding Hood",
+      category: "Storytelling",
+      players: "1-4",
+      duration: "20-30 min",
+      image: "Assets/Images/Little Red Riding Hood.jpg",
+      description: "Guide Little Red through the forest in this cooperative fairy tale adventure.",
+      tags: ["Cooperative", "Story-Driven", "Family"]
+    },
+    {
+      name: "Snow Time",
+      category: "Strategy",
+      players: "3-5",
+      duration: "30-40 min",
+      image: "Assets/Images/Snow Time.jpg",
+      description: "Collect magical fruits during a festive snowfall while outwitting opponents.",
+      tags: ["Simultaneous Play", "Bluffing", "Area Control"]
+    },
+    {
+      name: "Geometric Art",
+      category: "Party",
+      players: "3-6",
+      duration: "30 min",
+      image: "Assets/Images/Geometric Art.webp",
+      description: "Draw geometric patterns to communicate clues in this artistic deduction game.",
+      tags: ["Drawing", "Deduction", "Creativity"]
+    },
+    {
+      name: "Tortuga",
+      category: "Social Deduction",
+      players: "2-9",
+      duration: "20-40 min",
+      image: "Assets/Images/Tortuga.webp",
+      description: "Swear loyalty to a side and fight for treasure aboard the pirate ship Tortuga.",
+      tags: ["Hidden Roles", "Voting", "Thematic"]
+    },
+    {
+      name: "The Grizzled",
+      category: "Cooperative",
+      players: "2-5",
+      duration: "30 min",
+      image: "Assets/Images/The Grizzled.jpg",
+      description: "Survive the emotional toll of WWI in this poignant and challenging card game.",
+      tags: ["Cooperative", "Hand Management", "War-Themed"]
+    },
+    {
+      name: "Machi Koro",
+      category: "City Building",
+      players: "2-4",
+      duration: "30 min",
+      image: "Assets/Images/Machi Koro.webp",
+      description: "Roll dice, earn income, and develop your city faster than your rivals.",
+      tags: ["Dice Rolling", "Engine Building", "Light Strategy"]
+    },
+    {
+      name: "Chromino",
+      category: "Abstract",
+      players: "1-6",
+      duration: "30 min",
+      image: "Assets/Images/Chromino.jpg",
+      description: "Match colorful tiles in this domino-style strategy game with a twist.",
+      tags: ["Tile Placement", "Color Matching", "Abstract"]
+    },
+    {
+      name: "Spirit Island",
+      category: "Cooperative",
+      players: "1-4",
+      duration: "90-120 min",
+      image: "Assets/Images/Spirit Island.webp",
+      description: "Become powerful spirits defending your island from invading colonizers.",
+      tags: ["Cooperative", "Area Control", "Asymmetric Powers"]
+    },
+    {
+      name: "IKI",
+      category: "Strategy",
+      players: "2-4",
+      duration: "60-90 min",
+      image: "Assets/Images/Iki.webp",
+      description: "Live the life of an Edo-period merchant and become the most respected citizen.",
+      tags: ["Resource Management", "Worker Placement", "Historical"]
+    },
+    {
+      name: "Happy Little Dinosaurs",
+      category: "Party",
+      players: "2-4",
+      duration: "30-60 min",
+      image: "Assets/Images/Happy Little Dinosaurs.jpg",
+      description: "Dodge disasters and be the last dino standing in this hilarious survival game.",
+      tags: ["Humor", "Take That", "Light Strategy"]
+    },
+    {
+      name: "Mansions of Madness",
+      category: "Horror",
+      players: "1-5",
+      duration: "120-180 min",
+      image: "Assets/Images/Mansions Of Madness.jpg",
+      description: "Explore haunted mansions, solve mysteries, and battle Lovecraftian horrors.",
+      tags: ["Cooperative", "App-Driven", "Exploration", "Horror"]
+    },
+    {
+      name: "Cards Against Humanity",
+      category: "Party",
+      players: "4-20+",
+      duration: "30-90 min",
+      image: "Assets/Images/Cards Against Humanity.jpeg",
+      description: "A game for horrible people. Match cards for the funniest (or darkest) combos.",
+      tags: ["Humor", "Adult", "Fill-in-the-Blank"]
+    },
+    {
+      name: "Cash 'n Guns",
+      category: "Party",
+      players: "4-8",
+      duration: "30 min",
+      image: "Assets/Images/Cash n Guns.webp",
+      description: "Point foam guns at your friends to split the loot — or go down in a standoff.",
+      tags: ["Bluffing", "Party Game", "Action Selection"]
+    },
+    {
+      name: "Aquatica",
+      category: "Strategy",
+      players: "1-4",
+      duration: "30-60 min",
+      image: "Assets/Images/Aquatica.png",
+      description: "Dive into an underwater kingdom and rise to power through tactical depth.",
+      tags: ["Engine Building", "Hand Management", "Underwater Theme"]
+    },
+    {
+      name: "Telestrations",
+      category: "Party",
+      players: "4-8",
+      duration: "30 min",
+      image: "Assets/Images/Telestrations.webp",
+      description: "Draw, guess, and laugh your way through a telephone-style drawing game.",
+      tags: ["Drawing", "Party Game", "Laugh-Out-Loud"]
+    },
+    {
+      name: "Unconscious Mind",
+      category: "Strategy",
+      players: "1-4",
+      duration: "90-120 min",
+      image: "Assets/Images/Unconscious Mind.jpg",
+      description: "Explore dreamscapes and psychology in this deep Euro game set in Freud's era.",
+      tags: ["Worker Placement", "Tableau Building", "Narrative"]
+    },                  
   ];
 
   function renderBoardgames(data) {
