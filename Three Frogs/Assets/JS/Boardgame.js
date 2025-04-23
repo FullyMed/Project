@@ -1,5 +1,5 @@
 // ===============================
-// JS for Boardgame.html
+// JS for index.html
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("boardgame-list");
@@ -1949,7 +1949,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ================= Boardgame Page =================
-  if (window.location.pathname.includes("Boardgame.html")) {
+  if (window.location.pathname.includes("index.html")) {
     const maxToShow = 10;
     const shuffled = boardgames.sort(() => 0.5 - Math.random());
     const toDisplay = shuffled.slice(0, maxToShow);

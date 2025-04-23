@@ -5,10 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const navLinks = document.getElementById("navLinks");
     const user = JSON.parse(localStorage.getItem("loggedInUser"));
   
-    if (!navLinks) return; // Pastikan elemen ada sebelum lanjut
+    if (!navLinks) return;
   
     navLinks.innerHTML = `
-      <li><a href="Boardgame.html">Home</a></li>
+      <li><a href="index.html">Home</a></li>
       <li><a href="Booking.html">Booking</a></li>
       <li><a href="About.html">About</a></li>
       ${
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
       logoutLink.addEventListener("click", () => {
         localStorage.removeItem("loggedInUser");
         alert("You have been logged out.");
-        window.location.href = "Boardgame.html";
+        window.location.href = "index.html";
       });
     }
   });
@@ -41,7 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("DOMContentLoaded", () => {
     const scrollBtn = document.getElementById("scrollTopBtn");
   
-    // Tampilkan tombol saat scroll ke bawah
     window.onscroll = function () {
       if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
         scrollBtn.style.display = "block";
@@ -50,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
   
-    // Scroll halus ke atas saat diklik
     scrollBtn.addEventListener("click", () => {
       window.scrollTo({
         top: 0,
