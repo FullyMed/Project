@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Family",
       players: "2-5",
       duration: "60 min",
-      image: "Assets/Images/Ticket To Ride.jpg",
+      image: "Assets/Images/Ticket to Ride.jpg",
       description: "Collect train cards to claim routes across the map.",
       tags: ["Route Building", "Set Collection"]
     },
