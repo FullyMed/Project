@@ -1,20 +1,35 @@
 <?php
-include 'db.php';
+include 'db_connect.php';
 
-$email = $_POST['email'];
-$password = $_POST['password'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = htmlspecialchars($_POST["email"]);
+    $password = $_POST["password"];
 
-$sql = "SELECT * FROM users WHERE email='$email'";
-$result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT id, name, password, avatar FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->store_result();
 
-if ($result->num_rows == 1) {
-    $user = $result->fetch_assoc();
-    if (password_verify($password, $user['password'])) {
-        echo json_encode(["status" => "success", "user" => $user]);
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($id, $name, $hashed_password, $avatar);
+        $stmt->fetch();
+
+        if (password_verify($password, $hashed_password)) {
+            echo json_encode([
+                "status" => "success",
+                "id" => $id,
+                "name" => $name,
+                "email" => $email,
+                "avatar" => $avatar
+            ]);
+        } else {
+            echo json_encode(["status" => "wrong_password"]);
+        }
     } else {
-        echo json_encode(["status" => "error", "message" => "Wrong password"]);
+        echo json_encode(["status" => "not_found"]);
     }
-} else {
-    echo json_encode(["status" => "error", "message" => "Email not found"]);
+
+    $stmt->close();
 }
+$conn->close();
 ?>

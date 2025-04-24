@@ -1,19 +1,27 @@
 <?php
-include 'db.php';
+header("Content-Type: application/json");
+require_once("db_connect.php");
 
-$name = $_POST['name'];
-$email = $_POST['email'];
-$password = password_hash($_POST['password'], PASSWORD_DEFAULT); // hash!
+$data = json_decode(file_get_contents("php://input"), true);
+$name = $data['name'];
+$email = $data['email'];
+$password = password_hash($data['password'], PASSWORD_DEFAULT);
+$avatar = $data['avatar'];
 
-$sql = "SELECT * FROM users WHERE email='$email'";
-$result = $conn->query($sql);
+$stmt = $conn->prepare("INSERT INTO users (name, email, password, avatar) VALUES (?, ?, ?, ?)");
+$stmt->bind_param("ssss", $name, $email, $password, $avatar);
 
-if ($result->num_rows > 0) {
-    echo json_encode(["status" => "error", "message" => "Email already registered"]);
+$response = [];
+
+if ($stmt->execute()) {
+    $response["success"] = true;
 } else {
-    $stmt = $conn->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $name, $email, $password);
-    $stmt->execute();
-    echo json_encode(["status" => "success"]);
+    $response["success"] = false;
+    $response["error"] = $conn->error;
 }
+
+$stmt->close();
+$conn->close();
+
+echo json_encode($response);
 ?>
