@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Strategy",
       players: "2-4",
       duration: "120 min",
-      image: "Assets/Images/Risk  Europe.jpg",
+      image: "Assets/Images/Risk Europe.jpg",
       description: "Command medieval armies and use tactics and economy to dominate Europe.",
       tags: ["Area Control", "Dice Rolling", "War Game"]
     },
@@ -1445,7 +1445,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Cooperative",
       players: "1-4",
       duration: "60-90 min",
-      image: "Assets/Images/God Of War.jpeg",
+      image: "Assets/Images/God of War.jpeg",
       description: "Team up to defeat monsters and change your fate in this Norse mythology card game.",
       tags: ["Cooperative", "Card Drafting", "Scenario-Based"]
     },
@@ -1580,7 +1580,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Thematic",
       players: "2",
       duration: "60-120 min",
-      image: "Assets/Images/Fog Of Love.webp",
+      image: "Assets/Images/Fog of Love.webp",
       description: "Roleplay a romantic comedy where each player’s choices shape a unique love story.",
       tags: ["Storytelling", "Roleplaying", "Negotiation"]
     },
@@ -1724,7 +1724,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Adventure",
       players: "1-8",
       duration: "60-90 min",
-      image: "Assets/Images/House Of Danger.jpg",
+      image: "Assets/Images/House of Danger.jpg",
       description: "Explore a haunted mansion in this choose-your-own-adventure mystery game.",
       tags: ["Storytelling", "Exploration", "Solo-Friendly"]
     },
@@ -1904,7 +1904,7 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "Horror",
       players: "1-5",
       duration: "120-180 min",
-      image: "Assets/Images/Mansions Of Madness.jpg",
+      image: "Assets/Images/Mansions of Madness.jpg",
       description: "Explore haunted mansions, solve mysteries, and battle Lovecraftian horrors.",
       tags: ["Cooperative", "App-Driven", "Exploration", "Horror"]
     },
