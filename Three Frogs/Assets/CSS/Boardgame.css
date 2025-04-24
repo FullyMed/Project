@@ -2,9 +2,10 @@ body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1, #ffdde1, #c3cfe2, #fda085, #f6d365);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+    background-size: 200% 200%;
+    animation: gradientBG 25s ease infinite;
     color: #333;
+    will-change: background-position;
 }
 
 @keyframes gradientBG {
@@ -17,6 +18,16 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
 }
   
 .navbar {
