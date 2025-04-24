@@ -199,6 +199,42 @@ document.addEventListener("DOMContentLoaded", () => {
       tags: ["Engine Building", "Set Collection", "Card Drafting"]
     },
     {
+      name: "Splendor Duel",
+      category: "Card Game",
+      players: "2",
+      duration: "30 min",
+      image: "Assets/Images/Splendor Duel.jpg",
+      description: "A tense and tactical two-player twist on the classic Splendor engine-building game.",
+      tags: ["Engine Building", "Card Drafting", "Two Player"]
+    },
+    {
+      name: "That's You",
+      category: "Party",
+      players: "2-6",
+      duration: "20-60 min",
+      image: "Assets/Images/Thats You.png",
+      description: "Answer hilarious personal questions and see how well you know your friends.",
+      tags: ["Social", "Mobile Integration", "Humor"]
+    },
+    {
+      name: "Forest Shuffle",
+      category: "Strategy",
+      players: "2-4",
+      duration: "40-60 min",
+      image: "Assets/Images/Forest Shuffle.jpg",
+      description: "Grow a thriving forest by strategically layering trees, animals, and plants.",
+      tags: ["Card Drafting", "Nature-Themed", "Set Collection"]
+    },
+    {
+      name: "Happy Salmon",
+      category: "Party",
+      players: "3-6",
+      duration: "2-5 min",
+      image: "Assets/Images/Happy Salmon.png",
+      description: "Frantic, fast-paced fun where players race to perform silly actions and ditch their cards.",
+      tags: ["Real-Time", "Party Game", "High Energy"]
+    },    
+    {
       name: "Love Letter",
       category: "Card Game",
       players: "2-4",
