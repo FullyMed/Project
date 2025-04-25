@@ -1,56 +1,64 @@
 // ===============================
-// JS for Login.html
+// JS for Login.html (with PHP backend)
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
-    const loginForm = document.getElementById("loginForm");
-  
-    if (loginForm) {
-      loginForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-  
-        const email = document.getElementById("loginEmail").value;
-        const password = document.getElementById("loginPassword").value;
-  
-        const users = JSON.parse(localStorage.getItem("users")) || [];
-        const matchedUser = users.find(user => user.email === email && user.password === password);
-  
-        if (matchedUser) {
-          localStorage.setItem("loggedInUser", JSON.stringify(matchedUser));
-  
-          document.getElementById("loginResult").innerHTML = `
+  const loginForm = document.getElementById("loginForm");
+
+  if (loginForm) {
+    loginForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+      const resultBox = document.getElementById("loginResult");
+
+      try {
+        const response = await fetch("login.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          localStorage.setItem("loggedInUser", JSON.stringify(result.user));
+
+          resultBox.innerHTML = `
             <h3>Login Successful!</h3>
-            <p>Welcome back, <strong>${matchedUser.name}</strong>. Redirecting to homepage...</p>
+            <p>Welcome back, <strong>${result.user.name}</strong>. Redirecting to homepage...</p>
           `;
-  
-          setTimeout(() => {
-            window.location.href = "index.html";
-          }, 1500);
+
+          setTimeout(() => window.location.href = "index.html", 1500);
+          loginForm.reset();
         } else {
-          document.getElementById("loginResult").innerHTML = `
-            <p style="color:red;"><strong>Invalid email or password.</strong></p>
+          resultBox.innerHTML = `
+            <p style="color:red;"><strong>${result.error || "Invalid email or password."}</strong></p>
             <p style="margin-top: 8px;">
               <a href="Forgot-password.html" style="color: #2563eb; font-weight: bold;">Forgot your password?</a>
             </p>
           `;
         }
-  
-        loginForm.reset();
-      });
-    }
-  });
-  
-  // ===============================
-  // Toggle Show/Hide Password
-  // ===============================
-  document.addEventListener("DOMContentLoaded", () => {
-    const toggleBtn = document.getElementById("toggleLoginPassword");
-    const passwordInput = document.getElementById("loginPassword");
-  
-    if (toggleBtn && passwordInput) {
-      toggleBtn.addEventListener("click", () => {
-        const isVisible = passwordInput.type === "text";
-        passwordInput.type = isVisible ? "password" : "text";
-        toggleBtn.textContent = isVisible ? "👁️" : "🙈";
-      });
-    }
-  });
+      } catch (error) {
+        resultBox.innerHTML = `<p style="color:red;"><strong>Server error. Please try again later.</strong></p>`;
+        console.error(error);
+      }
+    });
+  }
+});
+
+// ===============================
+// Toggle Show/Hide Password
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.getElementById("toggleLoginPassword");
+  const passwordInput = document.getElementById("loginPassword");
+
+  if (toggleBtn && passwordInput) {
+    toggleBtn.addEventListener("click", () => {
+      const isVisible = passwordInput.type === "text";
+      passwordInput.type = isVisible ? "password" : "text";
+      toggleBtn.textContent = isVisible ? "👁️" : "🙈";
+    });
+  }
+});
