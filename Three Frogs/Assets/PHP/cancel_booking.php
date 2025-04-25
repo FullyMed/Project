@@ -3,17 +3,15 @@ header("Content-Type: application/json");
 require_once("db_connect.php");
 
 $data = json_decode(file_get_contents("php://input"), true);
-
 $email = $data['email'];
 $date = $data['date'];
 $start = $data['start'];
 $end = $data['end'];
-$people = intval($data['people']);
 
 $response = [];
 
-$stmt = $conn->prepare("INSERT INTO bookings (email, date, start, end, people) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssi", $email, $date, $start, $end, $people);
+$stmt = $conn->prepare("DELETE FROM bookings WHERE email = ? AND date = ? AND start = ? AND end = ?");
+$stmt->bind_param("ssss", $email, $date, $start, $end);
 
 if ($stmt->execute()) {
     $response["success"] = true;
