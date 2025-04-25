@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
   
     if (!navLinks) return;
   
+//  navLinks.innerHTML = `
+//     <li><a href="/">Home</a></li>
     navLinks.innerHTML = `
       <li><a href="index.html">Home</a></li>
       <li><a href="Booking.html">Booking</a></li>
@@ -55,4 +57,4 @@ document.addEventListener("DOMContentLoaded", () => {
         behavior: "smooth"
       });
     });
-  });  
+  });
