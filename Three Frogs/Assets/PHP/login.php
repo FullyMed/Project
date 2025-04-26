@@ -8,6 +8,13 @@ $password = $data['password'] ?? '';
 
 $response = [];
 
+if (empty($email) || empty($password)) {
+    $response['success'] = false;
+    $response['error'] = "Email and password are required.";
+    echo json_encode($response);
+    exit();
+}
+
 $stmt = $conn->prepare("SELECT id, name, email, password, avatar FROM users WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
@@ -17,7 +24,7 @@ if ($result->num_rows === 1) {
     $user = $result->fetch_assoc();
 
     if (password_verify($password, $user['password'])) {
-        unset($user['password']); // remove password before sending to frontend
+        unset($user['password']);
         $response['success'] = true;
         $response['user'] = $user;
     } else {
