@@ -2,24 +2,23 @@
 header("Content-Type: application/json");
 require_once("db_connect.php");
 
-$data = json_decode(file_get_contents("php://input"), true);
-
-$user_id = intval($data['user_id'] ?? 0);
-$date = $data['date'] ?? '';
-$time = $data['time'] ?? '';
-$people = intval($data['people'] ?? 0);
+$email = $_POST['email'] ?? '';
+$date = $_POST['date'] ?? '';
+$start = $_POST['start'] ?? '';
+$end = $_POST['end'] ?? '';
+$people = intval($_POST['people'] ?? 0);
 
 $response = [];
 
-if ($user_id <= 0 || empty($date) || empty($time) || $people <= 0) {
+if (!$email || !$date || !$start || !$end || !$people) {
     $response["success"] = false;
     $response["error"] = "All fields are required.";
     echo json_encode($response);
-    exit();
+    exit;
 }
 
-$stmt = $conn->prepare("INSERT INTO bookings (user_id, date, time, people) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("issi", $user_id, $date, $time, $people);
+$stmt = $conn->prepare("INSERT INTO bookings (email, date, start, end, people) VALUES (?, ?, ?, ?, ?)");
+$stmt->bind_param("ssssi", $email, $date, $start, $end, $people);
 
 if ($stmt->execute()) {
     $response["success"] = true;
@@ -32,5 +31,4 @@ $stmt->close();
 $conn->close();
 
 echo json_encode($response);
-exit();
 ?>

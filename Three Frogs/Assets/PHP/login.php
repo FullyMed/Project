@@ -2,9 +2,8 @@
 header("Content-Type: application/json");
 require_once("db_connect.php");
 
-$data = json_decode(file_get_contents("php://input"), true);
-$email = $data['email'] ?? '';
-$password = $data['password'] ?? '';
+$email = $_POST['email'] ?? '';
+$password = $_POST['password'] ?? '';
 
 $response = [];
 

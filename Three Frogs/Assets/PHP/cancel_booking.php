@@ -2,16 +2,22 @@
 header("Content-Type: application/json");
 require_once("db_connect.php");
 
-$data = json_decode(file_get_contents("php://input"), true);
-
-$user_id = intval($data['user_id']);
-$date = $data['date'];
-$time = $data['time'];
+$email = $_POST['email'] ?? '';
+$date = $_POST['date'] ?? '';
+$start = $_POST['start'] ?? '';
+$end = $_POST['end'] ?? '';
 
 $response = [];
 
-$stmt = $conn->prepare("DELETE FROM bookings WHERE user_id = ? AND date = ? AND time = ?");
-$stmt->bind_param("iss", $user_id, $date, $time);
+if (!$email || !$date || !$start || !$end) {
+    $response["success"] = false;
+    $response["error"] = "All fields are required.";
+    echo json_encode($response);
+    exit;
+}
+
+$stmt = $conn->prepare("DELETE FROM bookings WHERE email = ? AND date = ? AND start = ? AND end = ?");
+$stmt->bind_param("ssss", $email, $date, $start, $end);
 
 if ($stmt->execute()) {
     $response["success"] = true;

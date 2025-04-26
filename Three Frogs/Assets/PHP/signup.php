@@ -1,15 +1,24 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 header("Content-Type: application/json");
 require_once("db_connect.php");
 
-$data = json_decode(file_get_contents("php://input"), true);
-$name = $data['name'];
-$email = $data['email'];
-$password = password_hash($data['password'], PASSWORD_DEFAULT);
-$avatar = $data['avatar'];
+$name = $_POST['name'] ?? '';
+$email = $_POST['email'] ?? '';
+$password = $_POST['password'] ?? '';
+$avatar = $_POST['avatar'] ?? '';
+
+if (empty($name) || empty($email) || empty($password) || empty($avatar)) {
+    echo json_encode(["success" => false, "error" => "All fields are required."]);
+    exit;
+}
+
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 $stmt = $conn->prepare("INSERT INTO users (name, email, password, avatar) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("ssss", $name, $email, $password, $avatar);
+$stmt->bind_param("ssss", $name, $email, $hashedPassword, $avatar);
 
 $response = [];
 

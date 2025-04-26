@@ -2,14 +2,19 @@
 header("Content-Type: application/json");
 require_once("db_connect.php");
 
-$data = json_decode(file_get_contents("php://input"), true);
-$email = $data['email'];
+$email = $_POST['email'] ?? '';
 
 $response = [
     "success" => false,
     "bookings" => [],
     "error" => ""
 ];
+
+if (!$email) {
+    $response["error"] = "Email is required.";
+    echo json_encode($response);
+    exit;
+}
 
 $stmt = $conn->prepare("SELECT date, start, end, people FROM bookings WHERE email = ? ORDER BY date, start");
 $stmt->bind_param("s", $email);

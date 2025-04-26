@@ -2,17 +2,16 @@
 header("Content-Type: application/json");
 require_once("db_connect.php");
 
-$data = json_decode(file_get_contents("php://input"), true);
-$email = $data['email'] ?? '';
-$newPassword = $data['newPassword'] ?? '';
+$email = $_POST['email'] ?? '';
+$newPassword = $_POST['newPassword'] ?? '';
 
 $response = [];
 
-if (empty($email) || empty($newPassword)) {
+if (!$email || !$newPassword) {
     $response["success"] = false;
     $response["error"] = "Email and new password are required.";
     echo json_encode($response);
-    exit();
+    exit;
 }
 
 $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
@@ -20,30 +19,25 @@ $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
 
-if ($result->num_rows !== 1) {
-    $response["success"] = false;
-    $response["error"] = "Email not found.";
-    echo json_encode($response);
-    $stmt->close();
-    $conn->close();
-    exit();
-}
+if ($result->num_rows === 1) {
+    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+    $update = $conn->prepare("UPDATE users SET password = ? WHERE email = ?");
+    $update->bind_param("ss", $hashedPassword, $email);
 
-$hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-$update = $conn->prepare("UPDATE users SET password = ? WHERE email = ?");
-$update->bind_param("ss", $hashedPassword, $email);
+    if ($update->execute()) {
+        $response["success"] = true;
+    } else {
+        $response["success"] = false;
+        $response["error"] = "Failed to update password.";
+    }
 
-if ($update->execute()) {
-    $response["success"] = true;
+    $update->close();
 } else {
     $response["success"] = false;
-    $response["error"] = "Failed to update password.";
+    $response["error"] = "Email not found.";
 }
 
-$update->close();
 $stmt->close();
 $conn->close();
-
 echo json_encode($response);
-exit();
 ?>
