@@ -1,11 +1,26 @@
+/* -------- Global -------- */
 body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1, #ffdde1, #c3cfe2, #fda085, #f6d365);
-    background-size: 200% 200%;
-    animation: gradientBG 25s ease infinite;
-    color: #333;
-    will-change: background-position;
+  margin: 0;
+  font-family: 'Poppins', 'Quicksand', 'Segoe UI', sans-serif;
+  background: linear-gradient(-45deg, #e0f7fa, #fce4ec, #f3e5f5, #fff9c4);
+  background-size: 200% 200%;
+  animation: gradientBG 25s ease infinite;
+  color: #333;
+  will-change: background-position;
+  line-height: 1.6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+main {
+  flex: 1;
+}
+
+html, body {
+  height: 100%;
+  flex-direction: column;
 }
 
 @keyframes gradientBG {
@@ -16,24 +31,27 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-html {
-  scroll-behavior: smooth;
+/* -------- Entrance Animation -------- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-html, body {
-  height: 100%;
-  flex-direction: column;
+.hidden {
+  display: none !important;
 }
 
-main {
-  flex: 1;
+.boardgame-card {
+  animation: fadeUp 0.8s ease forwards;
+  animation-delay: 0.2s;
 }
   
+/* -------- Navbar -------- */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1f2937;
+  background-color: #475569;
   padding: 1rem 2rem;
   color: white;
 }
@@ -47,31 +65,71 @@ main {
 .nav-links a {
   color: white;
   text-decoration: none;
-  font-weight: bold;
-}
-  
-.hero {
-  background-color: #3b82f6;
-  color: white;
-  text-align: center;
-  padding: 3rem 1rem;
-}
-  
-.section-title {
-  text-align: center;
-  margin-top: 2rem;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: color 0.3s;
 }
 
-.letter-heading {
+.nav-links a:hover {
+  color: #ffeb3b;
+}
+
+/* -------- Hero Section -------- */
+.hero {
+  background: url('Assets/Images/Agricola.webp') center/cover no-repeat;
+  position: relative;
+  color: white;
   text-align: center;
-  font-size: 2.5em;
-  font-weight: bold;
+  padding: 5rem 2rem;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.hero h1, .hero p {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.5rem;
+}
+
+/* -------- Section Titles -------- */
+.section-title, .letter-heading {
+  text-align: center;
+  font-size: 2.5rem;
   margin: 60px 0 20px;
-  color: #333;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 10px;
+  color: #374151;
+  font-weight: 600;
+  position: relative;
+}
+
+.section-title::after, .letter-heading::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: #4fc3f7;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+section[id^="letter-"] {
+  margin-bottom: 40px;
 }
   
+/* -------- Boardgame Cards -------- */
 .boardgame-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -81,50 +139,58 @@ main {
   
 .boardgame-card {
   background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   overflow: hidden;
-  transition: transform 0.2s;
   position: relative;
-  max-height: 515px;
+  animation: fadeUp 0.8s ease forwards;
+  animation-delay: 0.2s;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.boardgame-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 .boardgame-card .details {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 1rem;
-  font-size: 0.9rem;
   opacity: 0;
-  transform: translateY(100%);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(20px);
+  transition: 0.5s ease;
+  background: #fff;
 }
 
 .boardgame-card:hover .details {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease;
 }
   
 .boardgame-card img {
   width: 100%;
   height: 250px;
   object-fit: contain;
-  display: block;
-  margin: 0 auto;
+  padding: 10px;
+  background: #fafafa;
+  border-bottom: 1px solid #eee;
+  transition: transform 0.3s ease;
 }
 
 .boardgame-card img:hover {
   transform: scale(1.05);
 }
   
-.boardgame-card .info {
+.boardgame-card .info, .boardgame-card .details {
   padding: 1rem;
 }
 
-/* ========== Responsive Layout ========== */
+/* -------- Footer -------- */
+footer {
+  background-color: #475569;
+  padding: 2rem;
+  text-align: center;
+  color: white;
+  font-size: 0.9rem;
+}
 
 /* Small Phone (≤600px) */
 @media (max-width: 600px) {
@@ -184,17 +250,6 @@ main {
   }
 }
 
-section[id^="letter-"] {
-  margin-bottom: 40px;
-}
-  
-footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: #1f2937;
-  color: white;
-}
-
 .booking-form {
   max-width: 500px;
   margin: 40px auto;
@@ -227,16 +282,16 @@ footer {
   margin-top: 20px;
   padding: 12px;
   width: 100%;
-  background: #2f80ed;
+  background: #6ec6ff;
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 16px;
   cursor: pointer;
 }
   
 .booking-form button:hover {
-  background: #2563eb;
+  background: #4dabf5;
 }
 
 .booking-card {
@@ -286,16 +341,16 @@ footer {
   margin-top: 20px;
   padding: 12px;
   width: 100%;
-  background: #2f80ed;
+  background: #6ec6ff;
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 16px;
   cursor: pointer;
 }
 
 .login-container button:hover {
-  background: #2563eb;
+  background: #4dabf5;
 }
 
 .login-container .link {
@@ -394,7 +449,7 @@ footer {
   max-width: 500px;
 }
 
-.view-more-button {
+/* .view-more-button {
   display: inline-block;
   margin: 10px;
   padding: 10px 20px;
@@ -407,7 +462,7 @@ footer {
 
 .view-more-button:hover {
   background-color: #388e3c;
-}
+} */
 
 .dashboard-container {
   max-width: 600px;
@@ -509,7 +564,7 @@ input[type="radio"]:checked + .avatar-option {
   margin-bottom: 40px;
 }
 
-.see-more-button {
+/* .see-more-button {
   margin-top: 20px;
   padding: 12px 24px;
   background-color: #3b82f6;
@@ -523,10 +578,23 @@ input[type="radio"]:checked + .avatar-option {
 
 .see-more-button:hover {
   background-color: #2563eb;
+} */
+
+/* -------- Buttons -------- */
+.see-more-button, .view-more-button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #4fc3f7, #81d4fa);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
 }
 
-.hidden {
-  display: none;
+.see-more-button:hover, .view-more-button:hover {
+  background: linear-gradient(135deg, #29b6f6, #4dd0e1);
+  transform: scale(1.05);
 }
 
 .search-filter-bar {
@@ -606,10 +674,6 @@ input[type="radio"]:checked + .avatar-option {
 .popup-btn:not(.cancel) {
   background-color: #ef4444;
   color: white;
-}
-
-.hidden {
-  display: none !important;
 }
 
 .contact-icon {
