@@ -7,27 +7,22 @@ document.addEventListener("DOMContentLoaded", () => {
     if (signupForm) {
       signupForm.addEventListener("submit", async function (e) {
         e.preventDefault();
-      
-        const name = document.getElementById("signupName").value;
-        const email = document.getElementById("signupEmail").value;
-        const password = document.getElementById("signupPassword").value;
-        const avatar = document.querySelector('input[name="avatar"]:checked')?.value || "Assets/Images/Avatars/Clam.jpg";
-      
-        const resultBox = document.getElementById("signupResult");
-      
+    
+        const formData = new FormData(signupForm);
+        const resultBox = document.getElementById("signupResult"); // <-- ini penting!
+    
         try {
           const response = await fetch("signup.php", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email, password, avatar }),
+            body: formData,
           });
-      
+    
           const result = await response.json();
-      
+    
           if (result.success) {
             resultBox.innerHTML = `
               <h3>Sign Up Successful!</h3>
-              <p>Welcome, <strong>${name}</strong>. Redirecting to homepage...</p>
+              <p>Welcome, <strong>${formData.get("name")}</strong>. Redirecting to homepage...</p>
             `;
             setTimeout(() => window.location.href = "index.html", 1500);
             signupForm.reset();
@@ -38,8 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
           resultBox.innerHTML = `<p style="color:red;"><strong>Server error. Please try again later.</strong></p>`;
           console.error(err);
         }
-      });      
-    }
+      });
+    }    
   });
   
   // ===============================

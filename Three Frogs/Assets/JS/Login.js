@@ -1,5 +1,5 @@
 // ===============================
-// JS for Login.html (with PHP backend)
+// JS for Login.html (Fixed Version)
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
@@ -12,11 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const password = document.getElementById("loginPassword").value;
       const resultBox = document.getElementById("loginResult");
 
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("password", password);
+
       try {
         const response = await fetch("login.php", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password })
+          body: formData
         });
 
         const result = await response.json();
