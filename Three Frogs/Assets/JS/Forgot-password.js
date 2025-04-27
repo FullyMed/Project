@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <p>Redirecting to login page...</p>
           `;
           setTimeout(() => {
+            forgotForm.reset();
             window.location.href = "Login.html";
           }, 1500);
         } else {
@@ -37,8 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
         resultBox.innerHTML = `<p style="color:red;">Server error. Please try again later.</p>`;
         console.error(err);
       }
-
-      forgotForm.reset();
     });
   }
 });

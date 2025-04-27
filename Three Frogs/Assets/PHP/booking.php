@@ -5,33 +5,37 @@ error_reporting(E_ALL);
 header("Content-Type: application/json");
 require_once("db_connect.php");
 
-$email = $_POST['email'] ?? '';
-$date = $_POST['date'] ?? '';
-$start = $_POST['start'] ?? '';
-$end = $_POST['end'] ?? '';
-$people = intval($_POST['people'] ?? 0);
+// Terima JSON
+$data = json_decode(file_get_contents("php://input"), true);
+
+$name = $data['name'] ?? '';
+$email = $data['email'] ?? '';
+$date = $data['date'] ?? '';
+$start = $data['start'] ?? '';
+$end = $data['end'] ?? '';
+$people = $data['people'] ?? '';
 
 $response = [];
 
-if (!$email || !$date || !$start || !$end || !$people) {
+if (!$name || !$email || !$date || !$start || !$end || !$people) {
     $response["success"] = false;
     $response["error"] = "All fields are required.";
     echo json_encode($response);
     exit;
 }
 
-$stmt = $conn->prepare("INSERT INTO bookings (email, date, start, end, people) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssi", $email, $date, $start, $end, $people);
+// Insert ke database bookings
+$stmt = $conn->prepare("INSERT INTO bookings (name, email, date, start_time, end_time, people) VALUES (?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("sssssi", $name, $email, $date, $start, $end, $people);
 
 if ($stmt->execute()) {
     $response["success"] = true;
 } else {
     $response["success"] = false;
-    $response["error"] = $conn->error;
+    $response["error"] = "Failed to save booking. " . $conn->error;
 }
 
 $stmt->close();
 $conn->close();
-
 echo json_encode($response);
 ?>
