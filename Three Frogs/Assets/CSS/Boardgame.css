@@ -581,7 +581,7 @@ input[type="radio"]:checked + .avatar-option {
 } */
 
 /* -------- Buttons -------- */
-.see-more-button, .view-more-button {
+button, .see-more-button, .view-more-button {
   padding: 12px 24px;
   background: linear-gradient(135deg, #4fc3f7, #81d4fa);
   color: white;
@@ -592,7 +592,7 @@ input[type="radio"]:checked + .avatar-option {
   transition: background 0.3s, transform 0.2s;
 }
 
-.see-more-button:hover, .view-more-button:hover {
+button:hover, .see-more-button:hover, .view-more-button:hover {
   background: linear-gradient(135deg, #29b6f6, #4dd0e1);
   transform: scale(1.05);
 }
