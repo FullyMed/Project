@@ -7,7 +7,6 @@ require_once("db_connect.php");
 
 $response = [];
 
-// Ambil data dari POST
 $email = trim($_POST['email'] ?? '');
 $password = trim($_POST['password'] ?? '');
 
@@ -20,7 +19,6 @@ if (empty($email) || empty($password)) {
     exit();
 }
 
-// Cek user berdasarkan email
 $stmt = $conn->prepare("SELECT id, name, email, password, avatar FROM users WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
@@ -30,7 +28,7 @@ if ($result->num_rows === 1) {
     $user = $result->fetch_assoc();
 
     if (password_verify($password, $user['password'])) {
-        unset($user['password']); // Jangan kirim password ke client
+        unset($user['password']);
         $response = [
             "success" => true,
             "user" => $user

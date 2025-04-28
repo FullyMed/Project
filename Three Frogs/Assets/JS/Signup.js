@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
     
         const formData = new FormData(signupForm);
-        const resultBox = document.getElementById("signupResult"); // <-- ini penting!
+        const resultBox = document.getElementById("signupResult");
     
         try {
           const response = await fetch("signup.php", {

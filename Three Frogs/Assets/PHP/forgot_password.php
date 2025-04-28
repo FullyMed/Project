@@ -5,7 +5,6 @@ error_reporting(E_ALL);
 header("Content-Type: application/json");
 require_once("db_connect.php");
 
-// Baca JSON body
 $data = json_decode(file_get_contents("php://input"), true);
 
 $email = strtolower(trim($data['email'] ?? ''));
@@ -13,7 +12,6 @@ $newPassword = $data['newPassword'] ?? '';
 
 $response = [];
 
-// Validasi input
 if (empty($email) || empty($newPassword)) {
     $response["success"] = false;
     $response["error"] = "Email and new password are required.";
@@ -28,7 +26,6 @@ if (strlen($newPassword) < 6) {
     exit;
 }
 
-// Cari user berdasarkan email
 $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();

@@ -5,7 +5,6 @@ error_reporting(E_ALL);
 header("Content-Type: application/json");
 require_once("db_connect.php");
 
-// Terima JSON
 $data = json_decode(file_get_contents("php://input"), true);
 
 $name = $data['name'] ?? '';
@@ -24,7 +23,6 @@ if (!$name || !$email || !$date || !$start || !$end || !$people) {
     exit;
 }
 
-// Insert ke database bookings
 $stmt = $conn->prepare("INSERT INTO bookings (name, email, date, start_time, end_time, people) VALUES (?, ?, ?, ?, ?, ?)");
 $stmt->bind_param("sssssi", $name, $email, $date, $start, $end, $people);
 

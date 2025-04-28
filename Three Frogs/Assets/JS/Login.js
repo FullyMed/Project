@@ -1,5 +1,5 @@
 // ===============================
-// JS for Login.html (Fixed Version)
+// JS for Login.html
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");

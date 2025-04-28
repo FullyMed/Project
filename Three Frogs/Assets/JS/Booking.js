@@ -33,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const closeTime = "22:00";
       const today = new Date().toISOString().split("T")[0];
 
-      // Validasi
       if (date < today) {
         bookingResult.innerHTML = `<p style="color:red;"><strong>Booking date cannot be in the past.</strong></p>`;
         return;
@@ -73,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <p>We've sent a confirmation to <strong>${currentUser.email}</strong>.</p>
           `;
           bookingForm.reset();
-          loadUpcomingBookings(); // Refresh daftar booking
+          loadUpcomingBookings();
         } else {
           bookingResult.innerHTML = `<p style="color:red;">${result.error}</p>`;
         }
@@ -83,11 +82,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    loadUpcomingBookings(); // Load booking saat halaman dibuka
+    loadUpcomingBookings();
   }
 
   // ===============================
-  // Fungsi untuk Load Upcoming Bookings
+  // Function for Load Upcoming Bookings
   // ===============================
   async function loadUpcomingBookings() {
     const upcomingContainer = document.getElementById("upcomingBookings");
@@ -123,7 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
           upcomingContainer.appendChild(bookingItem);
         });
 
-        // Tambahkan event listener untuk semua tombol cancel
         document.querySelectorAll(".cancelBookingBtn").forEach(button => {
           button.addEventListener("click", cancelBooking);
         });
@@ -138,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===============================
-  // Fungsi untuk Cancel Booking
+  // Function for Cancel Booking
   // ===============================
   async function cancelBooking(event) {
     const button = event.target;
@@ -161,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (result.success) {
         alert("Booking cancelled successfully.");
-        loadUpcomingBookings(); // Refresh daftar setelah cancel
+        loadUpcomingBookings();
       } else {
         alert(result.error);
       }
