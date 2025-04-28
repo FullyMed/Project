@@ -1,6 +1,6 @@
 <?php
 $host = "localhost";
-$user = "threefrogs";
+$user = "u181047418_threefrogs";
 $password = "Threefr0gs*";
 $database = "u181047418_threefrogs";
 

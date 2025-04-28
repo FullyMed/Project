@@ -76,7 +76,7 @@ html, body {
 
 /* -------- Hero Section -------- */
 .hero {
-  background: url('Three Frogs\Assets\Images\ThreeFrogsPlace.webp') center/cover no-repeat;
+  background: url('../Images/ThreeFrogsPlace.webp') center/cover no-repeat;
   position: relative;
   color: white;
   text-align: center;
