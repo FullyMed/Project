@@ -1,5 +1,5 @@
 // ===============================
-// JS for Booking.html (Backend Version)
+// JS for Booking.html
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
   const bookingForm = document.getElementById("bookingForm");
@@ -23,43 +23,44 @@ document.addEventListener("DOMContentLoaded", () => {
     bookingForm.addEventListener("submit", async function (e) {
       e.preventDefault();
 
-      const name = document.getElementById("name").value;
+      const name = document.getElementById("name").value.trim();
       const date = document.getElementById("date").value;
       const start = document.getElementById("start-time").value;
       const end = document.getElementById("end-time").value;
       const people = document.getElementById("people").value;
+
       const openTime = "12:00";
       const closeTime = "22:00";
       const today = new Date().toISOString().split("T")[0];
 
-      // Validation
+      // Validasi
       if (date < today) {
         bookingResult.innerHTML = `<p style="color:red;"><strong>Booking date cannot be in the past.</strong></p>`;
         return;
       }
+
       if (end <= start) {
         bookingResult.innerHTML = `<p style="color:red;"><strong>End time must be later than start time.</strong></p>`;
         return;
       }
+
       if (start < openTime || end > closeTime) {
         bookingResult.innerHTML = `<p style="color:red;"><strong>Booking must be between 12:00 and 22:00.</strong></p>`;
         return;
       }
 
-      const bookingData = {
-        name,
-        email: currentUser.email,
-        date,
-        start,
-        end,
-        people
-      };
-
       try {
         const response = await fetch("booking.php", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(bookingData),
+          body: JSON.stringify({
+            name,
+            email: currentUser.email,
+            date,
+            start,
+            end,
+            people
+          })
         });
 
         const result = await response.json();
@@ -72,13 +73,101 @@ document.addEventListener("DOMContentLoaded", () => {
             <p>We've sent a confirmation to <strong>${currentUser.email}</strong>.</p>
           `;
           bookingForm.reset();
+          loadUpcomingBookings(); // Refresh daftar booking
         } else {
           bookingResult.innerHTML = `<p style="color:red;">${result.error}</p>`;
         }
-      } catch (err) {
+      } catch (error) {
+        console.error(error);
         bookingResult.innerHTML = `<p style="color:red;">Server error. Please try again later.</p>`;
-        console.error(err);
       }
     });
+
+    loadUpcomingBookings(); // Load booking saat halaman dibuka
+  }
+
+  // ===============================
+  // Fungsi untuk Load Upcoming Bookings
+  // ===============================
+  async function loadUpcomingBookings() {
+    const upcomingContainer = document.getElementById("upcomingBookings");
+
+    if (!upcomingContainer || !currentUser) return;
+
+    try {
+      const response = await fetch("get_bookings.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `email=${encodeURIComponent(currentUser.email)}`
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        if (result.bookings.length === 0) {
+          upcomingContainer.innerHTML = "<p>No upcoming bookings.</p>";
+          return;
+        }
+
+        upcomingContainer.innerHTML = "";
+
+        result.bookings.forEach((booking, index) => {
+          const bookingItem = document.createElement("div");
+          bookingItem.className = "booking-item";
+          bookingItem.innerHTML = `
+            <p><strong>Date:</strong> ${booking.date}</p>
+            <p><strong>Time:</strong> ${booking.start} - ${booking.end}</p>
+            <p><strong>People:</strong> ${booking.people}</p>
+            <button class="cancelBookingBtn" data-date="${booking.date}" data-start="${booking.start}" data-end="${booking.end}">Cancel</button>
+          `;
+          upcomingContainer.appendChild(bookingItem);
+        });
+
+        // Tambahkan event listener untuk semua tombol cancel
+        document.querySelectorAll(".cancelBookingBtn").forEach(button => {
+          button.addEventListener("click", cancelBooking);
+        });
+
+      } else {
+        upcomingContainer.innerHTML = `<p style="color:red;">${result.error}</p>`;
+      }
+    } catch (error) {
+      console.error(error);
+      upcomingContainer.innerHTML = `<p style="color:red;">Failed to load bookings.</p>`;
+    }
+  }
+
+  // ===============================
+  // Fungsi untuk Cancel Booking
+  // ===============================
+  async function cancelBooking(event) {
+    const button = event.target;
+    const date = button.dataset.date;
+    const start = button.dataset.start;
+    const end = button.dataset.end;
+
+    if (!confirm(`Are you sure you want to cancel booking on ${date} from ${start} to ${end}?`)) {
+      return;
+    }
+
+    try {
+      const response = await fetch("cancel_booking.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `email=${encodeURIComponent(currentUser.email)}&date=${encodeURIComponent(date)}&start=${encodeURIComponent(start)}&end=${encodeURIComponent(end)}`
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert("Booking cancelled successfully.");
+        loadUpcomingBookings(); // Refresh daftar setelah cancel
+      } else {
+        alert(result.error);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Failed to cancel booking.");
+    }
   }
 });
