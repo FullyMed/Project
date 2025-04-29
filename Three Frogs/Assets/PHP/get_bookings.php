@@ -9,7 +9,8 @@ $email = $_POST['email'] ?? '';
 
 $response = [
     "success" => false,
-    "bookings" => [],
+    "upcoming" => [],
+    "history" => [],
     "error" => ""
 ];
 
@@ -19,24 +20,37 @@ if (!$email) {
     exit;
 }
 
-$stmt = $conn->prepare("SELECT date, start, end, people FROM bookings WHERE email = ? ORDER BY date, start");
-$stmt->bind_param("s", $email);
+// Upcoming bookings (today or future)
+$upcomingStmt = $conn->prepare("SELECT date, start, end, people FROM bookings WHERE email = ? AND date >= CURDATE() ORDER BY date, start");
+$upcomingStmt->bind_param("s", $email);
 
-if ($stmt->execute()) {
-    $result = $stmt->get_result();
-    $bookings = [];
-
+if ($upcomingStmt->execute()) {
+    $result = $upcomingStmt->get_result();
     while ($row = $result->fetch_assoc()) {
-        $bookings[] = $row;
+        $response["upcoming"][] = $row;
     }
-
-    $response["success"] = true;
-    $response["bookings"] = $bookings;
 } else {
-    $response["error"] = $conn->error;
+    $response["error"] = "Error fetching upcoming: " . $conn->error;
+    echo json_encode($response);
+    exit;
+}
+$upcomingStmt->close();
+
+// Booking history (past dates only)
+$historyStmt = $conn->prepare("SELECT date, start, end, people FROM bookings WHERE email = ? AND date < CURDATE() ORDER BY date DESC");
+$historyStmt->bind_param("s", $email);
+
+if ($historyStmt->execute()) {
+    $result = $historyStmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $response["history"][] = $row;
+    }
+    $response["success"] = true;
+} else {
+    $response["error"] = "Error fetching history: " . $conn->error;
 }
 
-$stmt->close();
+$historyStmt->close();
 $conn->close();
 
 echo json_encode($response);
