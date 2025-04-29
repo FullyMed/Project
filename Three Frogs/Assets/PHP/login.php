@@ -1,4 +1,5 @@
 <?php
+session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -19,7 +20,7 @@ if (empty($email) || empty($password)) {
     exit();
 }
 
-$stmt = $conn->prepare("SELECT id, name, email, password, avatar FROM users WHERE email = ?");
+$stmt = $conn->prepare("SELECT id, name, email, password, avatar FROM users WHERE email = ? LIMIT 1");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -28,7 +29,15 @@ if ($result->num_rows === 1) {
     $user = $result->fetch_assoc();
 
     if (password_verify($password, $user['password'])) {
+        $_SESSION['user'] = [
+            "id" => $user['id'],
+            "name" => $user['name'],
+            "email" => $user['email'],
+            "avatar" => $user['avatar']
+        ];
+
         unset($user['password']);
+
         $response = [
             "success" => true,
             "user" => $user
@@ -50,4 +59,3 @@ $stmt->close();
 $conn->close();
 
 echo json_encode($response);
-?>
