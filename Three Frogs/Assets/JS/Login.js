@@ -25,8 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const result = await response.json();
 
         if (result.success) {
-          localStorage.setItem("loggedInUser", JSON.stringify(result.user));
-
           resultBox.innerHTML = `
             <h3>Login Successful!</h3>
             <p>Welcome back, <strong>${result.user.name}</strong>. Redirecting to homepage...</p>

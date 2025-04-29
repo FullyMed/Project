@@ -1,22 +1,32 @@
 <?php
+session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 header("Content-Type: application/json");
 require_once("db_connect.php");
 
+$response = [];
+
+if (!isset($_SESSION['user'])) {
+    $response["success"] = false;
+    $response["error"] = "You must be logged in to make a booking.";
+    echo json_encode($response);
+    exit;
+}
+
+$user = $_SESSION['user'];
+$name = $user['name'];
+$email = $user['email'];
+
 $data = json_decode(file_get_contents("php://input"), true);
 
-$name = $data['name'] ?? '';
-$email = $data['email'] ?? '';
 $date = $data['date'] ?? '';
 $start = $data['start'] ?? '';
 $end = $data['end'] ?? '';
 $people = $data['people'] ?? '';
 
-$response = [];
-
-if (!$name || !$email || !$date || !$start || !$end || !$people) {
+if (!$date || !$start || !$end || !$people) {
     $response["success"] = false;
     $response["error"] = "All fields are required.";
     echo json_encode($response);
@@ -36,4 +46,3 @@ if ($stmt->execute()) {
 $stmt->close();
 $conn->close();
 echo json_encode($response);
-?>

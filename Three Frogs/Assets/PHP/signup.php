@@ -6,6 +6,7 @@ header("Content-Type: application/json");
 require_once("db_connect.php");
 
 if (!$conn || $conn->connect_error) {
+    http_response_code(500);
     echo json_encode([
         "success" => false,
         "error" => "Database connection failed: " . ($conn ? $conn->connect_error : "no connection object")
@@ -14,11 +15,12 @@ if (!$conn || $conn->connect_error) {
 }
 
 $name     = trim($_POST['name'] ?? '');
-$email    = trim($_POST['email'] ?? '');
+$email    = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
 $password = trim($_POST['password'] ?? '');
 $avatar   = trim($_POST['avatar'] ?? "Assets/Images/Avatars/Clam.jpg");
 
 if (empty($name) || empty($email) || empty($password)) {
+    http_response_code(400);
     echo json_encode([
         "success" => false,
         "error" => "Name, email, and password are required."
@@ -27,6 +29,7 @@ if (empty($name) || empty($email) || empty($password)) {
 }
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    http_response_code(400);
     echo json_encode([
         "success" => false,
         "error" => "Invalid email format."
@@ -34,13 +37,22 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit();
 }
 
-// Check if email already exists
+if (strlen($password) < 6) {
+    http_response_code(400);
+    echo json_encode([
+        "success" => false,
+        "error" => "Password must be at least 6 characters long."
+    ]);
+    exit();
+}
+
 $checkStmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
 $checkStmt->bind_param("s", $email);
 $checkStmt->execute();
 $checkStmt->store_result();
 
 if ($checkStmt->num_rows > 0) {
+    http_response_code(409);
     echo json_encode([
         "success" => false,
         "error" => "Email already registered."
@@ -54,8 +66,8 @@ $checkStmt->close();
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 $stmt = $conn->prepare("INSERT INTO users (name, email, password, avatar) VALUES (?, ?, ?, ?)");
-
 if (!$stmt) {
+    http_response_code(500);
     echo json_encode([
         "success" => false,
         "error" => "Database error: " . $conn->error
@@ -65,16 +77,16 @@ if (!$stmt) {
 
 $stmt->bind_param("ssss", $name, $email, $hashedPassword, $avatar);
 
-$response = [];
-
 if ($stmt->execute()) {
-    $response["success"] = true;
+    http_response_code(201);
+    echo json_encode(["success" => true]);
 } else {
-    $response["success"] = false;
-    $response["error"] = "Signup failed: " . $stmt->error;
+    http_response_code(500);
+    echo json_encode([
+        "success" => false,
+        "error" => "Signup failed: " . $stmt->error
+    ]);
 }
 
 $stmt->close();
 $conn->close();
-
-echo json_encode($response);

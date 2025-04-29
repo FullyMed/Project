@@ -6,17 +6,15 @@ error_reporting(E_ALL);
 header("Content-Type: application/json");
 require_once("db_connect.php");
 
-$response = [];
-
-$email = trim($_POST['email'] ?? '');
+$email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
 $password = trim($_POST['password'] ?? '');
 
 if (empty($email) || empty($password)) {
-    $response = [
+    http_response_code(400);
+    echo json_encode([
         "success" => false,
         "error" => "Email and password are required."
-    ];
-    echo json_encode($response);
+    ]);
     exit();
 }
 
@@ -38,24 +36,25 @@ if ($result->num_rows === 1) {
 
         unset($user['password']);
 
-        $response = [
+        http_response_code(200);
+        echo json_encode([
             "success" => true,
             "user" => $user
-        ];
+        ]);
     } else {
-        $response = [
+        http_response_code(401);
+        echo json_encode([
             "success" => false,
             "error" => "Incorrect password."
-        ];
+        ]);
     }
 } else {
-    $response = [
+    http_response_code(404);
+    echo json_encode([
         "success" => false,
         "error" => "Email not found."
-    ];
+    ]);
 }
 
 $stmt->close();
 $conn->close();
-
-echo json_encode($response);
