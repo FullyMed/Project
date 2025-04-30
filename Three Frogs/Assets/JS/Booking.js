@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        const response = await fetch("booking.php", {
+        const response = await fetch("PHP/booking.php", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!upcomingContainer || !currentUser) return;
 
     try {
-      const response = await fetch("get_bookings.php", {
+      const response = await fetch("PHP/get_bookings.php", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: `email=${encodeURIComponent(currentUser.email)}`
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const response = await fetch("cancel_booking.php", {
+      const response = await fetch("PHP/cancel_booking.php", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: `email=${encodeURIComponent(currentUser.email)}&date=${encodeURIComponent(date)}&start=${encodeURIComponent(start)}&end=${encodeURIComponent(end)}`

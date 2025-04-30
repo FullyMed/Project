@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function fetchBookingsFromServer() {
     try {
-      const response = await fetch("get_bookings.php", {
+      const response = await fetch("PHP/get_bookings.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: loggedInUser.email }),
@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (confirmCancel) {
     confirmCancel.addEventListener("click", async () => {
       try {
-        const res = await fetch("cancel_booking.php", {
+        const res = await fetch("PHP/cancel_booking.php", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
