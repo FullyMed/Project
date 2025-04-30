@@ -6,74 +6,65 @@ error_reporting(E_ALL);
 header("Content-Type: application/json");
 require_once("db_connect.php");
 
-$response = [
-    "success" => false,
-    "upcoming" => [],
-    "history" => [],
-    "error" => ""
-];
-
-if (!isset($_SESSION['user'])) {
-    $response["error"] = "You must be logged in to view bookings.";
-    echo json_encode($response);
+// Check if user is logged in
+if (!isset($_SESSION['user']) || empty($_SESSION['user']['email'])) {
+    http_response_code(401);
+    echo json_encode([
+        "success" => false,
+        "error" => "You must be logged in to view bookings."
+    ]);
     exit;
 }
 
 $email = $_POST['email'] ?? '';
 
-if (!$email) {
-    $response["error"] = "Email is required.";
-    echo json_encode($response);
+if (empty($email)) {
+    http_response_code(400);
+    echo json_encode([
+        "success" => false,
+        "error" => "Email is required."
+    ]);
     exit;
 }
 
+// Ensure the email matches the logged-in user
 if ($email !== $_SESSION['user']['email']) {
-    $response["error"] = "Email does not match the logged-in user.";
-    echo json_encode($response);
+    http_response_code(403);
+    echo json_encode([
+        "success" => false,
+        "error" => "Email does not match the logged-in user."
+    ]);
     exit;
 }
 
-$upcomingStmt = $conn->prepare("SELECT date, start_time, end_time, people FROM bookings WHERE email = ? AND date >= CURDATE() AND status = 'active' ORDER BY date, start_time");
-$upcomingStmt->bind_param("s", $email);
+$stmt = $conn->prepare("SELECT date, start AS start_time, end AS end_time, people FROM bookings WHERE email = ? ORDER BY date, start");
+$stmt->bind_param("s", $email);
 
-if ($upcomingStmt->execute()) {
-    $result = $upcomingStmt->get_result();
+if ($stmt->execute()) {
+    $result = $stmt->get_result();
+    $bookings = [];
     while ($row = $result->fetch_assoc()) {
-        $response["upcoming"][] = [
+        $bookings[] = [
             "date" => $row["date"],
             "start" => $row["start_time"],
             "end" => $row["end_time"],
             "people" => $row["people"]
         ];
     }
-} else {
-    $response["error"] = "Error fetching upcoming: " . $conn->error;
-    echo json_encode($response);
-    exit;
-}
-$upcomingStmt->close();
 
-$historyStmt = $conn->prepare("SELECT date, start_time, end_time, people, status FROM bookings WHERE email = ? AND date < CURDATE() ORDER BY date DESC");
-$historyStmt->bind_param("s", $email);
-
-if ($historyStmt->execute()) {
-    $result = $historyStmt->get_result();
-    while ($row = $result->fetch_assoc()) {
-        $response["history"][] = [
-            "date" => $row["date"],
-            "start" => $row["start_time"],
-            "end" => $row["end_time"],
-            "people" => $row["people"],
-            "status" => $row["status"]
-        ];
-    }
-    $response["success"] = true;
+    http_response_code(200);
+    echo json_encode([
+        "success" => true,
+        "bookings" => $bookings
+    ]);
 } else {
-    $response["error"] = "Error fetching history: " . $conn->error;
+    http_response_code(500);
+    echo json_encode([
+        "success" => false,
+        "error" => "Error fetching bookings: " . $conn->error
+    ]);
 }
 
-$historyStmt->close();
+$stmt->close();
 $conn->close();
-
-echo json_encode($response);
 ?>
