@@ -4,7 +4,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("boardgame-list");
   const seeMoreBox = document.getElementById("seeMoreBox");
-  const isLoggedIn = localStorage.getItem("loggedInUser") !== null;
   const searchInput = document.getElementById("searchInput");
   const categoryFilter = document.getElementById("categoryFilter");
 
@@ -1985,111 +1984,135 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ================= Boardgame Page =================
-  if (window.location.pathname.includes("index.html")) {
-// if (window.location.pathname === "/" || window.location.pathname.includes("index.html")) {
-    const maxToShow = 10;
-    const shuffled = boardgames.sort(() => 0.5 - Math.random());
-    const toDisplay = shuffled.slice(0, maxToShow);
-    renderBoardgames(toDisplay);
-
-    if (seeMoreBox) {
-      seeMoreBox.classList.remove("hidden");
-      seeMoreBox.innerHTML = isLoggedIn
-        ? `<a href="Collection.html" class="see-more-button">See Other Boardgames</a>`
-        : `<p style="margin-top: 20px;">Please <a href="Login.html" style="color: #2563eb; font-weight: bold;">Login</a> or <a href="Signup.html" style="color: #2563eb; font-weight: bold;">Sign Up</a> to see the full collection.</p>`;
+  // if (window.location.pathname === "/" || window.location.pathname.includes("index.html")) {
+    if (window.location.pathname.includes("index.html")) {
+      const maxToShow = 10;
+      const shuffled = boardgames.sort(() => 0.5 - Math.random());
+      const toDisplay = shuffled.slice(0, maxToShow);
+      renderBoardgames(toDisplay);
+  
+      if (seeMoreBox) {
+        fetch("Assets/PHP/check_session.php")
+          .then(res => {
+            if (!res.ok) {
+              throw new Error(`HTTP error! status: ${res.status}`);
+            }
+            return res.json();
+          })
+          .then(data => {
+            console.log("check_session response in Boardgame.js:", data);
+            seeMoreBox.classList.remove("hidden");
+            seeMoreBox.innerHTML = data.loggedIn
+              ? `<a href="Collection.html" class="see-more-button">See Other Boardgames</a>`
+              : `<p style="margin-top: 20px;">Please <a href="Login.html" style="color: #2563eb; font-weight: bold;">Login</a> or <a href="Signup.html" style="color: #2563eb; font-weight: bold;">Sign Up</a> to see the full collection.</p>`;
+          })
+          .catch(err => {
+            console.error("Error checking session in Boardgame.js:", err);
+            seeMoreBox.classList.remove("hidden");
+            seeMoreBox.innerHTML = `<p style="margin-top: 20px;">Please <a href="Login.html" style="color: #2563eb; font-weight: bold;">Login</a> or <a href="Signup.html" style="color: #2563eb; font-weight: bold;">Sign Up</a> to see the full collection.</p>`;
+          });
+      }
     }
-  }
-
-  // ================= Collection Page =================
-  if (window.location.pathname.includes("Collection.html")) {
-    const isLoggedIn = localStorage.getItem("loggedInUser");
-    if (!isLoggedIn) {
-      alert("You must be logged in to view the full boardgame collection.");
-      window.location.href = "Login.html";
-      return;
-    }
-
-    const container = document.getElementById("boardgame-list");
-    const searchInput = document.getElementById("searchInput");
-    const categoryFilter = document.getElementById("categoryFilter");
-
-    boardgames.sort((a, b) => a.name.localeCompare(b.name)); // Sort A-Z
-
-    function groupBoardgamesByLetter(games) {
-      const grouped = {};
-      games.forEach(game => {
-        let letter = game.name && game.name[0] ? game.name[0].toUpperCase() : '#';
-        if (!isNaN(letter)) {
-          letter = '#';
-        }
-
-        if (!grouped[letter]) grouped[letter] = [];
-        grouped[letter].push(game);
-      });
-      return grouped;
-    }
-
-    function renderGroupedBoardgames(games) {
-      container.innerHTML = "";
-      const grouped = groupBoardgamesByLetter(games);
-
-      Object.keys(grouped).sort().forEach(letter => {
-        const section = document.createElement("section");
-        section.id = `letter-${letter}`;
-        
-        const heading = document.createElement("h2");
-        heading.className = "letter-heading";
-        heading.textContent = letter;
-        section.appendChild(heading);
-
-        const groupContainer = document.createElement("div");
-        groupContainer.className = "boardgame-container";
-
-        grouped[letter].forEach(game => {
-          const card = document.createElement("div");
-          card.className = "boardgame-card";
-          const tagsHtml = game.tags.map(tag => `<span class='tag'>${tag}</span>`).join(" ");
-
-          card.innerHTML = `
-            <img src="${game.image}" alt="${game.name}" />
-            <div class="info">
-              <h3>${game.name}</h3>
-              <p>Category: ${game.category}</p>
-              <div class="tags">${tagsHtml}</div>
-            </div>
-            <div class="details">
-              <p><strong>Players:</strong> ${game.players}</p>
-              <p><strong>Duration:</strong> ${game.duration}</p>
-              <p>${game.description}</p>
-            </div>
-          `;
-          groupContainer.appendChild(card);
+  
+    // ================= Collection Page =================
+    if (window.location.pathname.includes("Collection.html")) {
+      fetch("Assets/PHP/check_session.php")
+        .then(res => {
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
+          return res.json();
+        })
+        .then(data => {
+          if (!data.loggedIn) {
+            alert("You must be logged in to view the full boardgame collection.");
+            window.location.href = "Login.html";
+            return;
+          }
+  
+          boardgames.sort((a, b) => a.name.localeCompare(b.name)); // Sort A-Z
+  
+          function groupBoardgamesByLetter(games) {
+            const grouped = {};
+            games.forEach(game => {
+              let letter = game.name && game.name[0] ? game.name[0].toUpperCase() : '#';
+              if (!isNaN(letter)) {
+                letter = '#';
+              }
+  
+              if (!grouped[letter]) grouped[letter] = [];
+              grouped[letter].push(game);
+            });
+            return grouped;
+          }
+  
+          function renderGroupedBoardgames(games) {
+            container.innerHTML = "";
+            const grouped = groupBoardgamesByLetter(games);
+  
+            Object.keys(grouped).sort().forEach(letter => {
+              const section = document.createElement("section");
+              section.id = `letter-${letter}`;
+              
+              const heading = document.createElement("h2");
+              heading.className = "letter-heading";
+              heading.textContent = letter;
+              section.appendChild(heading);
+  
+              const groupContainer = document.createElement("div");
+              groupContainer.className = "boardgame-container";
+  
+              grouped[letter].forEach(game => {
+                const card = document.createElement("div");
+                card.className = "boardgame-card";
+                const tagsHtml = game.tags.map(tag => `<span class='tag'>${tag}</span>`).join(" ");
+  
+                card.innerHTML = `
+                  <img src="${game.image}" alt="${game.name}" />
+                  <div class="info">
+                    <h3>${game.name}</h3>
+                    <p>Category: ${game.category}</p>
+                    <div class="tags">${tagsHtml}</div>
+                  </div>
+                  <div class="details">
+                    <p><strong>Players:</strong> ${game.players}</p>
+                    <p><strong>Duration:</strong> ${game.duration}</p>
+                    <p>${game.description}</p>
+                  </div>
+                `;
+                groupContainer.appendChild(card);
+              });
+  
+              section.appendChild(groupContainer);
+              container.appendChild(section);
+            });
+          }
+  
+          // Initial render
+          renderGroupedBoardgames(boardgames);
+  
+          function filterBoardgames() {
+            const keyword = searchInput.value.toLowerCase();
+            const category = categoryFilter.value;
+  
+            const filtered = boardgames.filter(game => {
+              const matchName = game.name.toLowerCase().includes(keyword);
+              const matchCategory = category === "" || game.category === category;
+              return matchName && matchCategory;
+            });
+  
+            renderGroupedBoardgames(filtered);
+          }
+  
+          if (searchInput && categoryFilter) {
+            searchInput.addEventListener("input", filterBoardgames);
+            categoryFilter.addEventListener("change", filterBoardgames);
+          }
+        })
+        .catch(err => {
+          console.error("Error checking session in Collection.html:", err);
+          alert("Error checking session. Please login again.");
+          window.location.href = "Login.html";
         });
-
-        section.appendChild(groupContainer);
-        container.appendChild(section);
-      });
     }
-
-    // Initial render
-    renderGroupedBoardgames(boardgames);
-
-    function filterBoardgames() {
-      const keyword = searchInput.value.toLowerCase();
-      const category = categoryFilter.value;
-
-      const filtered = boardgames.filter(game => {
-        const matchName = game.name.toLowerCase().includes(keyword);
-        const matchCategory = category === "" || game.category === category;
-        return matchName && matchCategory;
-      });
-
-      renderGroupedBoardgames(filtered);
-    }
-
-    if (searchInput && categoryFilter) {
-      searchInput.addEventListener("input", filterBoardgames);
-      categoryFilter.addEventListener("change", filterBoardgames);
-    }
-  }
-});
+  });
