@@ -20,12 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
   .then(data => {
     console.log("check_session response:", data);
     
-    // Ensure data.user and data.user.name exist
     const userName = data.loggedIn && data.user && data.user.name ? data.user.name : "User";
     
-    //    <li><a href="/">Home</a></li>
-      navLinks.innerHTML = `
-        <li><a href="index.html">Home</a></li>
+    navLinks.innerHTML = `
+        <li><a href="/">Home</a></li>
         <li><a href="Booking.html">Booking</a></li>
         <li><a href="About.html">About</a></li>
         ${
