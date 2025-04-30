@@ -1,7 +1,27 @@
-// ===============================
-// JS for Forgot-password.html
-// ===============================
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  // Function to check session via backend
+  async function checkSession() {
+    try {
+      const response = await fetch("Assets/PHP/check_session.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      });
+      const result = await response.json();
+      return result.loggedIn ? result.user : null;
+    } catch (error) {
+      console.error("Session check failed:", error);
+      return null;
+    }
+  }
+
+  // Check if user is already logged in
+  const currentUser = await checkSession();
+  if (currentUser) {
+    window.location.href = "Dashboard.html";
+    return;
+  }
+
+  // Handle forgot password form submission
   const forgotForm = document.getElementById("forgotForm");
   const resultBox = document.getElementById("forgotResult");
 
@@ -12,11 +32,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = document.getElementById("forgotEmail").value;
       const newPassword = document.getElementById("newPassword").value;
 
+      if (newPassword.length < 8) {
+        resultBox.innerHTML = `<p style="color:red;"><strong>Password must be at least 8 characters long.</strong></p>`;
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("password", newPassword);
+
       try {
-        const response = await fetch("forgot-password.php", {
+        const response = await fetch("Assets/PHP/forgot_password.php", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, newPassword }),
+          body: formData,
         });
 
         const result = await response.json();
@@ -36,16 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       } catch (err) {
         resultBox.innerHTML = `<p style="color:red;">Server error. Please try again later.</p>`;
-        console.error(err);
+        console.error("Reset password error:", err);
       }
     });
   }
-});
 
-// ===============================
-// Toggle Show/Hide Password
-// ===============================
-document.addEventListener("DOMContentLoaded", () => {
+  // Toggle Show/Hide Password
   const toggleForgotPassword = document.getElementById("toggleForgotPassword");
   const forgotPasswordInput = document.getElementById("newPassword");
 

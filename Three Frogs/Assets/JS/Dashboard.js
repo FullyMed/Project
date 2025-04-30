@@ -1,7 +1,4 @@
-// ===============================
-// JS for Dashboard.html
-// ===============================
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const userInfo = document.getElementById("userInfo");
   const logoutBtn = document.getElementById("logoutBtn");
   const upcomingContainer = document.getElementById("upcomingBookings");
@@ -14,41 +11,68 @@ document.addEventListener("DOMContentLoaded", () => {
   const avatarMsg = document.getElementById("avatarUpdateMessage");
   const currentAvatar = document.getElementById("currentAvatar");
 
-  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  let loggedInUser = null;
   let allBookings = [];
   let selectedBooking = null;
 
+  // Check session via backend
+  async function checkSession() {
+    try {
+      const response = await fetch("Assets/PHP/check_session.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      });
+      const result = await response.json();
+      if (result.loggedIn) {
+        return result.user;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Session check failed:", error);
+      return null;
+    }
+  }
+
+  // Initialize user session
+  loggedInUser = await checkSession();
   if (!loggedInUser) {
     alert("You are not logged in. Redirecting to login page...");
     window.location.href = "Login.html";
     return;
   }
 
-  function getCancelKey() {
-    const now = new Date();
-    return `${loggedInUser.email}-${now.getFullYear()}-${now.getMonth() + 1}`;
-  }
-
-  function getCancelRemaining() {
-    const cancelCounts = JSON.parse(localStorage.getItem("cancelCounts")) || {};
-    const key = getCancelKey();
-    return 2 - (cancelCounts[key] || 0);
-  }
-
-  function incrementCancelCount() {
-    const cancelCounts = JSON.parse(localStorage.getItem("cancelCounts")) || {};
-    const key = getCancelKey();
-    cancelCounts[key] = (cancelCounts[key] || 0) + 1;
-    localStorage.setItem("cancelCounts", JSON.stringify(cancelCounts));
-  }
-
   function updateUserInfo() {
     userInfo.innerHTML = `
-      <img src="${loggedInUser.avatar}" alt="User Avatar" style="width:100px;height:100px;border-radius:50%;margin-bottom:10px;">
       <p><strong>Name:</strong> ${loggedInUser.name}</p>
       <p><strong>Email:</strong> ${loggedInUser.email}</p>
     `;
     if (currentAvatar) currentAvatar.src = loggedInUser.avatar;
+  }
+
+  async function fetchBookingsFromServer() {
+    try {
+      const formData = new FormData();
+      formData.append("email", loggedInUser.email);
+
+      const response = await fetch("Assets/PHP/get_bookings.php", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        allBookings = result.bookings;
+        renderBookings();
+      } else {
+        upcomingContainer.innerHTML = "<p>Error fetching bookings.</p>";
+        historyContainer.innerHTML = "";
+      }
+    } catch (err) {
+      console.error("Fetch bookings error:", err);
+      upcomingContainer.innerHTML = "<p>Server error.</p>";
+      historyContainer.innerHTML = "";
+    }
   }
 
   function renderBookings() {
@@ -62,10 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
       else history.push(b);
     });
 
-    // === Upcoming Bookings ===
+    // Upcoming Bookings
     upcomingContainer.innerHTML = upcoming.length === 0 ? "<p>No upcoming bookings.</p>" : "";
-    const remaining = getCancelRemaining();
-
     upcoming.forEach((b, index) => {
       const card = document.createElement("div");
       card.className = "booking-card";
@@ -73,11 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <p><strong>Date:</strong> ${b.date}</p>
         <p><strong>Time:</strong> ${b.start} - ${b.end}</p>
         <p><strong>People:</strong> ${b.people}</p>
-        ${
-          remaining > 0
-            ? `<button class="cancelBtn" data-index="${index}" style="margin-top:10px;">Cancel</button>`
-            : `<p style="color:red; font-weight:bold;">Cancel limit reached (2/2)</p>`
-        }
+        <button class="cancelBtn" data-index="${index}" style="margin-top:10px;">Cancel</button>
       `;
       upcomingContainer.appendChild(card);
     });
@@ -86,12 +104,12 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.addEventListener("click", () => {
         const idx = parseInt(btn.getAttribute("data-index"));
         selectedBooking = upcoming[idx];
-        cancelText.textContent = `Are you sure? Cancel Remaining ${getCancelRemaining()}/2`;
+        cancelText.textContent = `Are you sure you want to cancel this booking?`;
         popup.classList.remove("hidden");
       });
     });
 
-    // === Booking History ===
+    // Booking History
     historyContainer.innerHTML = history.length === 0
       ? "<p>No past bookings found.</p>"
       : history.map(b => `
@@ -103,75 +121,64 @@ document.addEventListener("DOMContentLoaded", () => {
       `).join("");
   }
 
-  async function fetchBookingsFromServer() {
-    try {
-      const response = await fetch("PHP/get_bookings.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: loggedInUser.email }),
-      });
-
-      const result = await response.json();
-      if (result.success) {
-        allBookings = result.bookings;
-        renderBookings();
-      } else {
-        upcomingContainer.innerHTML = "<p>Error fetching bookings.</p>";
-        historyContainer.innerHTML = "";
-      }
-    } catch (err) {
-      console.error(err);
-      upcomingContainer.innerHTML = "<p>Server error.</p>";
-      historyContainer.innerHTML = "";
-    }
-  }
-
-  // === Avatar Change Logic ===
+  // Avatar Change Logic
   if (changeAvatarForm) {
-    changeAvatarForm.addEventListener("submit", (e) => {
+    changeAvatarForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const newAvatar = document.querySelector('input[name="newAvatar"]:checked')?.value;
-      const users = JSON.parse(localStorage.getItem("users")) || [];
-      const index = users.findIndex(u => u.email === loggedInUser.email);
 
-      if (index !== -1 && newAvatar) {
-        users[index].avatar = newAvatar;
-        localStorage.setItem("users", JSON.stringify(users));
-        loggedInUser.avatar = newAvatar;
-        localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
-        updateUserInfo();
-        avatarMsg.innerHTML = `<p style="color:green;">Avatar updated successfully!</p>`;
-        setTimeout(() => avatarMsg.innerHTML = "", 3000);
+      if (newAvatar) {
+        const formData = new FormData();
+        formData.append("avatar", newAvatar);
+
+        try {
+          const response = await fetch("Assets/PHP/update_avatar.php", {
+            method: "POST",
+            body: formData,
+          });
+
+          const result = await response.json();
+          if (result.success) {
+            loggedInUser.avatar = newAvatar;
+            updateUserInfo();
+            avatarMsg.innerHTML = `<p style="color:green;">Avatar updated successfully!</p>`;
+            setTimeout(() => avatarMsg.innerHTML = "", 3000);
+          } else {
+            avatarMsg.innerHTML = `<p style="color:red;">${result.error}</p>`;
+          }
+        } catch (err) {
+          console.error("Avatar update error:", err);
+          avatarMsg.innerHTML = `<p style="color:red;">Server error.</p>`;
+        }
       }
     });
   }
 
-  // === Cancel Confirm / Close
+  // Cancel Confirm / Close
   if (confirmCancel) {
     confirmCancel.addEventListener("click", async () => {
       try {
-        const res = await fetch("PHP/cancel_booking.php", {
+        const formData = new FormData();
+        formData.append("email", loggedInUser.email);
+        formData.append("date", selectedBooking.date);
+        formData.append("start", selectedBooking.start);
+        formData.append("end", selectedBooking.end);
+
+        const res = await fetch("Assets/PHP/cancel_booking.php", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: loggedInUser.email,
-            date: selectedBooking.date,
-            start: selectedBooking.start,
-            end: selectedBooking.end,
-          }),
+          body: formData,
         });
 
         const result = await res.json();
         if (result.success) {
-          incrementCancelCount();
           popup.classList.add("hidden");
           fetchBookingsFromServer();
           alert("Booking cancelled successfully.");
         } else {
-          alert("Failed to cancel booking.");
+          alert("Failed to cancel booking: " + result.error);
         }
       } catch (err) {
-        console.error(err);
+        console.error("Cancel booking error:", err);
         alert("Server error.");
       }
     });
@@ -183,16 +190,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === Logout
+  // Logout
   if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => {
-      localStorage.removeItem("loggedInUser");
-      alert("You have been logged out.");
-      window.location.href = "Login.html";
+    logoutBtn.addEventListener("click", async () => {
+      try {
+        const response = await fetch("Assets/PHP/logout.php", {
+          method: "POST",
+        });
+        const result = await response.json();
+        if (result.success) {
+          alert("You have been logged out.");
+          window.location.href = "Login.html";
+        } else {
+          alert("Logout failed.");
+        }
+      } catch (err) {
+        console.error("Logout error:", err);
+        alert("Server error during logout.");
+      }
     });
   }
 
-  // === Initialize
+  // Initialize
   updateUserInfo();
   fetchBookingsFromServer();
 });

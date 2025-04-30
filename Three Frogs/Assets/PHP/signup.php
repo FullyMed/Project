@@ -1,4 +1,5 @@
 <?php
+session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -14,16 +15,25 @@ if (!$conn || $conn->connect_error) {
     exit();
 }
 
-$name     = trim($_POST['name'] ?? '');
-$email    = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
+$name = trim($_POST['name'] ?? '');
+$email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
 $password = trim($_POST['password'] ?? '');
-$avatar   = trim($_POST['avatar'] ?? "Assets/Images/Avatars/Clam.jpg");
+$avatar = trim($_POST['avatar'] ?? "Assets/Images/Avatars/Clam.jpg");
 
 if (empty($name) || empty($email) || empty($password)) {
     http_response_code(400);
     echo json_encode([
         "success" => false,
         "error" => "Name, email, and password are required."
+    ]);
+    exit();
+}
+
+if (!preg_match("/^[a-zA-Z\s]+$/", $name)) {
+    http_response_code(400);
+    echo json_encode([
+        "success" => false,
+        "error" => "Name can only contain letters and spaces."
     ]);
     exit();
 }
@@ -37,11 +47,11 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit();
 }
 
-if (strlen($password) < 6) {
+if (strlen($password) < 8) {
     http_response_code(400);
     echo json_encode([
         "success" => false,
-        "error" => "Password must be at least 6 characters long."
+        "error" => "Password must be at least 8 characters long."
     ]);
     exit();
 }
@@ -72,14 +82,27 @@ if (!$stmt) {
         "success" => false,
         "error" => "Database error: " . $conn->error
     ]);
+    $conn->close();
     exit();
 }
 
 $stmt->bind_param("ssss", $name, $email, $hashedPassword, $avatar);
 
 if ($stmt->execute()) {
+    $userId = $stmt->insert_id;
+    $_SESSION['user'] = [
+        "id" => $userId,
+        "name" => $name,
+        "email" => $email,
+        "avatar" => $avatar
+    ];
     http_response_code(201);
-    echo json_encode(["success" => true]);
+    echo json_encode([
+        "success" => true,
+        "user" => [
+            "name" => $name
+        ]
+    ]);
 } else {
     http_response_code(500);
     echo json_encode([
@@ -90,3 +113,4 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $conn->close();
+?>

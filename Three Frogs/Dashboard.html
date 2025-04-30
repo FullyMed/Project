@@ -30,7 +30,7 @@
     </head>
 
     <body>
-
+        
         <header>
             <nav class="navbar">
                 <div class="logo">🐸 Three Frogs</div>
@@ -51,69 +51,57 @@
             <div id="avatarChangeContainer" class="hidden">
                 <h3>Change Avatar</h3>
                 
-                <form id="changeAvatarForm">
+                <form id="changeAvatarForm" action="Assets/PHP/update_avatar.php" method="POST">
                     <div class="avatar-scroll-wrapper">
                         <div class="avatar-selection">
                             <label>
                                 <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Clam.jpg" checked />
                                 <img src="Assets/Images/Avatars/Clam.jpg" class="avatar-option" />
                             </label>
-                            
                             <label>
                                 <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Cow.jpg" />
                                 <img src="Assets/Images/Avatars/Cow.jpg" class="avatar-option" />
                             </label>
-                            
                             <label>
                                 <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Crab.jpg" />
                                 <img src="Assets/Images/Avatars/Crab.jpg" class="avatar-option" />
                             </label>
-                            
                             <label>
                                 <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Dolphin.jpg" />
                                 <img src="Assets/Images/Avatars/Dolphin.jpg" class="avatar-option" />
                             </label>
-                            
                             <label>
                                 <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Nemo.jpg" />
                                 <img src="Assets/Images/Avatars/Nemo.jpg" class="avatar-option" />
                             </label>
-                            
                             <label>
                                 <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Puffer.jpg" />
                                 <img src="Assets/Images/Avatars/Puffer.jpg" class="avatar-option" />
                             </label>
-                            
                             <label>
                                 <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Seahorse.jpg" />
                                 <img src="Assets/Images/Avatars/Seahorse.jpg" class="avatar-option" />
                             </label>
-                            
                             <label>
                                 <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Sealion.jpg" />
                                 <img src="Assets/Images/Avatars/Sealion.jpg" class="avatar-option" />
                             </label>
-                            
                             <label>
                                 <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Shark.jpg" />
                                 <img src="Assets/Images/Avatars/Shark.jpg" class="avatar-option" />
                             </label>
-                            
                             <label>
                                 <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Squid.jpg" />
                                 <img src="Assets/Images/Avatars/Squid.jpg" class="avatar-option" />
                             </label>
-                            
                             <label>
                                 <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Stingray.jpg" />
                                 <img src="Assets/Images/Avatars/Stingray.jpg" class="avatar-option" />
                             </label>
-                            
                             <label>
                                 <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Turtle.jpg" />
                                 <img src="Assets/Images/Avatars/Turtle.jpg" class="avatar-option" />
                             </label>
-                            
                             <label>
                                 <input type="radio" name="newAvatar" value="Assets/Images/Avatars/Whale.jpg" />
                                 <img src="Assets/Images/Avatars/Whale.jpg" class="avatar-option" />
@@ -145,13 +133,15 @@
         </section>
 
         <footer>
-            <p>&copy; 2025 Three Frogs Boardgame Surabaya</p>
+            <p>© 2025 Three Frogs Boardgame Surabaya</p>
         </footer>
 
         <button id="scrollTopBtn" title="Back to Top">⬆️</button>
 
         <script src="Assets/JS/Dashboard.js"></script>
         <script src="Assets/JS/Navbar.js"></script>
+
+        <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93862d506c09b027',t:'MTc0NjAwNzA2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 
     </body>
 

@@ -1,54 +1,76 @@
-// ===============================
-// JS for Signup.html
-// ===============================
-document.addEventListener("DOMContentLoaded", () => {
-    const signupForm = document.getElementById("signupForm");
-  
-    if (signupForm) {
-      signupForm.addEventListener("submit", async function (e) {
-        e.preventDefault();
-    
-        const formData = new FormData(signupForm);
-        const resultBox = document.getElementById("signupResult");
-    
-        try {
-          const response = await fetch("signup.php", {
-            method: "POST",
-            body: formData,
-          });
-    
-          const result = await response.json();
-    
-          if (result.success) {
-            resultBox.innerHTML = `
-              <h3>Sign Up Successful!</h3>
-              <p>Welcome, <strong>${formData.get("name")}</strong>. Redirecting to homepage...</p>
-            `;
-            setTimeout(() => window.location.href = "index.html", 1500);
-            signupForm.reset();
-          } else {
-            resultBox.innerHTML = `<p style="color:red;"><strong>${result.error || "Signup failed."}</strong></p>`;
-          }
-        } catch (err) {
-          resultBox.innerHTML = `<p style="color:red;"><strong>Server error. Please try again later.</strong></p>`;
-          console.error(err);
-        }
+document.addEventListener("DOMContentLoaded", async () => {
+  // Function to check session via backend
+  async function checkSession() {
+    try {
+      const response = await fetch("Assets/PHP/check_session.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
-    }    
-  });
-  
-  // ===============================
-  // Toggle Show/Hide Password
-  // ===============================
-  document.addEventListener("DOMContentLoaded", () => {
-    const toggleBtn = document.getElementById("toggleSignupPassword");
-    const passwordInput = document.getElementById("signupPassword");
-  
-    if (toggleBtn && passwordInput) {
-      toggleBtn.addEventListener("click", () => {
-        const isVisible = passwordInput.type === "text";
-        passwordInput.type = isVisible ? "password" : "text";
-        toggleBtn.textContent = isVisible ? "👁️" : "🙈";
-      });
+      const result = await response.json();
+      return result.loggedIn ? result.user : null;
+    } catch (error) {
+      console.error("Session check failed:", error);
+      return null;
     }
-  });
+  }
+
+  // Check if user is already logged in
+  const currentUser = await checkSession();
+  if (currentUser) {
+    window.location.href = "index.html";
+    return;
+  }
+
+  // Handle signup form submission
+  const signupForm = document.getElementById("signupForm");
+  const resultBox = document.getElementById("signupResult");
+
+  if (signupForm) {
+    signupForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const password = document.getElementById("signupPassword").value;
+      if (password.length < 8) {
+        resultBox.innerHTML = `<p style="color:red;"><strong>Password must be at least 8 characters long.</strong></p>`;
+        return;
+      }
+
+      const formData = new FormData(signupForm);
+
+      try {
+        const response = await fetch("Assets/PHP/signup.php", {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          resultBox.innerHTML = `
+            <h3>Sign Up Successful!</h3>
+            <p>Welcome, <strong>${result.user.name}</strong>. Redirecting to homepage...</p>
+          `;
+          setTimeout(() => window.location.href = "index.html", 1500);
+          signupForm.reset();
+        } else {
+          resultBox.innerHTML = `<p style="color:red;"><strong>${result.error || "Signup failed."}</strong></p>`;
+        }
+      } catch (err) {
+        resultBox.innerHTML = `<p style="color:red;"><strong>Server error. Please try again later.</strong></p>`;
+        console.error("Signup error:", err);
+      }
+    });
+  }
+
+  // Toggle Show/Hide Password
+  const toggleBtn = document.getElementById("toggleSignupPassword");
+  const passwordInput = document.getElementById("signupPassword");
+
+  if (toggleBtn && passwordInput) {
+    toggleBtn.addEventListener("click", () => {
+      const isVisible = passwordInput.type === "text";
+      passwordInput.type = isVisible ? "password" : "text";
+      toggleBtn.textContent = isVisible ? "👁️" : "🙈";
+    });
+  }
+});

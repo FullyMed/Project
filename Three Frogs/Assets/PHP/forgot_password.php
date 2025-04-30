@@ -5,24 +5,24 @@ error_reporting(E_ALL);
 header("Content-Type: application/json");
 require_once("db_connect.php");
 
-$data = json_decode(file_get_contents("php://input"), true);
-
-$email = strtolower(trim($data['email'] ?? ''));
-$newPassword = $data['newPassword'] ?? '';
-
-$response = [];
+$email = strtolower(trim($_POST['email'] ?? ''));
+$newPassword = trim($_POST['password'] ?? '');
 
 if (empty($email) || empty($newPassword)) {
-    $response["success"] = false;
-    $response["error"] = "Email and new password are required.";
-    echo json_encode($response);
+    http_response_code(400);
+    echo json_encode([
+        "success" => false,
+        "error" => "Email and new password are required."
+    ]);
     exit;
 }
 
-if (strlen($newPassword) < 6) {
-    $response["success"] = false;
-    $response["error"] = "Password must be at least 6 characters.";
-    echo json_encode($response);
+if (strlen($newPassword) < 8) {
+    http_response_code(400);
+    echo json_encode([
+        "success" => false,
+        "error" => "Password must be at least 8 characters long."
+    ]);
     exit;
 }
 
@@ -37,19 +37,26 @@ if ($result->num_rows === 1) {
     $update->bind_param("ss", $hashedPassword, $email);
 
     if ($update->execute()) {
-        $response["success"] = true;
+        http_response_code(200);
+        echo json_encode([
+            "success" => true
+        ]);
     } else {
-        $response["success"] = false;
-        $response["error"] = "Failed to update password.";
+        http_response_code(500);
+        echo json_encode([
+            "success" => false,
+            "error" => "Failed to update password."
+        ]);
     }
-
     $update->close();
 } else {
-    $response["success"] = false;
-    $response["error"] = "Email not found.";
+    http_response_code(404);
+    echo json_encode([
+        "success" => false,
+        "error" => "Email not found."
+    ]);
 }
 
 $stmt->close();
 $conn->close();
-echo json_encode($response);
 ?>
