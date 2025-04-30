@@ -1,67 +1,58 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  // Function to check session via backend
-  async function checkSession() {
-    try {
-      const response = await fetch("Assets/PHP/check_session.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      });
-      const result = await response.json();
-      return result.loggedIn ? result.user : null;
-    } catch (error) {
-      console.error("Session check failed:", error);
-      return null;
-    }
-  }
-
-  // Check if user is already logged in
-  const currentUser = await checkSession();
-  if (currentUser) {
-    window.location.href = "index.html";
-    return;
-  }
-
-  // Handle login form submission
+// ===============================
+// JS for Login.html
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
-  const viewMorePrompt = document.getElementById("viewMorePrompt");
+  const errorMessage = document.getElementById("errorMessage");
 
   if (loginForm) {
-    loginForm.addEventListener("submit", async function (e) {
+    loginForm.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      const email = document.getElementById("loginEmail").value;
-      const password = document.getElementById("loginPassword").value;
-      const resultBox = document.getElementById("loginResult");
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      if (!email || !password) {
+        errorMessage.textContent = "Please fill in all fields.";
+        errorMessage.classList.remove("hidden");
+        return;
+      }
 
       const formData = new FormData();
       formData.append("email", email);
       formData.append("password", password);
 
-      try {
-        const response = await fetch("Assets/PHP/login.php", {
-          method: "POST",
-          body: formData
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-          resultBox.innerHTML = `
-            <h3>Login Successful!</h3>
-            <p>Welcome back, <strong>${result.user.name}</strong>. Redirecting to homepage...</p>
-          `;
-          setTimeout(() => window.location.href = "index.html", 1500);
-          loginForm.reset();
-        } else {
-          resultBox.innerHTML = `<p style="color:red;"><strong>${result.error || "Invalid email or password."}</strong></p>`;
-          if (viewMorePrompt) {
-            viewMorePrompt.style.display = "block";
+      fetch("Assets/PHP/login.php", {
+        method: "POST",
+        body: formData,
+      })
+        .then(res => {
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
           }
-        }
-      } catch (error) {
-        resultBox.innerHTML = `<p style="color:red;"><strong>Server error. Please try again later.</strong></p>`;
-        console.error("Login error:", error);
-      }
+          return res.text();
+        })
+        .then(text => {
+          try {
+            const result = JSON.parse(text);
+            if (result.success) {
+              alert("Login successful!");
+              window.location.href = "index.html";
+            } else {
+              errorMessage.textContent = result.error || "Invalid email or password.";
+              errorMessage.classList.remove("hidden");
+            }
+          } catch (e) {
+            console.error("Failed to parse JSON:", text);
+            errorMessage.textContent = "Server error: Invalid response from server. Please try again later.";
+            errorMessage.classList.remove("hidden");
+          }
+        })
+        .catch(err => {
+          console.error("Error during login:", err);
+          errorMessage.textContent = "Server error: " + err.message + ". Please try again later.";
+          errorMessage.classList.remove("hidden");
+        });
     });
   }
 
