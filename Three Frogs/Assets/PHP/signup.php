@@ -17,6 +17,7 @@ if (!$conn || $conn->connect_error) {
 
 $name = trim($_POST['name'] ?? '');
 $email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
+$email = strtolower($email);
 $password = trim($_POST['password'] ?? '');
 $avatar = trim($_POST['avatar'] ?? "Assets/Images/Avatars/Clam.jpg");
 

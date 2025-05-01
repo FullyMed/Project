@@ -29,6 +29,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     signupForm.addEventListener("submit", async function (e) {
       e.preventDefault();
 
+      const email = document.getElementById("signupEmail").value;
+      if (!validateEmail(email)) {
+        resultBox.innerHTML = `<p style="color:red;"><strong>Invalid email format.</strong></p>`;
+        return;
+      }
+
+      const name = document.getElementById("signupName").value;
+      if (!name.trim()) {
+        resultBox.innerHTML = `<p style="color:red;"><strong>Name cannot be empty.</strong></p>`;
+        return;
+      }
+
       const password = document.getElementById("signupPassword").value;
       if (password.length < 8) {
         resultBox.innerHTML = `<p style="color:red;"><strong>Password must be at least 8 characters long.</strong></p>`;

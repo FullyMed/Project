@@ -26,33 +26,21 @@ document.addEventListener("DOMContentLoaded", () => {
         method: "POST",
         body: formData,
       })
-        .then(res => {
-          if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-          }
-          return res.text();
-        })
-        .then(text => {
-          try {
-            const result = JSON.parse(text);
-            if (result.success) {
-              alert("Login successful!");
-              window.location.href = "index.html";
-            } else {
-              errorMessage.textContent = result.error || "Invalid email or password.";
-              errorMessage.classList.remove("hidden");
-            }
-          } catch (e) {
-            console.error("Failed to parse JSON:", text);
-            errorMessage.textContent = "Server error: Invalid response from server. Please try again later.";
+        .then(res => res.json())
+        .then(result => {
+          if (result.success) {
+            alert("Login successful!");
+            window.location.href = "index.html";
+          } else {
+            errorMessage.textContent = result.error || "Invalid email or password.";
             errorMessage.classList.remove("hidden");
           }
         })
         .catch(err => {
           console.error("Error during login:", err);
-          errorMessage.textContent = "Server error: " + err.message + ". Please try again later.";
+          errorMessage.textContent = "Server error: " + err.message;
           errorMessage.classList.remove("hidden");
-        });
+        });      
     });
   }
 
