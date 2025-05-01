@@ -30,7 +30,6 @@ if (empty($email) || empty($date) || empty($start) || empty($end)) {
     exit;
 }
 
-// Ensure the email matches the logged-in user
 if ($email !== $_SESSION['user']['email']) {
     http_response_code(403);
     echo json_encode([
@@ -57,13 +56,17 @@ if ($bookingCount == 0) {
     exit;
 }
 
-// Check cancel limit (2 per month)
-$checkStmt = $conn->prepare("SELECT COUNT(*) as cancel_count FROM cancellations WHERE email = ? AND MONTH(cancel_time) = MONTH(CURRENT_DATE()) AND YEAR(cancel_time) = YEAR(CURRENT_DATE())");
-$checkStmt->bind_param("s", $email);
-$checkStmt->execute();
-$checkResult = $checkStmt->get_result();
-$cancelCount = $checkResult->fetch_assoc()['cancel_count'];
-$checkStmt->close();
+// Check cancel limit
+$cancelStmt = $conn->prepare("
+    SELECT COUNT(*) AS cancel_count 
+    FROM cancellation_log 
+    WHERE email = ? AND YEAR(cancel_date) = YEAR(CURRENT_DATE()) AND MONTH(cancel_date) = MONTH(CURRENT_DATE())
+");
+$cancelStmt->bind_param("s", $email);
+$cancelStmt->execute();
+$cancelResult = $cancelStmt->get_result();
+$cancelCount = $cancelResult->fetch_assoc()['cancel_count'];
+$cancelStmt->close();
 
 if ($cancelCount >= 2) {
     http_response_code(403);
@@ -80,9 +83,8 @@ $stmt->bind_param("ssss", $email, $date, $start, $end);
 
 if ($stmt->execute()) {
     if ($stmt->affected_rows > 0) {
-        // Log the cancellation
-        $logStmt = $conn->prepare("INSERT INTO cancellations (email, date, start, end, cancel_time) VALUES (?, ?, ?, ?, NOW())");
-        $logStmt->bind_param("ssss", $email, $date, $start, $end);
+        $logStmt = $conn->prepare("INSERT INTO cancellation_log (email, cancel_date) VALUES (?, CURDATE())");
+        $logStmt->bind_param("s", $email);
         $logStmt->execute();
         $logStmt->close();
 

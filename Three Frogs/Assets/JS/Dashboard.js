@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   let loggedInUser = null;
   let allBookings = [];
   let selectedBooking = null;
+  let remainingCancels = 2; // ✅ default fallback
 
-  // Check session via backend
   async function checkSession() {
     try {
       const response = await fetch("Assets/PHP/check_session.php", {
@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // Initialize user session
   loggedInUser = await checkSession();
   if (!loggedInUser) {
     alert("You are not logged in. Redirecting to login page...");
@@ -63,6 +62,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const result = await response.json();
       if (result.success) {
         allBookings = result.bookings;
+        remainingCancels = result.remaining_cancels ?? 2;
         renderBookings();
       } else {
         upcomingContainer.innerHTML = "<p>Error fetching bookings.</p>";
@@ -86,7 +86,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       else history.push(b);
     });
 
-    // Upcoming Bookings
     upcomingContainer.innerHTML = upcoming.length === 0 ? "<p>No upcoming bookings.</p>" : "";
     upcoming.forEach((b, index) => {
       const card = document.createElement("div");
@@ -104,12 +103,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       btn.addEventListener("click", () => {
         const idx = parseInt(btn.getAttribute("data-index"));
         selectedBooking = upcoming[idx];
-        cancelText.textContent = `Are you sure you want to cancel this booking?`;
-        popup.classList.remove("hidden");
+
+        if (remainingCancels > 0) {
+          cancelText.textContent = `Are you sure? Cancel Remaining ${remainingCancels}/2`;
+          popup.classList.remove("hidden");
+        } else {
+          alert("You have reached the cancel limit (2/month). Cannot cancel more bookings.");
+        }
       });
     });
 
-    // Booking History
     historyContainer.innerHTML = history.length === 0
       ? "<p>No past bookings found.</p>"
       : history.map(b => `
@@ -121,22 +124,19 @@ document.addEventListener("DOMContentLoaded", async () => {
       `).join("");
   }
 
-  // Avatar Change Logic
+  // Avatar change
   if (changeAvatarForm) {
     changeAvatarForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const newAvatar = document.querySelector('input[name="newAvatar"]:checked')?.value;
-
       if (newAvatar) {
         const formData = new FormData();
         formData.append("avatar", newAvatar);
-
         try {
           const response = await fetch("Assets/PHP/update_avatar.php", {
             method: "POST",
             body: formData,
           });
-
           const result = await response.json();
           if (result.success) {
             loggedInUser.avatar = newAvatar;
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Cancel Confirm / Close
+  // Confirm Cancel
   if (confirmCancel) {
     confirmCancel.addEventListener("click", async () => {
       try {
@@ -172,6 +172,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const result = await res.json();
         if (result.success) {
           popup.classList.add("hidden");
+          remainingCancels--;
           fetchBookingsFromServer();
           alert("Booking cancelled successfully.");
         } else {
@@ -190,7 +191,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Logout
   if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
       try {
@@ -211,7 +211,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Initialize
   updateUserInfo();
   fetchBookingsFromServer();
 });
