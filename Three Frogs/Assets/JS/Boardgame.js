@@ -2047,6 +2047,10 @@ document.addEventListener("DOMContentLoaded", () => {
   
           function renderGroupedBoardgames(games) {
             container.innerHTML = "";
+            if (games.length === 0) {
+              container.innerHTML = `<p style="text-align:center;">No boardgames found.</p>`;
+              return;
+            }
             const grouped = groupBoardgamesByLetter(games);
   
             Object.keys(grouped).sort().forEach(letter => {
