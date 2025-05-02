@@ -4,6 +4,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("boardgame-list");
   const seeMoreBox = document.getElementById("seeMoreBox");
+  const viewMorePrompt = document.getElementById("viewMorePrompt");
   const searchInput = document.getElementById("searchInput");
   const categoryFilter = document.getElementById("categoryFilter");
 
@@ -1954,34 +1955,66 @@ document.addEventListener("DOMContentLoaded", () => {
     },                  
   ];
 
-  function renderBoardgames(data) {
+  document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("boardgame-list");
+  const seeMoreBox = document.getElementById("seeMoreBox");
+  const viewMorePrompt = document.getElementById("viewMorePrompt");
+  const searchInput = document.getElementById("searchInput");
+  const categoryFilter = document.getElementById("categoryFilter");
+
+  // 1. Render all boardgames
+  function renderBoardgames(filteredGames) {
     container.innerHTML = "";
 
-    if (data.length === 0) {
-      container.innerHTML = `<p style="text-align:center;">No boardgames found.</p>`;
+    if (filteredGames.length === 0) {
+      container.innerHTML = "<p>No boardgames found.</p>";
       return;
     }
 
-    data.forEach((game) => {
+    filteredGames.forEach(game => {
       const card = document.createElement("div");
-      card.className = "boardgame-card";
-      const tagsHtml = game.tags ? game.tags.map(tag => `<span class='tag'>${tag}</span>`).join(" ") : "";
+      card.className = "boardgame-card fadeUp";
       card.innerHTML = `
-        <img src="${game.image}" alt="${game.name}" />
+        <img src="${game.image}" alt="${game.name}">
         <div class="info">
           <h3>${game.name}</h3>
-          <p>Category: ${game.category}</p>
-          <div class="tags">${tagsHtml}</div>
-        </div>
-        <div class="details">
+          <p>${game.description}</p>
           <p><strong>Players:</strong> ${game.players}</p>
           <p><strong>Duration:</strong> ${game.duration}</p>
-          <p>${game.description}</p>
+          <div class="tags">
+            ${game.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}
+          </div>
         </div>
       `;
       container.appendChild(card);
     });
   }
+
+  // 2. Search and filter logic
+  function applyFilters() {
+    const keyword = searchInput?.value.toLowerCase() || "";
+    const selectedCategory = categoryFilter?.value || "All";
+
+    const filtered = boardgames.filter(game => {
+      const matchKeyword =
+        game.name.toLowerCase().includes(keyword) ||
+        game.tags.some(tag => tag.toLowerCase().includes(keyword));
+      const matchCategory =
+        selectedCategory === "All" || game.category === selectedCategory;
+
+      return matchKeyword && matchCategory;
+    });
+
+    renderBoardgames(filtered);
+  }
+
+  // 3. Initial load
+  renderBoardgames(boardgames);
+
+  // 4. Event listeners
+  if (searchInput) searchInput.addEventListener("input", applyFilters);
+  if (categoryFilter) categoryFilter.addEventListener("change", applyFilters);
+});
 
   // ================= Boardgame Page =================
     if (window.location.pathname === "/" || window.location.pathname.includes("index.html")) {

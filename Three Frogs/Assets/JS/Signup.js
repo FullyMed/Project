@@ -74,6 +74,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }  
+
   // Toggle Show/Hide Password
   const toggleBtn = document.getElementById("toggleSignupPassword");
   const passwordInput = document.getElementById("signupPassword");
