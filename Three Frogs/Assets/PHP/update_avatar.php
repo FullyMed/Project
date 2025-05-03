@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 header("Content-Type: application/json");
 require_once("db_connect.php");
 
-// Check if user is logged in
+// Ensure user is logged in
 if (!isset($_SESSION['user']) || empty($_SESSION['user']['email'])) {
     http_response_code(401);
     echo json_encode([
@@ -16,13 +16,10 @@ if (!isset($_SESSION['user']) || empty($_SESSION['user']['email'])) {
     exit;
 }
 
-// Get the user's email from session
 $email = $_SESSION['user']['email'];
-
-// Get the new avatar from POST data
 $newAvatar = trim($_POST['avatar'] ?? '');
 
-// Validate the avatar
+// Validate avatar input
 if (empty($newAvatar)) {
     http_response_code(400);
     echo json_encode([
@@ -32,7 +29,7 @@ if (empty($newAvatar)) {
     exit;
 }
 
-// List of allowed avatars (based on Dashboard.html)
+// Allowed avatars (should match your frontend)
 $allowedAvatars = [
     "Assets/Images/Avatars/Clam.jpg",
     "Assets/Images/Avatars/Cow.jpg",
@@ -49,7 +46,6 @@ $allowedAvatars = [
     "Assets/Images/Avatars/Whale.jpg"
 ];
 
-// Validate that the selected avatar is in the allowed list
 if (!in_array($newAvatar, $allowedAvatars)) {
     http_response_code(400);
     echo json_encode([
@@ -59,17 +55,26 @@ if (!in_array($newAvatar, $allowedAvatars)) {
     exit;
 }
 
-// Update the avatar in the database
+// Update avatar in database
 $stmt = $conn->prepare("UPDATE users SET avatar = ? WHERE email = ?");
-$stmt->bind_param("ss", $newAvatar, $email);
+if (!$stmt) {
+    http_response_code(500);
+    echo json_encode([
+        "success" => false,
+        "error" => "Database error: " . $conn->error
+    ]);
+    $conn->close();
+    exit;
+}
 
+$stmt->bind_param("ss", $newAvatar, $email);
 if ($stmt->execute()) {
-    // Update the session with the new avatar
     $_SESSION['user']['avatar'] = $newAvatar;
 
     http_response_code(200);
     echo json_encode([
-        "success" => true
+        "success" => true,
+        "message" => "Avatar updated successfully."
     ]);
 } else {
     http_response_code(500);
