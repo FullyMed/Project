@@ -6,14 +6,17 @@ error_reporting(E_ALL);
 header("Content-Type: application/json");
 require_once("db_connect.php");
 
-// Check if user is logged in
+function respond($status, $data) {
+    http_response_code($status);
+    echo json_encode($data);
+    exit;
+}
+
 if (!isset($_SESSION['user']) || empty($_SESSION['user']['email'])) {
-    http_response_code(401);
-    echo json_encode([
+    respond(401, [
         "success" => false,
         "error" => "You must be logged in to cancel a booking."
     ]);
-    exit;
 }
 
 $email = $_POST['email'] ?? '';
@@ -21,93 +24,74 @@ $date = $_POST['date'] ?? '';
 $start = $_POST['start'] ?? '';
 $end = $_POST['end'] ?? '';
 
-if (empty($email) || empty($date) || empty($start) || empty($end)) {
-    http_response_code(400);
-    echo json_encode([
+if (!$email || !$date || !$start || !$end) {
+    respond(400, [
         "success" => false,
         "error" => "All fields are required."
     ]);
-    exit;
 }
 
 if ($email !== $_SESSION['user']['email']) {
-    http_response_code(403);
-    echo json_encode([
+    respond(403, [
         "success" => false,
         "error" => "Email does not match the logged-in user."
     ]);
-    exit;
 }
 
-// Check if the booking exists
-$checkBookingStmt = $conn->prepare("SELECT COUNT(*) FROM bookings WHERE email = ? AND date = ? AND start = ? AND end = ?");
-$checkBookingStmt->bind_param("ssss", $email, $date, $start, $end);
-$checkBookingStmt->execute();
-$checkBookingStmt->bind_result($bookingCount);
-$checkBookingStmt->fetch();
-$checkBookingStmt->close();
+$checkBooking = $conn->prepare("SELECT COUNT(*) FROM bookings WHERE email = ? AND date = ? AND start_time = ? AND end_time = ?");
+$checkBooking->bind_param("ssss", $email, $date, $start, $end);
+$checkBooking->execute();
+$checkBooking->bind_result($bookingCount);
+$checkBooking->fetch();
+$checkBooking->close();
 
-if ($bookingCount == 0) {
-    http_response_code(404);
-    echo json_encode([
+if ($bookingCount === 0) {
+    respond(404, [
         "success" => false,
         "error" => "Booking not found."
     ]);
-    exit;
 }
 
-// Check cancel limit
+$cancelLimit = 2;
 $cancelStmt = $conn->prepare("
     SELECT COUNT(*) AS cancel_count 
     FROM cancellation_log 
-    WHERE email = ? AND YEAR(cancel_date) = YEAR(CURRENT_DATE()) AND MONTH(cancel_date) = MONTH(CURRENT_DATE())
+    WHERE email = ? AND YEAR(cancel_date) = YEAR(CURDATE()) AND MONTH(cancel_date) = MONTH(CURDATE())
 ");
 $cancelStmt->bind_param("s", $email);
 $cancelStmt->execute();
 $cancelResult = $cancelStmt->get_result();
-$cancelCount = $cancelResult->fetch_assoc()['cancel_count'];
+$cancelCount = (int) $cancelResult->fetch_assoc()['cancel_count'];
 $cancelStmt->close();
 
-if ($cancelCount >= 2) {
-    http_response_code(403);
-    echo json_encode([
+if ($cancelCount >= $cancelLimit) {
+    respond(403, [
         "success" => false,
         "error" => "You have reached the monthly cancellation limit (2 per month)."
     ]);
-    exit;
 }
 
-// Delete the booking
-$stmt = $conn->prepare("DELETE FROM bookings WHERE email = ? AND date = ? AND start = ? AND end = ?");
-$stmt->bind_param("ssss", $email, $date, $start, $end);
+$deleteStmt = $conn->prepare("DELETE FROM bookings WHERE email = ? AND date = ? AND start_time = ? AND end_time = ?");
+$deleteStmt->bind_param("ssss", $email, $date, $start, $end);
 
-if ($stmt->execute()) {
-    if ($stmt->affected_rows > 0) {
-        $logStmt = $conn->prepare("INSERT INTO cancellation_log (email, cancel_date) VALUES (?, CURDATE())");
-        $logStmt->bind_param("s", $email);
-        $logStmt->execute();
-        $logStmt->close();
+if ($deleteStmt->execute() && $deleteStmt->affected_rows > 0) {
+    $logStmt = $conn->prepare("INSERT INTO cancellation_log (email, cancel_date) VALUES (?, CURDATE())");
+    $logStmt->bind_param("s", $email);
+    $logStmt->execute();
+    $logStmt->close();
 
-        http_response_code(200);
-        echo json_encode([
-            "success" => true,
-            "remaining_cancel" => 2 - ($cancelCount + 1)
-        ]);
-    } else {
-        http_response_code(404);
-        echo json_encode([
-            "success" => false,
-            "error" => "Booking not found."
-        ]);
-    }
+    $remaining = max(0, $cancelLimit - ($cancelCount + 1));
+    respond(200, [
+        "success" => true,
+        "remaining_cancel" => $remaining
+    ]);
 } else {
-    http_response_code(500);
-    echo json_encode([
+    respond(500, [
         "success" => false,
-        "error" => "Failed to cancel booking: " . $stmt->error
+        "error" => "Failed to cancel booking."
     ]);
 }
 
-$stmt->close();
+$deleteStmt->close();
 $conn->close();
 ?>

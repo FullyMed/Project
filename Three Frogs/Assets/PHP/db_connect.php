@@ -6,7 +6,6 @@ $database = "u181047418_threefrogs";
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-// Konstanta koneksi
 define("DB_HOST", "localhost");
 define("DB_USER", "u181047418_threefrogs");
 define("DB_PASS", "Threefr0gs*");
