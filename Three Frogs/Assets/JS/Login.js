@@ -13,6 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = document.getElementById("loginEmail").value.trim();
       const password = document.getElementById("loginPassword").value.trim();
 
+      function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      }
+
       // Validation
       if (!validateEmail(email)) {
         resultBox.innerHTML = `<p style="color:red;"><strong>Invalid email format.</strong></p>`;
@@ -62,9 +67,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
-// Simple email validation
-function validateEmail(email) {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(email);
-}
