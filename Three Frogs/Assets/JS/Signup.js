@@ -25,6 +25,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   const signupForm = document.getElementById("signupForm");
   const resultBox = document.getElementById("signupResult");
 
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
   if (signupForm) {
     signupForm.addEventListener("submit", async function (e) {
       e.preventDefault();
@@ -73,11 +78,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
   }
-
-  function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  }  
 
   // Toggle Show/Hide Password
   const toggleBtn = document.getElementById("toggleSignupPassword");

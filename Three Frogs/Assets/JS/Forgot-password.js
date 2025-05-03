@@ -25,12 +25,22 @@ document.addEventListener("DOMContentLoaded", async () => {
   const forgotForm = document.getElementById("forgotForm");
   const resultBox = document.getElementById("forgotResult");
 
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
   if (forgotForm) {
     forgotForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       const email = document.getElementById("forgotEmail").value;
       const newPassword = document.getElementById("newPassword").value;
+
+      if (!validateEmail(email)) {
+        resultBox.innerHTML = `<p style="color:red;"><strong>Invalid email format.</strong></p>`;
+        return;
+      }
 
       if (newPassword.length < 8) {
         resultBox.innerHTML = `<p style="color:red;"><strong>Password must be at least 8 characters long.</strong></p>`;

@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const openTime = "12:00";
       const closeTime = "22:00";
-      const today = new Date().toISOString().split("T")[0];
+      const today = new Date().toLocaleDateString("en-CA");
 
       if (date < today) {
         bookingResult.innerHTML = `<p style="color:red;"><strong>Booking date cannot be in the past.</strong></p>`;
@@ -59,6 +59,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         bookingResult.innerHTML = `<p style="color:red;"><strong>Booking must be between 12:00 and 22:00.</strong></p>`;
         return;
       }
+
+      if (isNaN(people) || people <= 0) {
+        bookingResult.innerHTML = `<p style="color:red;"><strong>Number of people must be a positive number.</strong></p>`;
+        return;
+      }      
 
       try {
         const response = await fetch("Assets/PHP/booking.php", {
