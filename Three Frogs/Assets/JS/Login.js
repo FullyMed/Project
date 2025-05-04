@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const errorMessage = document.getElementById("errorMessage");
   const viewMorePrompt = document.getElementById("viewMorePrompt");
 
-  let failedAttempts = 0;
+  let loginAttempts = 0;
 
   if (loginForm) {
     loginForm.addEventListener("submit", async function (e) {
@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const email = document.getElementById("loginEmail").value.trim();
       const password = document.getElementById("loginPassword").value.trim();
+      const forgotPrompt = document.getElementById("viewMorePrompt");
 
       function validateEmail(email) {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -43,18 +44,16 @@ document.addEventListener("DOMContentLoaded", () => {
           alert("Login successful!");
           window.location.href = "index.html";
         } else {
-          failedAttempts += 1;
+          loginAttempts++;
 
           errorMessage.textContent = result.error || "Invalid email or password.";
           errorMessage.classList.remove("hidden");
 
-          if (failedAttempts >= 2 && viewMorePrompt) {
-            viewMorePrompt.style.display = "block";
-            viewMorePrompt.innerHTML = `
-              <div>
-                <a href="Forgot-password.html" class="view-more-button">Forgot your password?</a>
-              </div>
-            `;
+          if (loginAttempts >= 2 && forgotPrompt) {
+            console.log("✅ 2x gagal login. Menampilkan tombol Forgot Password.");
+            forgotPrompt.classList.add("active");
+          } else {
+            console.log(`Login attempt: ${loginAttempts}`);
           }
         }
       } catch (err) {

@@ -742,3 +742,12 @@ button:hover, .see-more-button:hover, .view-more-button:hover {
   color: #000;
   border-radius: 4px;
 }
+
+#viewMorePrompt {
+  display: none;
+  margin-top: 16px;
+}
+
+#viewMorePrompt.active {
+  display: block !important;
+}
