@@ -1,13 +1,13 @@
-// ===============================
-// JS for Login.html
-// ===============================
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
   const resultBox = document.getElementById("loginResult");
   const errorMessage = document.getElementById("errorMessage");
+  const viewMorePrompt = document.getElementById("viewMorePrompt");
+
+  let failedAttempts = 0;
 
   if (loginForm) {
-    loginForm.addEventListener("submit", async function(e) {
+    loginForm.addEventListener("submit", async function (e) {
       e.preventDefault();
 
       const email = document.getElementById("loginEmail").value.trim();
@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return re.test(email);
       }
 
-      // Validation
       if (!validateEmail(email)) {
         resultBox.innerHTML = `<p style="color:red;"><strong>Invalid email format.</strong></p>`;
         return;
@@ -44,8 +43,19 @@ document.addEventListener("DOMContentLoaded", () => {
           alert("Login successful!");
           window.location.href = "index.html";
         } else {
+          failedAttempts += 1;
+
           errorMessage.textContent = result.error || "Invalid email or password.";
           errorMessage.classList.remove("hidden");
+
+          if (failedAttempts >= 2 && viewMorePrompt) {
+            viewMorePrompt.style.display = "block";
+            viewMorePrompt.innerHTML = `
+              <div>
+                <a href="Forgot-password.html" class="view-more-button">Forgot your password?</a>
+              </div>
+            `;
+          }
         }
       } catch (err) {
         console.error("Error during login:", err);
