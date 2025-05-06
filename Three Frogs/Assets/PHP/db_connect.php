@@ -18,4 +18,3 @@ try {
     error_log($e->getMessage());
     exit("Database connection error.");
 }
-?>
