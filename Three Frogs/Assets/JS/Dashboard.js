@@ -159,16 +159,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (confirmCancel) {
     confirmCancel.addEventListener("click", async () => {
       try {
-        const formData = new FormData();
-        formData.append("email", loggedInUser.email);
-        formData.append("date", selectedBooking.date);
-        formData.append("start", selectedBooking.start_time);
-        formData.append("end", selectedBooking.end_time);
-
         const res = await fetch("Assets/PHP/cancel_booking.php", {
           method: "POST",
-          body: formData,
-        });
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email: loggedInUser.email,
+            date: selectedBooking.date,
+            start: selectedBooking.start_time,
+            end: selectedBooking.end_time
+          })
+        });        
 
         const result = await res.json();
         if (result.success) {

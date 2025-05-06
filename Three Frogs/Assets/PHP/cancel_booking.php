@@ -19,10 +19,11 @@ if (!isset($_SESSION['user']) || empty($_SESSION['user']['email'])) {
     ]);
 }
 
-$email = $_POST['email'] ?? '';
-$date = $_POST['date'] ?? '';
-$start = $_POST['start'] ?? '';
-$end = $_POST['end'] ?? '';
+$input = json_decode(file_get_contents("php://input"), true);
+$email = $input['email'] ?? '';
+$date = $input['date'] ?? '';
+$start = $input['start'] ?? '';
+$end = $input['end'] ?? '';
 
 if (!$email || !$date || !$start || !$end) {
     respond(400, [
