@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let loggedInUser = null;
   let allBookings = [];
   let selectedBooking = null;
-  let remainingCancels = 2; // ✅ default fallback
+  let remainingCancels = 2;
 
   async function checkSession() {
     try {
