@@ -47,8 +47,8 @@ $cancelLimit = 2;
 
 $cancelStmt = $conn->prepare("
     SELECT COUNT(*) AS cancel_count
-    FROM cancellation_log
-    WHERE email = ? AND YEAR(cancel_date) = ? AND MONTH(cancel_date) = ?
+    FROM cancellations
+    WHERE email = ? AND YEAR(cancel_time) = ? AND MONTH(cancel_time) = ?
 ");
 $cancelStmt->bind_param("sii", $email, $currentYear, $currentMonth);
 
