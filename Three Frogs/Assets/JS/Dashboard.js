@@ -51,13 +51,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function fetchBookingsFromServer() {
     try {
-      const formData = new FormData();
-      formData.append("email", loggedInUser.email);
 
       const response = await fetch("Assets/PHP/get_bookings.php", {
         method: "POST",
-        body: formData,
-      });
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: loggedInUser.email })
+      });      
 
       const result = await response.json();
       if (result.success) {
@@ -77,11 +78,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function renderBookings() {
     const now = new Date();
-    const userBookings = allBookings.filter(b => b.email === loggedInUser.email);
+    const userBookings = allBookings;
     const upcoming = [], history = [];
 
     userBookings.forEach(b => {
-      const bookingDateTime = new Date(`${b.date}T${b.end}`);
+      const bookingDateTime = new Date(`${b.date}T${b.end_time}`);
       if (bookingDateTime > now) upcoming.push(b);
       else history.push(b);
     });
@@ -92,7 +93,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       card.className = "booking-card";
       card.innerHTML = `
         <p><strong>Date:</strong> ${b.date}</p>
-        <p><strong>Time:</strong> ${b.start} - ${b.end}</p>
+        <p><strong>Time:</strong> ${b.start_time} - ${b.end_time}</p>
         <p><strong>People:</strong> ${b.people}</p>
         <button class="cancelBtn" data-index="${index}" style="margin-top:10px;">Cancel</button>
       `;
@@ -118,7 +119,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       : history.map(b => `
         <div class="booking-card">
           <p><strong>Date:</strong> ${b.date}</p>
-          <p><strong>Time:</strong> ${b.start} - ${b.end}</p>
+          <p><strong>Time:</strong> ${b.start_time} - ${b.end_time}</p>
           <p><strong>People:</strong> ${b.people}</p>
         </div>
       `).join("");
@@ -161,8 +162,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         const formData = new FormData();
         formData.append("email", loggedInUser.email);
         formData.append("date", selectedBooking.date);
-        formData.append("start", selectedBooking.start);
-        formData.append("end", selectedBooking.end);
+        formData.append("start", selectedBooking.start_time);
+        formData.append("end", selectedBooking.end_time);
 
         const res = await fetch("Assets/PHP/cancel_booking.php", {
           method: "POST",

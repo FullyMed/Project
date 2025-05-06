@@ -14,33 +14,17 @@ function respond($status, $data) {
 }
 
 if (!isset($_SESSION['user']) || empty($_SESSION['user']['email'])) {
-    respond(401, [
-        "success" => false,
-        "error" => "You must be logged in to view bookings."
-    ]);
+    respond(401, ["success" => false, "error" => "You must be logged in to view bookings."]);
 }
 
-$sessionEmail = $_SESSION['user']['email'];
-$email = $_POST['email'] ?? '';
+$data = json_decode(file_get_contents("php://input"), true);
 
-if (empty($email)) {
-    respond(400, [
-        "success" => false,
-        "error" => "Email is required."
-    ]);
-}
-
-if ($email !== $sessionEmail) {
-    respond(403, [
-        "success" => false,
-        "error" => "Email does not match the logged-in user."
-    ]);
-}
+$email = $_SESSION['user']['email'];
 
 $stmt = $conn->prepare("
     SELECT date, start_time, end_time, people 
     FROM bookings 
-    WHERE email = ? 
+    WHERE email = ? AND date >= CURDATE() AND status = 'active'
     ORDER BY date, start_time
 ");
 $stmt->bind_param("s", $email);
@@ -54,10 +38,7 @@ if ($stmt->execute()) {
     }
     $stmt->close();
 } else {
-    respond(500, [
-        "success" => false,
-        "error" => "Error fetching bookings: " . $conn->error
-    ]);
+    respond(500, ["success" => false, "error" => "Error fetching bookings: " . $conn->error]);
 }
 
 $currentYear = date("Y");
@@ -88,4 +69,3 @@ respond(200, [
     "bookings" => $bookings,
     "remaining_cancels" => $remainingCancels
 ]);
-?>
