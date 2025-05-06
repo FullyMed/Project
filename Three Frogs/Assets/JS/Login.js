@@ -2,24 +2,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
   const resultBox = document.getElementById("loginResult");
   const errorMessage = document.getElementById("errorMessage");
-  const viewMorePrompt = document.getElementById("viewMorePrompt");
+  const forgotPrompt = document.getElementById("viewMorePrompt");
 
-  let loginAttempts = 0;
+  if (forgotPrompt) {
+    forgotPrompt.style.display = "block";
+  }
 
   if (loginForm) {
-    loginForm.addEventListener("submit", async function (e) {
+    loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       const email = document.getElementById("loginEmail").value.trim();
       const password = document.getElementById("loginPassword").value.trim();
-      const forgotPrompt = document.getElementById("viewMorePrompt");
 
-      function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-      }
-
-      if (!validateEmail(email)) {
+      const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!isValidEmail) {
         resultBox.innerHTML = `<p style="color:red;"><strong>Invalid email format.</strong></p>`;
         return;
       }
@@ -40,22 +37,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const result = await response.json();
 
-        if (result.success) {
-          alert("Login successful!");
-          window.location.href = "index.html";
-        } else {
-          loginAttempts++;
-
+        if (!response.ok) {
           errorMessage.textContent = result.error || "Invalid email or password.";
           errorMessage.classList.remove("hidden");
-
-          if (loginAttempts >= 2 && forgotPrompt) {
-            console.log("✅ 2x gagal login. Menampilkan tombol Forgot Password.");
-            forgotPrompt.classList.add("active");
-          } else {
-            console.log(`Login attempt: ${loginAttempts}`);
-          }
+          return;
         }
+
+        alert("Login successful!");
+        window.location.href = "index.html";
+
       } catch (err) {
         console.error("Error during login:", err);
         errorMessage.textContent = "Server error: " + err.message;

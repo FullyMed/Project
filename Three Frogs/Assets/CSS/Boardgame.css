@@ -447,6 +447,11 @@ footer {
   background-color: #f2f2f2;
   border-radius: 10px;
   max-width: 500px;
+  display: none;
+}
+
+.view-more-box.active {
+  display: block;
 }
 
 /* .view-more-button {
