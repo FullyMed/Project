@@ -366,6 +366,15 @@ footer {
   color: #333;
 }
 
+.about-section .contact-link {
+  transition: transform 0.3s ease;
+}
+
+.about-section .contact-link:hover,
+.about-section .contact-link:focus {
+  transform: scale(1.02);
+}
+
 .about-section {
   padding: 30px;
   max-width: 900px;
@@ -453,21 +462,6 @@ footer {
 .view-more-box.active {
   display: block;
 }
-
-/* .view-more-button {
-  display: inline-block;
-  margin: 10px;
-  padding: 10px 20px;
-  background-color: #4caf50;
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: background-color 0.3s;
-}
-
-.view-more-button:hover {
-  background-color: #388e3c;
-} */
 
 .dashboard-container {
   max-width: 600px;
@@ -568,22 +562,6 @@ input[type="radio"]:checked + .avatar-option {
   text-align: center;
   margin-bottom: 40px;
 }
-
-/* .see-more-button {
-  margin-top: 20px;
-  padding: 12px 24px;
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.see-more-button:hover {
-  background-color: #2563eb;
-} */
 
 /* -------- Buttons -------- */
 button, .see-more-button, .view-more-button {
