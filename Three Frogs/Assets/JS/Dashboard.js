@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function updateUserInfo() {
+    document.getElementById("currentAvatar").src = loggedInUser.avatar;
     userInfo.innerHTML = `
       <p><strong>Name:</strong> ${loggedInUser.name}</p>
       <p><strong>Email:</strong> ${loggedInUser.email}</p>

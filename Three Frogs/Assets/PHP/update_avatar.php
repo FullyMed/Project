@@ -29,7 +29,6 @@ if (empty($newAvatar)) {
     exit;
 }
 
-// Allowed avatars (should match your frontend)
 $allowedAvatars = [
     "Assets/Images/Avatars/Clam.jpg",
     "Assets/Images/Avatars/Cow.jpg",
@@ -55,7 +54,6 @@ if (!in_array($newAvatar, $allowedAvatars)) {
     exit;
 }
 
-// Update avatar in database
 $stmt = $conn->prepare("UPDATE users SET avatar = ? WHERE email = ?");
 if (!$stmt) {
     http_response_code(500);
