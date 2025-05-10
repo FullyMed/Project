@@ -9,6 +9,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   const closePopup = document.getElementById("closePopup");
   const changeAvatarForm = document.getElementById("changeAvatarForm");
   const avatarMsg = document.getElementById("avatarUpdateMessage");
+
+  const editAvatarBtn = document.getElementById("editAvatarBtn");
+  const avatarChangeContainer = document.getElementById("avatarChangeContainer");
+
+  if (editAvatarBtn && avatarChangeContainer) {
+    editAvatarBtn.addEventListener("click", () => {
+      avatarChangeContainer.classList.toggle("hidden");
+    });
+  }
+
   const currentAvatar = document.getElementById("currentAvatar");
 
   let loggedInUser = null;
