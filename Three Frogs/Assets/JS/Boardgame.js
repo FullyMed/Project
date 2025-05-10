@@ -1952,7 +1952,25 @@ document.addEventListener("DOMContentLoaded", () => {
       image: "Assets/Images/Unconscious Mind.jpg",
       description: "Explore dreamscapes and psychology in this deep Euro game set in Freud's era.",
       tags: ["Worker Placement", "Tableau Building", "Narrative"]
-    },                  
+    },
+    {
+      name: "YAK",
+      category: "Strategy",
+      players: "2-4",
+      duration: "45 min",
+      image: "Assets/Images/YAK.webp",
+      description: "Build stone towers and trade with yak caravans in this serene yet tactical game by Michael Luu.",
+      tags: ["Resource Management", "Tile Placement", "Visual Strategy"]
+    },
+    {
+      name: "Mahjong",
+      category: "Classic",
+      players: "4",
+      duration: "60-120 min",
+      image: "Assets/Images/Mahjong.jpg",
+      description: "A traditional Chinese tile game of matching patterns, strategy, and memory.",
+      tags: ["Tile Game", "Pattern Recognition", "Classic"]
+    },      
   ];
 
   // 1. Render all boardgames
