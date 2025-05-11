@@ -1,6 +1,7 @@
 <?php
 session_start();
-ini_set('display_errors', 1);
+
+ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
 header("Content-Type: application/json");
@@ -12,6 +13,7 @@ function respond($status, $data) {
     exit;
 }
 
+// Ensure the user is logged in
 if (!isset($_SESSION['user']) || empty($_SESSION['user']['email'])) {
     respond(401, [
         "success" => false,
@@ -19,7 +21,16 @@ if (!isset($_SESSION['user']) || empty($_SESSION['user']['email'])) {
     ]);
 }
 
-$input = json_decode(file_get_contents("php://input"), true);
+$inputJSON = file_get_contents("php://input");
+$input = json_decode($inputJSON, true);
+
+if ($input === null) {
+    respond(400, [
+        "success" => false,
+        "error" => "Invalid JSON input."
+    ]);
+}
+
 $email = $input['email'] ?? '';
 $date = $input['date'] ?? '';
 $start = $input['start'] ?? '';
@@ -32,6 +43,7 @@ if (!$email || !$date || !$start || !$end) {
     ]);
 }
 
+// Double-check the email matches session
 if ($email !== $_SESSION['user']['email']) {
     respond(403, [
         "success" => false,
@@ -39,6 +51,7 @@ if ($email !== $_SESSION['user']['email']) {
     ]);
 }
 
+// Confirm booking exists
 $checkBooking = $conn->prepare("SELECT COUNT(*) FROM bookings WHERE email = ? AND date = ? AND start_time = ? AND end_time = ?");
 $checkBooking->bind_param("ssss", $email, $date, $start, $end);
 $checkBooking->execute();
@@ -53,11 +66,12 @@ if ($bookingCount === 0) {
     ]);
 }
 
+// Check cancel count this month
 $cancelLimit = 2;
 $cancelStmt = $conn->prepare("
     SELECT COUNT(*) AS cancel_count 
-    FROM cancellation_log 
-    WHERE email = ? AND YEAR(cancel_date) = YEAR(CURDATE()) AND MONTH(cancel_date) = MONTH(CURDATE())
+    FROM cancellations 
+    WHERE email = ? AND YEAR(cancel_time) = YEAR(CURDATE()) AND MONTH(cancel_time) = MONTH(CURDATE())
 ");
 $cancelStmt->bind_param("s", $email);
 $cancelStmt->execute();
@@ -72,12 +86,15 @@ if ($cancelCount >= $cancelLimit) {
     ]);
 }
 
+// Delete booking
 $deleteStmt = $conn->prepare("DELETE FROM bookings WHERE email = ? AND date = ? AND start_time = ? AND end_time = ?");
 $deleteStmt->bind_param("ssss", $email, $date, $start, $end);
 
 if ($deleteStmt->execute() && $deleteStmt->affected_rows > 0) {
-    $logStmt = $conn->prepare("INSERT INTO cancellation_log (email, cancel_date) VALUES (?, CURDATE())");
-    $logStmt->bind_param("s", $email);
+    $deleteStmt->close();
+
+    $logStmt = $conn->prepare("INSERT INTO cancellations (email, date, start, end, cancel_time) VALUES (?, ?, ?, ?, NOW())");
+    $logStmt->bind_param("ssss", $email, $date, $start, $end);
     $logStmt->execute();
     $logStmt->close();
 
@@ -92,7 +109,4 @@ if ($deleteStmt->execute() && $deleteStmt->affected_rows > 0) {
         "error" => "Failed to cancel booking."
     ]);
 }
-
-$deleteStmt->close();
-$conn->close();
 ?>
