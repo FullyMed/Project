@@ -2,7 +2,8 @@
 body {
   margin: 0;
   font-family: 'Poppins', 'Quicksand', 'Segoe UI', sans-serif;
-  background: linear-gradient(-45deg, #e0f7fa, #fce4ec, #f3e5f5, #fff9c4);
+  /* background: linear-gradient(-45deg, #e0f7fa, #fce4ec, #f3e5f5, #fff9c4); */
+  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1, #ffdde1, #c3cfe2, #fda085, #f6d365);
   background-size: 200% 200%;
   animation: gradientBG 25s ease infinite;
   color: #333;
