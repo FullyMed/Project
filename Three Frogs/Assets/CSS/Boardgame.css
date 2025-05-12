@@ -8,6 +8,8 @@ body {
   color: #333;
   will-change: background-position;
   line-height: 1.6;
+  font-size: clamp(14px, 1.6vw, 18px);
+  overflow-x: hidden;
 }
 
 html {
@@ -204,11 +206,27 @@ footer {
   }
 
   .boardgame-card img {
-    height: 180px;
+    object-fit: cover;
+    height: 200px;
   }
 
   .boardgame-card {
     max-height: 500px;
+  }
+}
+
+/* Small Phone (≤768px) */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+    margin-top: 10px;
   }
 }
 
